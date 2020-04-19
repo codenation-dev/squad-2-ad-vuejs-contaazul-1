@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Teste",
+      "email": "teste@teste.com",
+      "password": "123456",
+      "token": "qwertyuiopçlkjhgfdsa"
+    },
+    {
+      "id": "2",
+      "name": "Olá",
+      "email": "ola@teste.com",
+      "password": "123456",
+      "token": "qwertyuiopçlkjhgfdsa"
+    },
+    {
+      "id": "3",
+      "name": "Koasdf",
+      "email": "adf@asldf.com",
+      "password": "123456",
+      "token": "dfaoiha0w9urqraoisf"
+    },
+    {
+      "name": "Dedicio",
+      "email": "dedicio@gmail.com",
+      "password": "12345",
+      "id": "1586640985777"
+    },
+    {
+      "name": "Dedicio",
+      "email": "dedicio@gmail.com",
+      "password": "827ccb0eea8a706c4c34a16891f84e7b",
+      "token": "4d74b017539de9d34bb826abd3f675d0",
+      "id": "1586641480013"
+    }
+  ],
+  "posts": []
+}
