@@ -4,9 +4,10 @@
   "description": "Backend que retorna os valores fictícios para o desafio final do AceleraDev de Vue.js",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Dedicio Coelho",
+  "author": "Dedicio Coelho, Marcos Henrique Stuber Dreveck",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
