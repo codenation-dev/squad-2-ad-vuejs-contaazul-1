@@ -21,18 +21,19 @@
 			"email": "dedicio@gmail.com",
 			"url": "https://dedicio.com"
 		},
-
 		{
 			"name": "Lara Beatriz de Oliveira",
 			"email": "lara.bia@outlook.com.br",
-			"url": "https://github.com/lrbtz"	
+			"url": "https://github.com/lrbtz"
 		}
 	],
 	"dependencies": {
+		"axios": "^0.19.2",
 		"bulma": "^0.8.2",
 		"core-js": "^3.6.4",
 		"vue": "^2.6.11",
 		"vue-router": "^3.1.6",
+		"vuelidate": "^0.7.5",
 		"vuex": "^3.1.3"
 	},
 	"devDependencies": {
