@@ -20,9 +20,16 @@
 			"name": "Dedicio Coelho",
 			"email": "dedicio@gmail.com",
 			"url": "https://dedicio.com"
+		},
+
+		{
+			"name": "Lara Beatriz de Oliveira",
+			"email": "lara.bia@outlook.com.br",
+			"url": "https://github.com/lrbtz"	
 		}
 	],
 	"dependencies": {
+		"bulma": "^0.8.2",
 		"core-js": "^3.6.4",
 		"vue": "^2.6.11",
 		"vue-router": "^3.1.6",
