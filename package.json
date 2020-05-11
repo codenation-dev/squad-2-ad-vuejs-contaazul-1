@@ -21,11 +21,15 @@
 			"email": "dedicio@gmail.com",
 			"url": "https://dedicio.com"
 		},
-
 		{
 			"name": "Lara Beatriz de Oliveira",
 			"email": "lara.bia@outlook.com.br",
-			"url": "https://github.com/lrbtz"	
+			"url": "https://github.com/lrbtz"
+		},
+		{
+			"name": "Claudia Pimentel",
+			"email": "claupimentel98@gmail.com",
+			"url": "https://github.com/claupimentel"
 		}
 	],
 	"dependencies": {
