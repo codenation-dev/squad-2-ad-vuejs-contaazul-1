@@ -26,14 +26,14 @@ export default {
 
 <style lang="scss">
 .image {
-  max-height: 682px;
+  height: stretch;
 }
 
 .slot-style{
-  max-width: 350px;
+  max-width: 30%;
 }
 
 .width {
-  max-width: 600px;
+  max-width: 50%;
 }
 </style>

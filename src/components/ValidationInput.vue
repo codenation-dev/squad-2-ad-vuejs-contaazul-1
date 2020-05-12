@@ -1,12 +1,11 @@
 <template>
   <div class="container">
-    <div class="field">
-      <div class="field-body">
-        <label class="is-pulled-left title-style">
-          {{ title }}
-        </label>
-      </div>
-    </div>
+    <label class="is-pulled-left label-style">
+      {{ title }}
+    </label>
+    <label class="is-pulled-right label-slot-style">
+      <slot/>
+    </label>
     <input
       class="input"
       :placeholder="placeholder"
@@ -25,6 +24,7 @@ export default {
     placeholder: String,
     title: String,
     type: String,
+    value: String,
   },
   validations: {
     value: {
@@ -36,12 +36,12 @@ export default {
 </script>
 
 <style>
-.title-style {
-  position: absolute;
+.label-style {
   width: 41px;
   height: 14px;
   left: 0px;
   top: 0px;
+
   font-family: Rubik;
   font-style: normal;
   font-weight: 600;
@@ -49,8 +49,25 @@ export default {
   line-height: 5px;
   letter-spacing: 1.125px;
   text-transform: uppercase;
+
   color: #B0BAC9;
-  text-transform: uppercase;
+}
+
+.label-slot-style {
+  height: 14px;
+  left: 0px;
+  top: 0px;
+
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 5px;
+
+  text-align: right;
+
+  color: #B0BAC9;
+
 }
 
 .input {
