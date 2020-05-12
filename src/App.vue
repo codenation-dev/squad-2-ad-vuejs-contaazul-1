@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -10,6 +11,7 @@
 
 <style lang="scss">
 @import "~bulma/bulma";
+@import url('https://fonts.googleapis.com/css?family=Rubik');
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
