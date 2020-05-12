@@ -1,10 +1,10 @@
 <template>
     <section class="hero is-fullheight">
-      <div class="hero-body no-padding">
-        <div class="container">
+      <div class="hero-body is-paddingless">
+        <div class="container slot-style">
           <slot/>
         </div>
-        <div class="container width">
+        <div class="container is-marginless width">
           <img class="image is-pulled-right" :src="background">
         </div>
       </div>
@@ -25,15 +25,15 @@ export default {
 </script>
 
 <style lang="scss">
-.no-padding {
-  padding: 0px !important;
-}
-
 .image {
   max-height: 682px;
 }
 
+.slot-style{
+  max-width: 350px;
+}
+
 .width {
-  width: 20% !important;
+  max-width: 600px;
 }
 </style>
