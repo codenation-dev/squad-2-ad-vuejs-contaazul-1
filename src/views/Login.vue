@@ -14,7 +14,11 @@
           type="email"
           class="margin"
         />
-        <validation-input v-model="password" title="Senha" placeholder="senha" type="password">
+        <validation-input
+          v-model="password"
+          title="Senha"
+          placeholder="senha"
+          type="password">
           Esqueceu sua senha?
         </validation-input>
     </form-image>
@@ -41,6 +45,7 @@ export default {
 
 <style lang="scss">
 .margin {
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 

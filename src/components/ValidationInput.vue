@@ -12,6 +12,7 @@
       :value="value"
       :class="{ 'is-danger': !$v.value[type] && value}"
       @input="$emit('input', $event.target.value)"
+      :type="type"
     />
   </div>
 </template>
@@ -30,6 +31,7 @@ export default {
     value: {
       password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
       email,
+      name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/.test(value) && value.length >= 7 && value.length <= 50,
     },
   },
 };
@@ -37,7 +39,6 @@ export default {
 
 <style>
 .label-style {
-  width: 41px;
   height: 14px;
   left: 0px;
   top: 0px;
