@@ -24,7 +24,7 @@ const routes = [
     component: Register,
   },
   {
-    path: '/passwordreset',
+    path: '/reset-password',
     name: 'PasswordReset',
     component: PasswordReset,
   },

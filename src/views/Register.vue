@@ -125,5 +125,4 @@ export default {
   color: #B0BAC9;
   margin-top: 5px;
 }
-
 </style>
