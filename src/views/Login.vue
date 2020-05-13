@@ -1,7 +1,7 @@
 <template>
   <div>
     <form-image>
-        <div class="margin-bottom">
+        <div class="margin-title-description">
           <p class="big-title-style is-pulled-left">Entre</p>
           <p class="description-style is-pulled-left">
             Por favor, entre com suas credenciais para continuar
@@ -12,11 +12,19 @@
           title="Email"
           placeholder="email@exemplo.com"
           type="email"
-          class="margin"
+          class="margin-input"
         />
         <validation-input v-model="password" title="Senha" placeholder="senha" type="password">
-          Esqueceu sua senha?
+          <router-link class="label-style" to="/">Esqueceu sua senha?</router-link>
         </validation-input>
+        <div class="centered">
+          <label class="label-style width-center">
+            Não tem uma conta? <router-link class="link" to="/">Cadastre-se</router-link>
+          </label>
+        </div>
+        <div class="centered-button">
+          <button class="button is-fullwidth">Entre</button>
+        </div>
     </form-image>
   </div>
 </template>
@@ -40,37 +48,25 @@ export default {
 </script>
 
 <style lang="scss">
-.margin {
+.margin-input {
   margin-bottom: 20px;
 }
 
-.big-title-style {
-  left: calc(50% - 273px/2 - 23.5px);
-  width: 100%;
-
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 34px;
-  text-align: left;
-
-  color: #2E384D;
-}
-
-.description-style {
-  left: calc(50% - 273px/2 - 23.5px);
-
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 15px;
-  text-align: left;
-
-  color: #8798AD;
-}
-
-.margin-bottom {
+.margin-title-description {
   margin-bottom: 100px;
+}
+
+.link {
+  color: #2E5BFF;
+}
+
+.centered {
+  text-align: center;
+}
+
+.centered-button {
+  margin: auto;
+  width: 50%;
+  margin-top: 20px;
 }
 </style>
