@@ -1,7 +1,18 @@
 <template>
-  <div>
+  <div class="Register">
     <form-image>
-      <form-header title="Entre" subtitle="Por favor, entre com suas credenciais para continuar."/>
+      <form-header title="Comece de graça" subtitle="E fique sempre de olho na sua aplicação."/>
+      <p class="control has-icons-left">
+        <validation-input
+          v-model="nome"
+          title="Nome Completo"
+          placeholder="Insira seu nome completo"
+          type-validation="name"
+        />
+        <span class="icon is-small is-left icon-position">
+          <i class="fas fa-user"></i>
+        </span>
+      </p>
       <p class="control has-icons-left">
         <validation-input
           v-model="email"
@@ -19,12 +30,10 @@
           v-model="password"
           title="Senha"
           placeholder="Insira sua senha"
-          type-validation="password"
           :type="passwordFieldType"
+          type-validation="password"
           class="margin-input"
-        >
-          <router-link class="label-style" to="/reset-password">Esqueceu sua senha?</router-link>
-        </validation-input>
+        />
         <span
           class="icon
           is-small
@@ -41,20 +50,21 @@
           <i class="fas fa-eye"></i>
         </span>
       </p>
+      <router-link to="/login">
+        <button
+          class="button
+          is-link
+          is-fullwidth
+          button-style"
+        >
+          Crie sua conta
+        </button>
+      </router-link>
       <div class="centered">
         <p class="label-style">
-          Não tem uma conta?
-          <router-link class="click-link" to="/register">Cadastre-se</router-link>
+          Já possui uma conta? <router-link to="/login" class="click-link">Entre.</router-link>
         </p>
       </div>
-      <button
-        class="button
-        is-link
-        is-fullwidth
-        button-style"
-      >
-        Entre
-      </button>
     </form-image>
   </div>
 </template>
@@ -72,6 +82,7 @@ export default {
   },
   data() {
     return {
+      nome: null,
       email: null,
       password: null,
       passwordFieldType: 'password',

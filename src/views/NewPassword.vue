@@ -1,30 +1,41 @@
 <template>
   <div>
     <form-image>
-      <form-header title="Entre" subtitle="Por favor, entre com suas credenciais para continuar."/>
-      <p class="control has-icons-left">
+      <form-header title="Nova senha" subtitle="Insira a nova senha"/>
+      <p class="control has-icons-left has-icons-right">
         <validation-input
-          v-model="email"
-          title="Email"
-          placeholder="Insira seu e-mail"
-          type-validation="email"
+          v-model="newPassword"
+          title="Senha"
+          placeholder="Insira a nova senha"
+          type-validation="password"
+          :type="passwordFieldType"
           class="margin-input"
         />
-        <span class="icon is-left icon-position">
-          <i class="fas fa-envelope"></i>
+        <span
+          class="icon
+          is-small
+          is-left
+          icon-position">
+          <i class="fas fa-lock"></i>
+        </span>
+        <span
+          class="icon
+          is-right
+          icon-position
+          icon-click"
+          @click="switchVisibility()">
+          <i class="fas fa-eye"></i>
         </span>
       </p>
       <p class="control has-icons-left has-icons-right">
         <validation-input
-          v-model="password"
+          v-model="newPasswordConfirmation"
           title="Senha"
           placeholder="Insira sua senha"
           type-validation="password"
           :type="passwordFieldType"
           class="margin-input"
-        >
-          <router-link class="label-style" to="/reset-password">Esqueceu sua senha?</router-link>
-        </validation-input>
+        />
         <span
           class="icon
           is-small
@@ -43,8 +54,7 @@
       </p>
       <div class="centered">
         <p class="label-style">
-          Não tem uma conta?
-          <router-link class="click-link" to="/register">Cadastre-se</router-link>
+          Já possui uma conta? <router-link to="/login" class="click-link">Entre.</router-link>
         </p>
       </div>
       <button
@@ -53,7 +63,7 @@
         is-fullwidth
         button-style"
       >
-        Entre
+        Cadastre nova senha
       </button>
     </form-image>
   </div>
@@ -72,8 +82,8 @@ export default {
   },
   data() {
     return {
-      email: null,
-      password: null,
+      newPassword: null,
+      newPasswordConfirmation: null,
       passwordFieldType: 'password',
     };
   },

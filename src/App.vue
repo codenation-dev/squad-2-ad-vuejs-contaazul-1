@@ -19,8 +19,6 @@
   font-size: 15px;
   line-height: 5px;
 
-  text-align: right;
-
   color: #B0BAC9;
 
 }
@@ -48,5 +46,46 @@
   text-align: left;
 
   color: #8798AD;
+}
+
+.button-style {
+  color: #ffffff;
+  background-color: #2E5BFF;
+  margin-top: 15px;
+}
+
+.icon-click {
+  pointer-events: initial !important;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.icon-position {
+  padding-top: 27px;
+}
+
+.click-link {
+  color: #8798ad;
+}
+
+.click-link:hover {
+  color: #2E5BFF;
+  text-decoration: underline;
+}
+
+.text-botton-style {
+  font-size: 15px;
+  color: #B0BAC9;
+  margin-top: 5px;
+}
+
+.margin-input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.centered {
+  text-align: center;
+  margin-top: 10px;
 }
 </style>

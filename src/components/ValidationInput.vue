@@ -10,8 +10,9 @@
       class="input"
       :placeholder="placeholder"
       :value="value"
-      :class="{ 'is-danger': !$v.value[type] && value}"
+      :class="{ 'is-danger': !$v.value[typeValidation] && value}"
       @input="$emit('input', $event.target.value)"
+      :type="type"
     />
   </div>
 </template>
@@ -24,12 +25,14 @@ export default {
     placeholder: String,
     title: String,
     type: String,
+    typeValidation: String,
     value: String,
   },
   validations: {
     value: {
       password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
       email,
+      name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/.test(value) && value.length >= 7 && value.length <= 50,
     },
   },
 };
@@ -37,8 +40,6 @@ export default {
 
 <style>
 .label-title-style {
-  width: 41px;
-
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 1.125px;
