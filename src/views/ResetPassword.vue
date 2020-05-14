@@ -2,18 +2,14 @@
     <div class="PasswordReset">
       <form-image>
         <form-header title="Esqueceu a senha?" subtitle="Email para receber o link de redefinição"/>
-        <p class="control has-icons-left">
-          <validation-input
-            v-model="email"
-            title="Email"
-            placeholder="Insira seu e-mail"
-            type="email"
-            class="margin-input"
-          />
-          <span class="icon is-left icon-position">
-            <i class="fas fa-envelope"></i>
-          </span>
-        </p>
+        <validation-input
+          v-model="email"
+          title="Email"
+          placeholder="Insira seu e-mail"
+          type-validation="email"
+          class="margin-input"
+          icon="fa-envelope"
+        />
         <button
           class="button
           is-link

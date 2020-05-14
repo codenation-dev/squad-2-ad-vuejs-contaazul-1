@@ -2,45 +2,24 @@
   <div>
     <form-image>
       <form-header title="Entre" subtitle="Por favor, entre com suas credenciais para continuar."/>
-      <p class="control has-icons-left">
-        <validation-input
-          v-model="email"
-          title="Email"
-          placeholder="Insira seu e-mail"
-          type-validation="email"
-          class="margin-input"
-        />
-        <span class="icon is-left icon-position">
-          <i class="fas fa-envelope"></i>
-        </span>
-      </p>
-      <p class="control has-icons-left has-icons-right">
-        <validation-input
-          v-model="password"
-          title="Senha"
-          placeholder="Insira sua senha"
-          type-validation="password"
-          :type="passwordFieldType"
-          class="margin-input"
-        >
-          <router-link class="label-style" to="/reset-password">Esqueceu sua senha?</router-link>
-        </validation-input>
-        <span
-          class="icon
-          is-small
-          is-left
-          icon-position">
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon
-          is-right
-          icon-position
-          icon-click"
-          @click="switchVisibility()">
-          <i class="fas fa-eye"></i>
-        </span>
-      </p>
+      <validation-input
+        v-model="email"
+        title="Email"
+        placeholder="Insira seu e-mail"
+        type-validation="email"
+        class="margin-input"
+        icon="fa-envelope"
+      />
+      <validation-input
+        v-model="password"
+        title="Senha"
+        placeholder="Insira sua senha"
+        type-validation="password"
+        class="margin-input"
+        icon="fa-lock"
+      >
+        <router-link class="label-style" to="/reset-password">Esqueceu sua senha?</router-link>
+      </validation-input>
       <div class="centered">
         <p class="label-style">
           Não tem uma conta?
@@ -74,13 +53,7 @@ export default {
     return {
       email: null,
       password: null,
-      passwordFieldType: 'password',
     };
-  },
-  methods: {
-    switchVisibility() {
-      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-    },
   },
 };
 </script>
