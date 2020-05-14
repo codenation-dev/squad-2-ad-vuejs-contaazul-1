@@ -18,7 +18,7 @@
         class="margin-input"
         icon="fa-lock"
       >
-        <router-link class="label-style" to="/reset-password">Esqueceu sua senha?</router-link>
+        <router-link class="click-link" to="/reset-password">Esqueceu sua senha?</router-link>
       </validation-input>
       <div class="centered">
         <p class="label-style">
