@@ -60,10 +60,6 @@
   padding: 1px;
 }
 
-.icon-position {
-  padding-top: 27px;
-}
-
 .click-link {
   color: #8798ad;
 }
