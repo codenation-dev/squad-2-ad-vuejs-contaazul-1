@@ -28,6 +28,7 @@ export default {
 .image {
   width: 100%;
   height: stretch;
+  object-fit: cover;
 }
 
 .slot-style{
