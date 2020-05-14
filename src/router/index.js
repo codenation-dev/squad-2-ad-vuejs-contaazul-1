@@ -1,17 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
-import PasswordReset from '../views/PasswordReset.vue';
+import ResetPassword from '../views/ResetPassword.vue';
+import NewPassword from '../views/NewPassword.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    redirect: '/login',
   },
   {
     path: '/login',
@@ -25,16 +24,13 @@ const routes = [
   },
   {
     path: '/reset-password',
-    name: 'PasswordReset',
-    component: PasswordReset,
+    name: 'ResetPassword',
+    component: ResetPassword,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/new-password',
+    name: 'NewPassword',
+    component: NewPassword,
   },
 ];
 

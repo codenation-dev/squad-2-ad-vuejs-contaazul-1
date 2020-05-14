@@ -1,29 +1,27 @@
 <template>
   <div>
     <form-image>
-      <form-header title="Entre" subtitle="Por favor, entre com suas credenciais para continuar."/>
+      <form-header title="Nova senha" subtitle="Insira a nova senha"/>
       <validation-input
-        v-model="email"
-        title="Email"
-        placeholder="Insira seu e-mail"
-        type-validation="email"
-        class="margin-input"
-        icon="fa-envelope"
-      />
-      <validation-input
-        v-model="password"
+        v-model="newPassword"
         title="Senha"
-        placeholder="Insira sua senha"
+        placeholder="Insira a nova senha"
         type-validation="password"
         class="margin-input"
         icon="fa-lock"
-      >
-        <router-link class="label-style" to="/reset-password">Esqueceu sua senha?</router-link>
-      </validation-input>
+      />
+      <validation-input
+        v-model="newPasswordConfirmation"
+        title="Senha"
+        placeholder="Insira novamente a nova senha"
+        type-validation="newPassword"
+        :password="newPassword"
+        class="margin-input"
+        icon="fa-lock"
+      />
       <div class="centered">
         <p class="label-style">
-          Não tem uma conta?
-          <router-link class="click-link" to="/register">Cadastre-se</router-link>
+          Já possui uma conta? <router-link to="/login" class="click-link">Entre.</router-link>
         </p>
       </div>
       <button
@@ -32,7 +30,7 @@
         is-fullwidth
         button-style"
       >
-        Entre
+        Cadastre nova senha
       </button>
     </form-image>
   </div>
@@ -51,8 +49,8 @@ export default {
   },
   data() {
     return {
-      email: null,
-      password: null,
+      newPassword: null,
+      newPasswordConfirmation: null,
     };
   },
 };

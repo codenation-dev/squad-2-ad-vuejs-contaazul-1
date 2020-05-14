@@ -27,6 +27,7 @@ export default {
 <style lang="scss">
 .image {
   width: 100%;
+  height: stretch;
 }
 
 .slot-style{

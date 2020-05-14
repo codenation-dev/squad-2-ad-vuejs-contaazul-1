@@ -1,74 +1,85 @@
 <template>
   <div class="container">
-    <label class="is-pulled-left label-style">
+    <label class="is-pulled-left label-style label-title-style">
       {{ title }}
     </label>
-    <label class="is-pulled-right label-slot-style">
+    <label class="is-pulled-right label-style">
       <slot/>
     </label>
-    <input
-      class="input"
-      :placeholder="placeholder"
-      :value="value"
-      :class="{ 'is-danger': !$v.value[type] && value}"
-      @input="$emit('input', $event.target.value)"
-      :type="type"
-    />
+    <div
+      class="control"
+      :class="{ 'has-icons-right': isPassword, 'has-icons-left': icon !== null }"
+    >
+      <input
+        class="input"
+        :placeholder="placeholder"
+        :value="value"
+        :class="{ 'is-danger': !$v.value[typeValidation] && value }"
+        @input="$emit('input', $event.target.value)"
+        :type="passwordFieldType"
+      />
+      <span
+        v-if="isPassword"
+        class="icon
+        is-right
+        icon-click"
+        @click="switchVisibility()">
+        <i class="fas fa-eye"></i>
+      </span>
+      <span v-if="icon" class="icon is-small is-left">
+        <i class="fas" :class="icon"></i>
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
-import { email } from 'vuelidate/lib/validators';
+import { email, sameAs } from 'vuelidate/lib/validators';
 
 export default {
   props: {
     placeholder: String,
     title: String,
-    type: String,
+    typeValidation: String,
     value: String,
+    icon: String,
+    password: String,
+  },
+  data() {
+    return {
+      passwordFieldType: null,
+    };
   },
   validations: {
     value: {
       password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
       email,
       name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/.test(value) && value.length >= 7 && value.length <= 50,
+      newPassword: sameAs('password'),
+    },
+  },
+  computed: {
+    isPassword() {
+      return this.typeValidation === 'password' || this.typeValidation === 'newPassword';
+    },
+  },
+  created() {
+    this.passwordFieldType = this.isPassword ? 'password' : 'text';
+  },
+  methods: {
+    switchVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
     },
   },
 };
 </script>
 
 <style>
-.label-style {
-  height: 14px;
-  left: 0px;
-  top: 0px;
-
-  font-family: Rubik;
-  font-style: normal;
+.label-title-style {
   font-weight: 600;
   font-size: 12px;
-  line-height: 5px;
   letter-spacing: 1.125px;
   text-transform: uppercase;
-
-  color: #B0BAC9;
-}
-
-.label-slot-style {
-  height: 14px;
-  left: 0px;
-  top: 0px;
-
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 5px;
-
-  text-align: right;
-
-  color: #B0BAC9;
-
 }
 
 .input {
