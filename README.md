@@ -1,6 +1,6 @@
 # Cricket Gate
 
-Front end de Sistema de trackgin de erros em aplicações
+Front end de Sistema de tracking de erros em aplicações
 
 ## Como começar
 
@@ -26,5 +26,7 @@ cd backend && npm run start
 ```
 
 Isso fará com que o projeto rode nas seguintes portas:
+
 Front end: http://localhost:8080
+
 Back end: http://localhost:3000
