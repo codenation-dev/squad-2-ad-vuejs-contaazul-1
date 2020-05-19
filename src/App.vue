@@ -8,6 +8,10 @@
 @import "~bulma/bulma";
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .label-style {
   height: 14px;
   left: 0px;

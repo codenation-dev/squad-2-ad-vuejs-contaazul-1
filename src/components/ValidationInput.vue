@@ -24,11 +24,16 @@
         is-right
         icon-click"
         @click="switchVisibility()">
-        <i class="fas fa-eye"></i>
+        <img class="icon-image" src="../img/eye.png" v-if="passwordFieldType === 'password'">
+        <img class="icon-image" src="../img/eye-slash.png" v-else>
       </span>
       <span v-if="icon" class="icon is-small is-left">
         <i class="fas" :class="icon"></i>
       </span>
+
+      <div class="error" v-if="!$v.value[typeValidation] && value">
+        {{ messages[typeValidation] }}
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +53,11 @@ export default {
   data() {
     return {
       passwordFieldType: null,
+      messages: {
+        password: 'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.',
+        name: 'Digite seu nome completo.',
+        email: 'E-mail inválido.',
+      },
     };
   },
   validations: {
@@ -84,5 +94,16 @@ export default {
 
 .input {
   background: rgba(224, 231, 255, 0.2);
+}
+
+.icon-image {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
 }
 </style>
