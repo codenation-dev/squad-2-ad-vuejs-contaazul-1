@@ -32,10 +32,7 @@
       </span>
 
       <div class="error" v-if="!$v.value[typeValidation] && value">
-        {{ typeValidation == 'password' ?
-        'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.' :
-        (typeValidation == 'name' ? 'Digite seu nome completo.' :
-        'E-mail inválido.') }}
+        {{ messages[typeValidation] }}
       </div>
     </div>
   </div>
@@ -56,6 +53,11 @@ export default {
   data() {
     return {
       passwordFieldType: null,
+      messages: {
+        password: 'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.',
+        name: 'Digite seu nome completo.',
+        email: 'E-mail inválido.',
+      },
     };
   },
   validations: {

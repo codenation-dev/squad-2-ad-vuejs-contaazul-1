@@ -8,7 +8,7 @@
             <slot/>
           </div>
 
-          <div class="column is-offset-1 is-6 is-hidden-mobile is-paddingless">
+          <div v-if="this.windowWidth > 768" class="column is-offset-1 is-6 is-paddingless">
             <img class="image is-pulled-right" :src="background">
           </div>
         </div>
@@ -23,7 +23,13 @@ export default {
   data() {
     return {
       background: BackgroundImage,
+      windowWidth: window.innerWidth,
     };
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth;
+    });
   },
 };
 

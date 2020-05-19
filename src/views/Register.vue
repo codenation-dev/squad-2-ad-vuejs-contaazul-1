@@ -1,7 +1,9 @@
 <template>
   <div class="Register">
     <form-image>
-      <form-header title="Comece de graça" subtitle="E fique sempre de olho na sua aplicação."/>
+      <form-header
+        title="Comece de graça"
+        subtitle="Insira seu e-mail abaixo e mandaremos um link para resetar sua senha."/>
       <validation-input
         v-model="nome"
         title="Nome Completo"
