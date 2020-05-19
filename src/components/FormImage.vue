@@ -1,11 +1,16 @@
 <template>
     <section class="hero is-fullheight">
       <div class="hero-body is-paddingless">
-        <div class="container slot-style">
-          <slot/>
-        </div>
-        <div class="container is-marginless width">
-          <img class="image is-pulled-right" :src="background">
+        <div class="columns is-vcentered is-centered">
+          <div class="column
+            is-4-desktop is-offset-1-desktop
+            is-10-mobile is-offset-1-mobile">
+            <slot/>
+          </div>
+
+          <div class="column is-offset-1 is-6 is-hidden-mobile is-paddingless">
+            <img class="image is-pulled-right" :src="background">
+          </div>
         </div>
       </div>
     </section>
@@ -26,13 +31,9 @@ export default {
 
 <style lang="scss">
 .image {
+  height: 100vh;
   width: 100%;
-  height: 100%;
   object-fit: cover;
-}
-
-.slot-style{
-  max-width: 30%;
 }
 
 .width {
