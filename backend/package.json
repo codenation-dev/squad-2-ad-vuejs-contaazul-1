@@ -7,7 +7,7 @@
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Dedicio Coelho",
+  "author": "Dedicio Coelho, Marcos Henrique Stuber Dreveck",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
