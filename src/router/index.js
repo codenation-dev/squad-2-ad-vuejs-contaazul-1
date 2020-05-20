@@ -1,36 +1,27 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Login from '../views/Login.vue';
-import Register from '../views/Register.vue';
-import ResetPassword from '../views/ResetPassword.vue';
-import NewPassword from '../views/NewPassword.vue';
+import VueMeta from 'vue-meta';
+import store from '@/store';
+import Home from '@/views/Home.vue';
+import errorsRoutes from './errorsRoutes';
+import loginRoutes from './loginRoutes';
 
 Vue.use(VueRouter);
+Vue.use(VueMeta);
 
 const routes = [
   {
     path: '/',
-    redirect: '/login',
+    components: {
+      default: Home,
+    },
+    name: 'Home',
+    children: [...errorsRoutes],
   },
+  ...loginRoutes,
   {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-  },
-  {
-    path: '/reset-password',
-    name: 'ResetPassword',
-    component: ResetPassword,
-  },
-  {
-    path: '/new-password',
-    name: 'NewPassword',
-    component: NewPassword,
+    path: '*',
+    redirect: '/',
   },
 ];
 
@@ -38,6 +29,17 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const { isLogged } = store.getters;
+  const isAuthNeeded = to?.meta?.auth;
+
+  if (!isLogged && isAuthNeeded) {
+    router.push({ name: 'Login' });
+  }
+
+  next();
 });
 
 export default router;
