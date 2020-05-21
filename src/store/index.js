@@ -25,7 +25,7 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    updateErrors(state, payload) {
+    setErrors(state, payload) {
       state.errors = payload;
     },
     logout(state) {
@@ -33,8 +33,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    updateErrors({ commit }, payload) {
-      commit('updateErrors', payload);
+    setErrors({ commit }, payload) {
+      commit('setErrors', payload);
     },
     logout({ commit }) {
       commit('logout');

@@ -6,10 +6,9 @@
 
 <script>
 export default {
-  name: 'Cricket Gate',
   metaInfo: {
     title: 'Cricket Gate',
-    titleTemplate: '%s | Sistema de tracking de erros',
+    titleTemplate: '%s - Sistema de tracking de erros',
   },
 };
 </script>

@@ -33,7 +33,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['updateErrors']),
+    ...mapActions(['setErrors']),
   },
 
   created() {
@@ -41,7 +41,7 @@ export default {
       .get('/errors')
       .then(({ data }) => {
         this.errors = data;
-        this.updateErrors(data);
+        this.setErrors(data);
       })
       .catch((err) => console.error(err));
   },

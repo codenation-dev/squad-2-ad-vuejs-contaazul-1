@@ -15,7 +15,6 @@ const routes = [
     components: {
       default: Home,
     },
-    name: 'Home',
     children: [...errorsRoutes],
   },
   ...loginRoutes,
