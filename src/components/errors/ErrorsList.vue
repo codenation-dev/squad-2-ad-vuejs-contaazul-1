@@ -4,7 +4,11 @@
       <header class="errors-list--header columns">
         <div class="errors-list--header-item errors-list--header-actions">
           <div class="buttons has-addons">
-            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !selectedAll }">
+            <label
+              for="checkAll"
+              class="button is-small"
+              :class="{ 'is-ghost': !selectedAll }"
+            >
               <input
                 type="checkbox"
                 name="checkAll"
@@ -22,7 +26,11 @@
             </button>
           </div>
         </div>
-        <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
+        <div
+          class="errors-list--header-item"
+          v-for="(filter, index) in filters"
+          :key="index"
+        >
           <span
             class="errors-list--header-filter"
             :class="currentFilter === index ? activeClasses : ''"
@@ -35,8 +43,13 @@
       <transition mode="out-in" name="fade" appear>
         <loading-page v-if="isLoading" :key="loading"></loading-page>
         <ul class="panel" v-else :key="results">
-          <li v-for="error in getErrors" :key="error.id" class="panel-block has-background-white">
-            {{ error.id }} - {{ error.name }} - <a @click="activeActions">Selecionar</a>
+          <li
+            v-for="error in getErrors"
+            :key="error.id"
+            class="panel-block has-background-white"
+          >
+            {{ error.id }} - {{ error.name }} -
+            <a @click="activeActions">Selecionar</a>
           </li>
         </ul>
       </transition>

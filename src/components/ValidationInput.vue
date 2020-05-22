@@ -4,11 +4,14 @@
       {{ title }}
     </label>
     <label class="is-pulled-right label-style">
-      <slot/>
+      <slot />
     </label>
     <div
       class="control"
-      :class="{ 'has-icons-right': isPassword, 'has-icons-left': icon !== null }"
+      :class="{
+        'has-icons-right': isPassword,
+        'has-icons-left': icon !== null,
+      }"
     >
       <input
         class="input"
@@ -23,9 +26,14 @@
         class="icon
         is-right
         icon-click"
-        @click="switchVisibility()">
-        <img class="icon-image" src="../img/eye.png" v-if="passwordFieldType === 'password'">
-        <img class="icon-image" src="../img/eye-slash.png" v-else>
+        @click="switchVisibility()"
+      >
+        <img
+          class="icon-image"
+          src="../img/eye.png"
+          v-if="passwordFieldType === 'password'"
+        />
+        <img class="icon-image" src="../img/eye-slash.png" v-else />
       </span>
       <span v-if="icon" class="icon is-small is-left">
         <i class="fas" :class="icon"></i>
@@ -54,7 +62,8 @@ export default {
     return {
       passwordFieldType: null,
       messages: {
-        password: 'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.',
+        password:
+          'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.',
         name: 'Digite seu nome completo.',
         email: 'E-mail inválido.',
       },
@@ -64,13 +73,16 @@ export default {
     value: {
       password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
       email,
-      name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/.test(value) && value.length >= 7 && value.length <= 50,
+      name: (value) => (/^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/).test(value) && value.length >= 7 && value.length <= 50,
       newPassword: sameAs('password'),
     },
   },
   computed: {
     isPassword() {
-      return this.typeValidation === 'password' || this.typeValidation === 'newPassword';
+      return (
+        this.typeValidation === 'password'
+        || this.typeValidation === 'newPassword'
+      );
     },
   },
   created() {
