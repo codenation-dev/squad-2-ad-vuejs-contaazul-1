@@ -6,8 +6,17 @@ const adapter = new FileAsync('error.json');
 
 // Lista todos os erros
 router.get('/', (req, res) => {
+  const orderby = req.query.orderby || 'last_date';
+  const order = req.query.order || 'desc';
+  const filter = { archived: false };
+
   low(adapter).then((db) => {
-    const error = db.get('errors');
+    const error = db
+      .get('errors')
+      .filter(filter)
+      .orderBy(orderby, order)
+      .take(10)
+      .value();
 
     res.send(error);
   });
@@ -58,7 +67,7 @@ router.put('/:id/archive', (req, res) => {
     }
     db.get('errors')
       .find({ id: req.params.id })
-      .assign({ archive: true })
+      .assign({ archived: true })
       .write()
       .then((err) => res.send(err))
       .catch(() => res.status(404).send('Erro ao arquivar erro!'));

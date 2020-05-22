@@ -14,7 +14,7 @@
               <input class="input" type="text" placeholder="Find a post" />
             </p>
             <p class="control">
-              <button class="button">
+              <button class="button is-info">
                 Search
               </button>
             </p>
@@ -49,5 +49,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
