@@ -33,6 +33,7 @@
         is-link
         is-fullwidth
         button-style"
+        @click="register()"
       >
         Crie sua conta
       </button>
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import FormHeader from '../components/FormHeader.vue';
 import FormImage from '../components/FormImage.vue';
 import ValidationInput from '../components/ValidationInput.vue';
@@ -63,6 +65,26 @@ export default {
       email: null,
       password: null,
     };
+  },
+  methods: {
+    register() {
+      if (!(this.nome && this.email && this.password)) {
+        console.log('Preencha todas as informações.');
+        return;
+      }
+
+      try {
+        axios.post('http://localhost:3000/users/', { name: this.nome, email: this.email, password: this.password })
+          .then((result) => {
+            console.log('Cadastrado com sucesso.');
+            console.log(result);
+            this.$router.push({ name: 'Login' });
+          });
+      } catch (err) {
+        console.log('Erro ao comunicar com a API.');
+        console.log(err);
+      }
+    },
   },
 };
 </script>
