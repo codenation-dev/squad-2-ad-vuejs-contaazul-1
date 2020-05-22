@@ -1,7 +1,10 @@
 <template>
   <div>
     <form-image>
-      <form-header title="Entre" subtitle="Por favor, entre com suas credenciais para continuar."/>
+      <form-header
+        title="Entre"
+        subtitle="Por favor, entre com suas credenciais para continuar."
+      />
       <validation-input
         v-model="email"
         title="Email"
@@ -18,12 +21,16 @@
         class="margin-input"
         icon="fa-lock"
       >
-        <router-link class="click-link" to="/reset-password">Esqueceu sua senha?</router-link>
+        <router-link class="click-link" to="/reset-password"
+          >Esqueceu sua senha?</router-link
+        >
       </validation-input>
       <div class="centered">
         <p class="label-style">
           Não tem uma conta?
-          <router-link class="click-link" to="/register">Cadastre-se</router-link>
+          <router-link class="click-link" to="/register"
+            >Cadastre-se</router-link
+          >
         </p>
       </div>
       <button
