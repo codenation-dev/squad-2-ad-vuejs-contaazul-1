@@ -54,5 +54,8 @@ export default {
       newPasswordConfirmation: null,
     };
   },
+  mounted() {
+    console.log(this.$route.params.id);
+  },
 };
 </script>
