@@ -1,10 +1,10 @@
-import Vue from "vue";
-import axios from "axios";
+import Vue from 'vue';
+import axios from 'axios';
 
 Vue.use({
-  install(Vue) {
+  install() {
     Vue.prototype.$http = axios.create({
-      baseURL: "http://localhost:3000"
+      baseURL: 'http://localhost:3000',
     });
-  }
+  },
 });
