@@ -14,6 +14,9 @@
       <div class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item cde-item">
+            <span class="icon">
+              <i class="fas fa-table"></i>
+            </span>
             Dashboard
           </a>
         </div>
@@ -107,6 +110,10 @@ export default {
   .active {
     background-color: #2e5bff10 !important;
     border-bottom: 3px solid #2e5bff;
+  }
+  .icon {
+    margin-right: 0.5em !important;
+    margin-top: -1px;
   }
 }
 </style>
