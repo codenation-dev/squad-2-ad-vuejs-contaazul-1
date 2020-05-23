@@ -12,12 +12,14 @@
         type-validation="email"
         class="margin-input"
         icon="fa-envelope"
+        @validation="emailValidation"
       />
       <button
         class="button
-          is-link
-          is-fullwidth
-          button-syle"
+        is-link
+        is-fullwidth
+        button-syle"
+        :disabled="!emailIsValid"
       >
         Enviar link de reset
       </button>
@@ -39,7 +41,13 @@ export default {
   data() {
     return {
       email: null,
+      emailIsValid: false,
     };
+  },
+  methods: {
+    emailValidation(valid) {
+      this.emailIsValid = valid;
+    },
   },
 };
 </script>

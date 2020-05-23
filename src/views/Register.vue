@@ -3,7 +3,7 @@
     <form-image>
       <form-header
         title="Comece de graça"
-        subtitle="Insira seu e-mail abaixo e mandaremos um link para resetar sua senha."
+        subtitle="E fique sempre de olho na sua aplicação"
       />
       <validation-input
         v-model="nome"
@@ -11,6 +11,7 @@
         placeholder="Insira seu nome completo"
         type-validation="name"
         icon="fa-user"
+        @validation="nameValidation"
       />
       <validation-input
         v-model="email"
@@ -19,6 +20,7 @@
         type-validation="email"
         class="margin-input"
         icon="fa-envelope"
+        @validation="emailValidation"
       />
       <validation-input
         v-model="password"
@@ -27,12 +29,14 @@
         type-validation="password"
         class="margin-input"
         icon="fa-lock"
+        @validation="passwordValidation"
       />
       <button
         class="button
         is-link
         is-fullwidth
         button-style"
+        :disabled="disableButton"
       >
         Crie sua conta
       </button>
@@ -62,7 +66,26 @@ export default {
       nome: null,
       email: null,
       password: null,
+      nameIsValid: false,
+      emailIsValid: false,
+      passwordIsValid: false,
     };
+  },
+  computed: {
+    disableButton() {
+      return !(this.nameIsValid && this.emailIsValid && this.passwordIsValid);
+    },
+  },
+  methods: {
+    nameValidation(valid) {
+      this.nameIsValid = valid;
+    },
+    emailValidation(valid) {
+      this.emailIsValid = valid;
+    },
+    passwordValidation(valid) {
+      this.passwordIsValid = valid;
+    },
   },
 };
 </script>
