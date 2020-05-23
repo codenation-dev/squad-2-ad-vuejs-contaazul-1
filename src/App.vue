@@ -153,4 +153,8 @@ body {
   font-size: 1.125rem;
   margin-bottom: -0.25em;
 }
+
+.toast-error {
+  background: red !important;
+}
 </style>

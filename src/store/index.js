@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
-      token: '123456',
+      token: null,
     },
     errors: [],
   },
@@ -31,6 +31,9 @@ export default new Vuex.Store({
     logout(state) {
       state.user = {};
     },
+    login(state, user) {
+      state.user = user;
+    },
   },
   actions: {
     setErrors({ commit }, payload) {
@@ -38,6 +41,9 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit('logout');
+    },
+    login({ commit }, user) {
+      commit('login', user);
     },
   },
   modules: {},
