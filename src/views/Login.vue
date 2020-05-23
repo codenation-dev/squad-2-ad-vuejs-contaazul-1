@@ -40,7 +40,7 @@
         is-link
         is-fullwidth
         button-style"
-        @click="enter"
+        @click="doLogin"
         :disabled="disableButton"
       >
         Entre
@@ -83,7 +83,7 @@ export default {
     passwordValidation(valid) {
       this.passwordIsValid = valid;
     },
-    enter() {
+    doLogin() {
       const payload = {
         email: this.email,
         password: this.password,
