@@ -1,7 +1,7 @@
 <template>
   <div>
     <form-image>
-      <form-header title="Nova senha" subtitle="Insira a nova senha"/>
+      <form-header title="Nova senha" subtitle="Insira a nova senha" />
       <validation-input
         v-model="newPassword"
         title="Senha"
@@ -23,7 +23,8 @@
       />
       <div class="centered">
         <p class="label-style">
-          Já possui uma conta? <router-link to="/login" class="click-link">Entre.</router-link>
+          Já possui uma conta?
+          <router-link to="/login" class="click-link">Entre.</router-link>
         </p>
       </div>
       <button

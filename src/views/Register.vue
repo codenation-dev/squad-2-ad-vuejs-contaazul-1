@@ -3,7 +3,8 @@
     <form-image>
       <form-header
         title="Comece de graça"
-        subtitle="Insira seu e-mail abaixo e mandaremos um link para resetar sua senha."/>
+        subtitle="Insira seu e-mail abaixo e mandaremos um link para resetar sua senha."
+      />
       <validation-input
         v-model="nome"
         title="Nome Completo"
@@ -37,7 +38,8 @@
       </button>
       <div class="centered">
         <p class="label-style">
-          Já possui uma conta? <router-link to="/login" class="click-link">Entre.</router-link>
+          Já possui uma conta?
+          <router-link to="/login" class="click-link">Entre.</router-link>
         </p>
       </div>
     </form-image>

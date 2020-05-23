@@ -157,4 +157,73 @@ body {
 .toast-error {
   background: red !important;
 }
+
+.button.is-primary {
+  background-color: #2e5bff;
+  border-color: #1057bf;
+  color: #fff;
+
+  &:hover,
+  .is-hover {
+    background-color: #0c40ff;
+    border-color: #0d49a0;
+  }
+
+  &:focus,
+  .is-focus {
+    box-shadow: 0 0 0 0.125em rgba(46, 91, 255, 0.25);
+  }
+
+  &:active,
+  .is-active {
+    background-color: #0032e9;
+    border-color: #0b3a80;
+  }
+}
+
+.button.is-danger {
+  background-color: #e84a50;
+  border-color: #bb242a;
+  color: #fff;
+
+  &:hover,
+  .is-hover {
+    background-color: #e42c33;
+    border-color: #9f1f24;
+  }
+
+  &:focus,
+  .is-focus {
+    box-shadow: 0 0 0 0.125em rgba(232, 74, 80, 0.25);
+  }
+
+  &:active,
+  .is-active {
+    background-color: #d31b22;
+    border-color: #82191d;
+  }
+}
+
+.button.is-info {
+  background-color: #8097b1;
+  border-color: #8798ad;
+  color: #fff;
+
+  &:hover,
+  .is-hover {
+    background-color: #6b86a4;
+    border-color: #73879f;
+  }
+
+  &:focus,
+  .is-focus {
+    box-shadow: 0 0 0 0.125em rgba(128, 151, 177, 0.25);
+  }
+
+  &:active,
+  .is-active {
+    background-color: #5a7593;
+    border-color: #61768f;
+  }
+}
 </style>
