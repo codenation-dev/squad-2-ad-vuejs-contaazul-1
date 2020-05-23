@@ -12,7 +12,7 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item cde-item">
+        <a class="navbar-item">
           <span class="icon">
             <i class="fas fa-table"></i>
           </span>
@@ -25,7 +25,7 @@
           <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
           <div class="token">Seu token é: {{token}}</div>
         </div>
-        <figure class="image is-48x48 is-40x40 user-img">
+        <figure class="image is-48x48 user-img">
           <img
             class="is-rounded"
             src="https://unibrablog.files.wordpress.com/2017/02/marcia-regina.jpg?w=600&resize=327%2C320"
@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .navbar.is-light {
   background-color: white;
@@ -68,7 +68,7 @@ export default {
   align-self: center;
   margin: 0.5em;
 }
-.is-40x40 {
+.is-48x48 {
   height: 40px !important;
   width: 40px !important;
 }
@@ -85,7 +85,7 @@ export default {
     color: gray;
   }
 }
-.cde-item {
+.navbar-menu .navbar-start .navbar-item {
   text-transform: uppercase;
   border-bottom: 3px solid white;
   padding-top: 12px;
