@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     user: {
       token: '123456',
+      name: 'Ana',
     },
     errors: [],
     params: {
