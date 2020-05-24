@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import FormHeader from '../components/FormHeader.vue';
 import FormImage from '../components/FormImage.vue';
 import ValidationInput from '../components/ValidationInput.vue';
@@ -69,21 +68,45 @@ export default {
   methods: {
     register() {
       if (!(this.nome && this.email && this.password)) {
-        console.log('Preencha todas as informações.');
+        this.$toasted.show('Preencha todas as informações para continuar.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
         return;
       }
 
-      try {
-        axios.post('http://localhost:3000/users/', { name: this.nome, email: this.email, password: this.password })
-          .then((result) => {
-            console.log('Cadastrado com sucesso.');
-            console.log(result);
-            this.$router.push({ name: 'Login' });
+      this.$http.post('http://localhost:3000/users/', { name: this.nome, email: this.email, password: this.password })
+        .catch(() => {
+          this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
+            position: 'top-center',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
           });
-      } catch (err) {
-        console.log('Erro ao comunicar com a API.');
-        console.log(err);
-      }
+        })
+        .then(() => {
+          this.$toasted.show('Cadastro realizado com sucesso! Faça login para continuar.', {
+            position: 'top-center',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+          this.$router.push({ name: 'Login' });
+        });
     },
   },
 };

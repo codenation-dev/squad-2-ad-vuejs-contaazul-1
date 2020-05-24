@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import FormHeader from '../components/FormHeader.vue';
 import FormImage from '../components/FormImage.vue';
 import ValidationInput from '../components/ValidationInput.vue';
@@ -46,23 +45,46 @@ export default {
   methods: {
     sendLink() {
       if (!this.email) {
-        console.log('Preencha todas as informações.');
+        this.$toasted.show('Preencha seu e-mail para continuar.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
         return;
       }
 
-      try {
-        axios.get(`http://localhost:3000/users/${this.email}`).then((results) => {
-          if (results.data) {
-            console.log(results.data);
-            this.$router.push({ name: 'NewPassword', params: { id: results.data.id } });
-          } else {
-            console.log('Email não pertence a nenhum usuário cadastrado.');
-          }
+      this.$http.get(`http://localhost:3000/users/${this.email}`).catch(() => {
+        this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
         });
-      } catch (err) {
-        console.log('Erro de comunicação com a API.');
-        console.log(err);
-      }
+      }).then((results) => {
+        if (results.data) {
+          this.$router.push({ name: 'NewPassword', params: { id: results.data.id } });
+        } else {
+          this.$toasted.show('O e-mail informado não pertence a nenhum usuário cadastrado.', {
+            position: 'top-center',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        }
+      });
     },
   },
 };
