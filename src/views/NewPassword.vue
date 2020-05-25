@@ -76,25 +76,51 @@ export default {
       this.newPasswordIsValid = valid;
     },
     changePassword() {
-      const payload = {
-        password: this.newPassword,
-      };
+      if (this.password === this.newPassword && this.password !== null) {
+        const payload = {
+          password: this.newPassword,
+        };
 
-      this.$http.post(`users/${this.id}/reset`, payload)
-        .then(() => {
-          this.$toasted.show('Senha alterada com sucesso!', {
+        this.$http.post(`users/${this.id}/reset`, payload)
+          .then(() => {
+            this.$toasted.show('Senha alterada com sucesso!', {
+              theme: 'toasted-primary',
+              position: 'bottom-left',
+              duration: 5000,
+              type: 'success',
+              action: {
+                text: 'Fechar',
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
+              },
+            });
+
+            this.$router.push({ name: 'Login' });
+          }).catch((error) => this.$toasted.show(error, {
             theme: 'toasted-primary',
             position: 'bottom-left',
             duration: 5000,
-            type: 'success',
-          });
-
-          this.$router.push({ name: 'Login' });
-        }).catch((error) => this.$toasted.show(error, {
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          }));
+      } else {
+        this.$toasted.show('As senhas devem ser iguais!', {
           theme: 'toasted-primary',
           position: 'bottom-left',
           duration: 5000,
-        }));
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      }
     },
   },
 };

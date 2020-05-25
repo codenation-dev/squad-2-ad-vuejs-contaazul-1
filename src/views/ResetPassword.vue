@@ -3,7 +3,7 @@
     <form-image>
       <form-header
         title="Esqueceu a senha?"
-        subtitle="Email para receber o link de redefinição"
+        subtitle="Insira seu email para redefinir a senha!"
       />
       <validation-input
         v-model="email"
@@ -22,7 +22,7 @@
           :disabled="!emailIsValid"
           @click="sendLink()"
         >
-          Enviar link de reset
+          Redefinir senha
         </button>
     </form-image>
   </div>
@@ -52,7 +52,7 @@ export default {
     sendLink() {
       if (!this.email) {
         this.$toasted.show('Preencha seu e-mail para continuar.', {
-          position: 'top-center',
+          position: 'bottom-left',
           duration: 5000,
           action: {
             text: 'Fechar',
@@ -66,8 +66,9 @@ export default {
 
       this.$http.get(`users/${this.email}`).catch(() => {
         this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
-          position: 'top-center',
+          position: 'bottom-left',
           duration: 5000,
+          type: 'error',
           action: {
             text: 'Fechar',
             onClick: (e, toastObject) => {
@@ -80,8 +81,9 @@ export default {
           this.$router.push({ name: 'NewPassword', params: { id: results.data.id } });
         } else {
           this.$toasted.show('O e-mail informado não pertence a nenhum usuário cadastrado.', {
-            position: 'top-center',
+            position: 'bottom-left',
             duration: 5000,
+            type: 'error',
             action: {
               text: 'Fechar',
               onClick: (e, toastObject) => {

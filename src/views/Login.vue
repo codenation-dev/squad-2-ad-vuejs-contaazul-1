@@ -84,30 +84,57 @@ export default {
       this.passwordIsValid = valid;
     },
     doLogin() {
-      const payload = {
-        email: this.email,
-        password: this.password,
-      };
+      if (this.email && this.password) {
+        const payload = {
+          email: this.email,
+          password: this.password,
+        };
 
-      this.$http.post('/users/login', payload)
-        .then(({ data }) => {
-          if (data === 'Usuário ou senha incorretos') {
-            this.$toasted.show(data, {
-              theme: 'toasted-primary',
-              position: 'bottom-left',
-              duration: 5000,
-              type: 'error',
-            });
-          } else {
-            this.login(data);
-            this.$router.push({ name: 'ErrorHome' });
-          }
-        })
-        .catch((error) => this.$toasted.show(error, {
+        this.$http.post('/users/login', payload)
+          .then(({ data }) => {
+            if (data === 'Usuário ou senha incorretos') {
+              this.$toasted.show(data, {
+                theme: 'toasted-primary',
+                position: 'bottom-left',
+                duration: 5000,
+                type: 'error',
+                action: {
+                  text: 'Fechar',
+                  onClick: (e, toastObject) => {
+                    toastObject.goAway(0);
+                  },
+                },
+              });
+            } else {
+              this.login(data);
+              this.$router.push({ name: 'ErrorHome' });
+            }
+          })
+          .catch((error) => this.$toasted.show(error, {
+            theme: 'toasted-primary',
+            position: 'bottom-left',
+            duration: 5000,
+            type: 'error',
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          }));
+      } else {
+        this.$toasted.show('Preencha todos os campos!', {
           theme: 'toasted-primary',
           position: 'bottom-left',
           duration: 5000,
-        }));
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      }
     },
   },
 };

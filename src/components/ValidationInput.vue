@@ -50,14 +50,6 @@
 import { email, sameAs } from 'vuelidate/lib/validators';
 
 export default {
-  validations: {
-    value: {
-      password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
-      email,
-      name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/.test(value) && value.length >= 7 && value.length <= 50,
-      newPassword: sameAs('password'),
-    },
-  },
   props: {
     placeholder: String,
     title: String,

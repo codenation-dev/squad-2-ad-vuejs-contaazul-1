@@ -105,8 +105,9 @@ export default {
       this.$http.post('/users', { name: this.nome, email: this.email, password: this.password })
         .catch(() => {
           this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
-            position: 'top-center',
+            position: 'bottom-left',
             duration: 5000,
+            type: 'error',
             action: {
               text: 'Fechar',
               onClick: (e, toastObject) => {
@@ -117,8 +118,9 @@ export default {
         })
         .then(() => {
           this.$toasted.show('Cadastro realizado com sucesso! Faça login para continuar.', {
-            position: 'top-center',
+            position: 'bottom-left',
             duration: 5000,
+            type: 'success',
             action: {
               text: 'Fechar',
               onClick: (e, toastObject) => {
