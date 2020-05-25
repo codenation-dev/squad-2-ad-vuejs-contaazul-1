@@ -38,7 +38,6 @@
       <span v-if="icon" class="icon is-small is-left">
         <i class="fas" :class="icon"></i>
       </span>
-
       <div class="error" v-if="!$v.value[typeValidation] && value">
         {{ messages[typeValidation] }}
       </div>
@@ -96,7 +95,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .label-title-style {
   font-weight: 600;
   font-size: 12px;

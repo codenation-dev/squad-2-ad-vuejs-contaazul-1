@@ -9,16 +9,7 @@
       </div>
       <div class="level-right">
         <div class="level-item">
-          <div class="field has-addons">
-            <p class="control">
-              <input class="input" type="text" placeholder="Find a post" />
-            </p>
-            <p class="control">
-              <button class="button is-info">
-                Search
-              </button>
-            </p>
-          </div>
+            <search-bar/>
         </div>
       </div>
     </div>
@@ -29,10 +20,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import ErrorsList from '@/components/errors/ErrorsList.vue';
+import SearchBar from '@/components/SearchBar.vue';
 
 export default {
   components: {
     ErrorsList,
+    SearchBar,
   },
 
   data() {

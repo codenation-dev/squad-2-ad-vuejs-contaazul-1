@@ -22,7 +22,7 @@
 
       <div class="navbar-end">
         <div class="nav-welcome">
-          <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
+          <div class="title-welcome">Seja bem-vindo(a), {{name}}!</div>
           <div class="token">Seu token é: {{token}}</div>
         </div>
         <figure class="image is-48x48 user-img">
