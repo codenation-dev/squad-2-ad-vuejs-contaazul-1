@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 [*.{vue}]
 indent_style = space
 indent_size = 2
@@ -7,4 +5,4 @@ end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 100
->>>>>>> 231e96c52d17abfaba4a1c5f3f58ec8e1c13ce1f
+

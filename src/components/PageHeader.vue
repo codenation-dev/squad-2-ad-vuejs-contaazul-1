@@ -32,7 +32,6 @@
           />
         </figure>
       </div>
-
       <div v-else class="navbar-end button-wrapper">
         <router-link to='/'>
           <button class="button is-link button-return">
@@ -40,7 +39,6 @@
           </button>
         </router-link>
       </div>
-
     </div>
   </nav>
 </template>
