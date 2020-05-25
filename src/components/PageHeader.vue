@@ -33,13 +33,13 @@
             />
           </figure>
         </div>
-        <div v-if="voltar" class="navbar-end button-wrapper">
-          <router-link to='/'>
-            <button class="button is-link button-return">
-              Voltar
-            </button>
-          </router-link>
-        </div>
+      </div>
+      <div v-else class="navbar-end button-wrapper">
+        <router-link to='/'>
+          <button class="button is-link button-return">
+            Voltar
+          </button>
+        </router-link>
       </div>
     </div>
   </nav>
