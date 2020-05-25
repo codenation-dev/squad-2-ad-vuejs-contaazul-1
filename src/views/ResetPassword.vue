@@ -16,13 +16,14 @@
       />
       <button
         class="button
-        is-link
-        is-fullwidth
-        button-syle"
-        :disabled="!emailIsValid"
-      >
-        Enviar link de reset
-      </button>
+          is-link
+          is-fullwidth
+          button-syle"
+          :disabled="!emailIsValid"
+          @click="sendLink()"
+        >
+          Enviar link de reset
+        </button>
     </form-image>
   </div>
 </template>
@@ -47,6 +48,49 @@ export default {
   methods: {
     emailValidation(valid) {
       this.emailIsValid = valid;
+    },
+    sendLink() {
+      if (!this.email) {
+        this.$toasted.show('Preencha seu e-mail para continuar.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+        return;
+      }
+
+      this.$http.get(`users/${this.email}`).catch(() => {
+        this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      }).then((results) => {
+        if (results.data) {
+          this.$router.push({ name: 'NewPassword', params: { id: results.data.id } });
+        } else {
+          this.$toasted.show('O e-mail informado não pertence a nenhum usuário cadastrado.', {
+            position: 'top-center',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        }
+      });
     },
   },
 };

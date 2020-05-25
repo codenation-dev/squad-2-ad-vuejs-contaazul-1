@@ -82,6 +82,14 @@ export default {
       this.$emit('validation', this.$v.value[this.typeValidation]);
     },
   },
+  validations: {
+    value: {
+      password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
+      email,
+      name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)/.test(value) && value.length >= 7 && value.length <= 50,
+      newPassword: sameAs('password'),
+    },
+  },
   computed: {
     isPassword() {
       return (
