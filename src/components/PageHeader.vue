@@ -21,24 +21,25 @@
       </div>
 
       <div class="navbar-end" v-if="!voltar">
-      <div class="navbar-end">
-        <div class="nav-welcome">
-          <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
-          <div class="token">Seu token é: {{token}}</div>
+        <div class="navbar-end">
+          <div class="nav-welcome">
+            <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
+            <div class="token">Seu token é: {{token}}</div>
+          </div>
+          <figure class="image is-48x48 user-img">
+            <img
+              class="is-rounded"
+              src="https://unibrablog.files.wordpress.com/2017/02/marcia-regina.jpg?w=600&resize=327%2C320"
+            />
+          </figure>
         </div>
-        <figure class="image is-48x48 user-img">
-          <img
-            class="is-rounded"
-            src="https://unibrablog.files.wordpress.com/2017/02/marcia-regina.jpg?w=600&resize=327%2C320"
-          />
-        </figure>
-      </div>
-      <div v-else class="navbar-end button-wrapper">
-        <router-link to='/'>
-          <button class="button is-link button-return">
-            Voltar
-          </button>
-        </router-link>
+        <div v-if="voltar" class="navbar-end button-wrapper">
+          <router-link to='/'>
+            <button class="button is-link button-return">
+              Voltar
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </nav>
