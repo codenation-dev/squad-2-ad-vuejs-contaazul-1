@@ -58,7 +58,7 @@ export default {
         return;
       }
 
-      this.$http.get(`http://localhost:3000/users/${this.email}`).catch(() => {
+      this.$http.get(`users/${this.email}`).catch(() => {
         this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
           position: 'top-center',
           duration: 5000,
