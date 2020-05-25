@@ -6,6 +6,7 @@ import store from '@/store';
 import Home from '@/views/Home.vue';
 import errorsRoutes from './errorsRoutes';
 import loginRoutes from './loginRoutes';
+import NotFound from '../views/NotFound.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueMeta);
@@ -21,8 +22,13 @@ const routes = [
   },
   ...loginRoutes,
   {
+    path: '/404',
+    name: '404',
+    component: NotFound,
+  },
+  {
     path: '*',
-    redirect: '/',
+    redirect: '/404',
   },
 ];
 
