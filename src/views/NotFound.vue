@@ -2,7 +2,7 @@
   <div class="main">
     <pageHeader :voltar="true" />
     <div class="columns is-marginless">
-        <div v-if="this.windowWidth > 768" class="column is-10 is-offset-1">
+        <div v-if="windowWidth > 768" class="column is-10 is-offset-1">
             <img class="image-style-404" :src="image">
         </div>
         <div v-else class="column is-paddingless is-12">
