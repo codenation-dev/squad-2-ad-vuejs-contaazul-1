@@ -15,13 +15,13 @@
 <script>
 import PageHeader from '@/components/PageHeader.vue';
 import pageNotFound from '../img/page-not-found.svg';
-import mobilePageNotFound from '../img/page-not-found-mobile.svg';
+import PageNotFoundmobile from '../img/page-not-found-mobile.svg';
 
 export default {
   data() {
     return {
       image: pageNotFound,
-      imageMobile: mobilePageNotFound,
+      imageMobile: PageNotFoundmobile,
       windowWidth: window.innerWidth,
     };
   },
