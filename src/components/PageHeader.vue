@@ -21,6 +21,7 @@
       </div>
 
       <div class="navbar-end" v-if="!voltar">
+      <div class="navbar-end">
         <div class="nav-welcome">
           <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
           <div class="token">Seu token é: {{token}}</div>

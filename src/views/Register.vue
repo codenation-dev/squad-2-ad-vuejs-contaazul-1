@@ -81,7 +81,7 @@ export default {
         return;
       }
 
-      this.$http.post('http://localhost:3000/users/', { name: this.nome, email: this.email, password: this.password })
+      this.$http.post('/users', { name: this.nome, email: this.email, password: this.password })
         .catch(() => {
           this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
             position: 'top-center',
