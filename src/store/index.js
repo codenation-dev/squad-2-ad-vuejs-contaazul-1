@@ -14,6 +14,7 @@ export default new Vuex.Store({
       order: 'desc',
       orderby: 'last_date',
     },
+    selectedItems: [],
   },
   getters: {
     getErrors(state) {
@@ -31,6 +32,12 @@ export default new Vuex.Store({
     getParams(state) {
       return state.params;
     },
+    getSelectedItems(state) {
+      return state.selectedItems;
+    },
+    getUser(state) {
+      return state.user;
+    },
   },
   mutations: {
     setErrors(state, payload) {
@@ -41,6 +48,15 @@ export default new Vuex.Store({
     },
     setParams(state, payload) {
       state.params = payload;
+    },
+    addSelectedItem(state, payload) {
+      state.selectedItems.push(payload);
+    },
+    removeSelectedItem(state, payload) {
+      state.selectedItems.splice(payload, 1);
+    },
+    setSelectedItems(state, payload) {
+      state.selectedItems = [...payload];
     },
   },
   actions: {
@@ -68,6 +84,18 @@ export default new Vuex.Store({
       }
 
       commit('setParams', params);
+    },
+    toggleSelectedItem({ commit, state }, payload) {
+      const existId = state.selectedItems.findIndex((item) => item === payload);
+
+      if (existId >= 0) {
+        commit('removeSelectedItem', existId);
+      } else {
+        commit('addSelectedItem', payload);
+      }
+    },
+    setSelectedItems({ commit }, payload) {
+      commit('setSelectedItems', payload);
     },
   },
   modules: {},

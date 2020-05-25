@@ -37,39 +37,43 @@ router.get('/:id', (req, res) => {
 });
 
 // Deletar erro
-router.delete('/:id', (req, res) => {
-  low(adapter).then((db) => {
-    const error = db
-      .get('errors')
-      .find({ id: req.params.id })
-      .value();
-    if (!error) {
-      res.status(404).send('Erro não existe!');
-    }
+router.delete('/', (req, res) => {
+  const { ids } = req.body || {};
 
-    db.get('errors')
-      .remove({ id: req.params.id })
-      .write()
+  low(adapter).then((db) => {
+    const promises = ids.map((id) => {
+      const collection = 'errors';
+
+      return db
+        .get(collection)
+        .remove({ id })
+        .write();
+    });
+
+    return Promise.all(promises)
       .then(() => res.send(JSON.stringify(true)))
-      .catch(() => res.status(404).send('Erro ao deletar erro!'));
+      .catch(() => res.status(404).send('Erro ao excluir erro!'));
   });
 });
 
 // Arquivar erro
-router.put('/:id/archive', (req, res) => {
+router.put('/archive', (req, res) => {
+  const { ids } = req.body || {};
+  const status = { archived: true };
+
   low(adapter).then((db) => {
-    const error = db
-      .get('errors')
-      .find({ id: req.params.id })
-      .value();
-    if (!error) {
-      res.status(404).send('Erro não existe!');
-    }
-    db.get('errors')
-      .find({ id: req.params.id })
-      .assign({ archived: true })
-      .write()
-      .then((err) => res.send(err))
+    const promises = ids.map((id) => {
+      const collection = 'errors';
+
+      return db
+        .get(collection)
+        .find({ id })
+        .assign(status)
+        .write();
+    });
+
+    return Promise.all(promises)
+      .then((data) => res.send(data))
       .catch(() => res.status(404).send('Erro ao arquivar erro!'));
   });
 });
