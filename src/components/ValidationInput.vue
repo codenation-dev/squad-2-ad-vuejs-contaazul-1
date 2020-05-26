@@ -28,11 +28,7 @@
         icon-click"
         @click="switchVisibility()"
       >
-        <img
-          class="icon-image"
-          src="../img/eye.png"
-          v-if="passwordFieldType === 'password'"
-        />
+        <img class="icon-image" src="../img/eye.png" v-if="passwordFieldType === 'password'" />
         <img class="icon-image" src="../img/eye-slash.png" v-else />
       </span>
       <span v-if="icon" class="icon is-small is-left">
@@ -48,6 +44,8 @@
 
 <script>
 import { email, sameAs } from 'vuelidate/lib/validators';
+
+const nameRegex = /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)$/;
 
 export default {
   props: {
@@ -78,16 +76,13 @@ export default {
     value: {
       password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
       email,
-      name: (value) => /^([a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\s+[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+)/.test(value) && value.length >= 7 && value.length <= 50,
+      name: (value) => nameRegex.test(value) && value.length >= 7 && value.length <= 50,
       newPassword: sameAs('password'),
     },
   },
   computed: {
     isPassword() {
-      return (
-        this.typeValidation === 'password'
-        || this.typeValidation === 'newPassword'
-      );
+      return this.typeValidation === 'password' || this.typeValidation === 'newPassword';
     },
   },
   created() {
@@ -101,7 +96,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .label-title-style {
   font-weight: 600;
   font-size: 12px;
