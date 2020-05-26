@@ -33,6 +33,7 @@
         is-link
         is-fullwidth
         button-style"
+        @click="register()"
       >
         Crie sua conta
       </button>
@@ -63,6 +64,50 @@ export default {
       email: null,
       password: null,
     };
+  },
+  methods: {
+    register() {
+      if (!(this.nome && this.email && this.password)) {
+        this.$toasted.show('Preencha todas as informações para continuar.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+        return;
+      }
+
+      this.$http.post('/users', { name: this.nome, email: this.email, password: this.password })
+        .catch(() => {
+          this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
+            position: 'top-center',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        })
+        .then(() => {
+          this.$toasted.show('Cadastro realizado com sucesso! Faça login para continuar.', {
+            position: 'top-center',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+          this.$router.push({ name: 'Login' });
+        });
+    },
   },
 };
 </script>
