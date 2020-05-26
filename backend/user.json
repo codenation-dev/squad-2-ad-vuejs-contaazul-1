@@ -1,18 +1,25 @@
 {
-	"users": [
-		{
-			"name": "Teste 2",
-			"email": "teste2@teste.com",
-			"password": "000000",
-			"token": "3ea7b2ab2e8151d4d30d979b98057f6a",
-			"id": "f7b068a3-40e1-4e2b-b787-0d105b49c3b3"
-		},
-		{
-			"name": "Dedicio",
-			"email": "dedicio@gmail.com",
-			"password": "131422",
-			"token": "2235f14beb4cda7a437dc13b5c0ea681",
-			"id": "26fd02e6-1f22-4615-90cd-972e224f371d"
-		}
-	]
+  "users": [
+    {
+      "name": "Teste 2",
+      "email": "teste2@teste.com",
+      "password": "000000",
+      "token": "3ea7b2ab2e8151d4d30d979b98057f6a",
+      "id": "f7b068a3-40e1-4e2b-b787-0d105b49c3b3"
+    },
+    {
+      "name": "Dedicio",
+      "email": "dedicio@gmail.com",
+      "password": "131422",
+      "token": "2235f14beb4cda7a437dc13b5c0ea681",
+      "id": "26fd02e6-1f22-4615-90cd-972e224f371d"
+    },
+    {
+      "name": "Administrador",
+      "email": "admin@cricket.com",
+      "password": "mudar123",
+      "token": "35f14beb4dda7f437dc1322b5c0bb908",
+      "id": "ff71f655-4a3d-4ecc-89eb-27fc856eae1b"
+    }
+  ]
 }
