@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <page-header/>
+    <page-header />
 
     <div class="container">
       <transition mode="out-in" name="fade" appear>

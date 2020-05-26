@@ -81,7 +81,8 @@ export default {
           password: this.newPassword,
         };
 
-        this.$http.post(`users/${this.id}/reset`, payload)
+        this.$http
+          .post(`users/${this.id}/reset`, payload)
           .then(() => {
             this.$toasted.show('Senha alterada com sucesso!', {
               theme: 'toasted-primary',
@@ -97,7 +98,8 @@ export default {
             });
 
             this.$router.push({ name: 'Login' });
-          }).catch((error) => this.$toasted.show(error, {
+          })
+          .catch((error) => this.$toasted.show(error, {
             theme: 'toasted-primary',
             position: 'bottom-left',
             duration: 5000,

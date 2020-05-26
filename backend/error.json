@@ -9,7 +9,7 @@
       "enviroment": "develop",
       "level": "error",
       "qty": 1000,
-      "colletected_by": "Marcos",
+      "collected_by": "Marcos",
       "last_date": "2020-04-20T17:44:14Z",
       "archived": false
     },
@@ -22,7 +22,7 @@
       "enviroment": "production",
       "level": "debug",
       "qty": 300,
-      "colletected_by": "Dedicio",
+      "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
     },
@@ -35,7 +35,7 @@
       "enviroment": "production",
       "level": "warning",
       "qty": 11,
-      "colletected_by": "Lara",
+      "collected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
       "archived": false
     }

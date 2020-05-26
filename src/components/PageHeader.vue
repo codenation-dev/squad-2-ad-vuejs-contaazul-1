@@ -22,8 +22,8 @@
 
       <div class="navbar-end">
         <div class="nav-welcome">
-          <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
-          <div class="token">Seu token é: {{token}}</div>
+          <div class="title-welcome">Seja bem-vinda, {{ name }}!</div>
+          <div class="token">Seu token é: {{ token }}</div>
         </div>
         <figure class="image is-48x48 user-img">
           <img
@@ -32,7 +32,6 @@
           />
         </figure>
       </div>
-
     </div>
   </nav>
 </template>
@@ -50,7 +49,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .navbar.is-light {
   background-color: white;
 }
