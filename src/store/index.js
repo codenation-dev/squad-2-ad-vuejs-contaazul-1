@@ -6,8 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
-      token: '123456',
-      name: 'Ana',
+      token: null,
     },
     errors: [],
     params: {
@@ -39,6 +38,9 @@ export default new Vuex.Store({
     logout(state) {
       state.user = {};
     },
+    login(state, user) {
+      state.user = user;
+    },
     setParams(state, payload) {
       state.params = payload;
     },
@@ -49,6 +51,9 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit('logout');
+    },
+    login({ commit }, user) {
+      commit('login', user);
     },
     setParams({ commit, state }, payload) {
       let { params } = state;
@@ -70,5 +75,4 @@ export default new Vuex.Store({
       commit('setParams', params);
     },
   },
-  modules: {},
 });

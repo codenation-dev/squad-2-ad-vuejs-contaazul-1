@@ -68,6 +68,11 @@ export default {
       },
     };
   },
+  watch: {
+    value() {
+      this.$emit('validation', this.$v.value[this.typeValidation]);
+    },
+  },
   validations: {
     value: {
       password: (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
