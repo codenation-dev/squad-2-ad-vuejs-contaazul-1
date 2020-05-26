@@ -155,6 +155,10 @@ body {
   margin-bottom: -0.25em;
 }
 
+.toast-error {
+  background: red !important;
+}
+
 .button.is-primary {
   background-color: #2e5bff;
   border-color: #1057bf;

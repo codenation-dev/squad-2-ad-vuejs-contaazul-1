@@ -9,6 +9,7 @@
         type-validation="password"
         class="margin-input"
         icon="fa-lock"
+        @validation="passwordValidation"
       />
       <validation-input
         v-model="newPasswordConfirmation"
@@ -18,6 +19,7 @@
         :password="newPassword"
         class="margin-input"
         icon="fa-lock"
+        @validation="newPasswordValidation"
       />
       <div class="centered">
         <p class="label-style">
@@ -30,6 +32,8 @@
         is-link
         is-fullwidth
         button-style"
+        @click="changePassword"
+        :disabled="disableButton"
       >
         Cadastre nova senha
       </button>
@@ -52,7 +56,72 @@ export default {
     return {
       newPassword: null,
       newPasswordConfirmation: null,
+      passwordIsValid: false,
+      newPasswordIsValid: false,
     };
+  },
+  props: {
+    id: String,
+  },
+  computed: {
+    disableButton() {
+      return !(this.passwordIsValid && this.newPasswordIsValid);
+    },
+  },
+  methods: {
+    passwordValidation(valid) {
+      this.passwordIsValid = valid;
+    },
+    newPasswordValidation(valid) {
+      this.newPasswordIsValid = valid;
+    },
+    changePassword() {
+      if (this.password === this.newPassword && this.password !== null) {
+        const payload = {
+          password: this.newPassword,
+        };
+
+        this.$http.post(`users/${this.id}/reset`, payload)
+          .then(() => {
+            this.$toasted.show('Senha alterada com sucesso!', {
+              theme: 'toasted-primary',
+              position: 'bottom-left',
+              duration: 5000,
+              type: 'success',
+              action: {
+                text: 'Fechar',
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
+              },
+            });
+
+            this.$router.push({ name: 'Login' });
+          }).catch((error) => this.$toasted.show(error, {
+            theme: 'toasted-primary',
+            position: 'bottom-left',
+            duration: 5000,
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          }));
+      } else {
+        this.$toasted.show('As senhas devem ser iguais!', {
+          theme: 'toasted-primary',
+          position: 'bottom-left',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      }
+    },
   },
 };
 </script>

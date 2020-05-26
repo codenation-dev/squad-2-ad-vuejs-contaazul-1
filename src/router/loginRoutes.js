@@ -20,8 +20,9 @@ export default [
     component: ResetPassword,
   },
   {
-    path: '/new-password',
+    path: '/new-password/:id',
     name: 'NewPassword',
     component: NewPassword,
+    params: true,
   },
 ];

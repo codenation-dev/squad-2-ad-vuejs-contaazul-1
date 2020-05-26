@@ -3,7 +3,7 @@
     <form-image>
       <form-header
         title="Comece de graça"
-        subtitle="Insira seu e-mail abaixo e mandaremos um link para resetar sua senha."
+        subtitle="E fique sempre de olho na sua aplicação"
       />
       <validation-input
         v-model="nome"
@@ -11,6 +11,7 @@
         placeholder="Insira seu nome completo"
         type-validation="name"
         icon="fa-user"
+        @validation="nameValidation"
       />
       <validation-input
         v-model="email"
@@ -19,6 +20,7 @@
         type-validation="email"
         class="margin-input"
         icon="fa-envelope"
+        @validation="emailValidation"
       />
       <validation-input
         v-model="password"
@@ -27,12 +29,15 @@
         type-validation="password"
         class="margin-input"
         icon="fa-lock"
+        @validation="passwordValidation"
       />
       <button
         class="button
         is-link
         is-fullwidth
         button-style"
+        :disabled="disableButton"
+        @click="register()"
       >
         Crie sua conta
       </button>
@@ -62,7 +67,70 @@ export default {
       nome: null,
       email: null,
       password: null,
+      nameIsValid: false,
+      emailIsValid: false,
+      passwordIsValid: false,
     };
+  },
+  computed: {
+    disableButton() {
+      return !(this.nameIsValid && this.emailIsValid && this.passwordIsValid);
+    },
+  },
+  methods: {
+    nameValidation(valid) {
+      this.nameIsValid = valid;
+    },
+    emailValidation(valid) {
+      this.emailIsValid = valid;
+    },
+    passwordValidation(valid) {
+      this.passwordIsValid = valid;
+    },
+    register() {
+      if (!(this.nome && this.email && this.password)) {
+        this.$toasted.show('Preencha todas as informações para continuar.', {
+          position: 'top-center',
+          duration: 5000,
+          action: {
+            text: 'Fechar',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+        return;
+      }
+
+      this.$http.post('/users', { name: this.nome, email: this.email, password: this.password })
+        .catch(() => {
+          this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
+            position: 'bottom-left',
+            duration: 5000,
+            type: 'error',
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        })
+        .then(() => {
+          this.$toasted.show('Cadastro realizado com sucesso! Faça login para continuar.', {
+            position: 'bottom-left',
+            duration: 5000,
+            type: 'success',
+            action: {
+              text: 'Fechar',
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+          this.$router.push({ name: 'Login' });
+        });
+    },
   },
 };
 </script>
