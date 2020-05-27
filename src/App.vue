@@ -107,6 +107,18 @@ body {
   margin-top: 15px;
 }
 
+.button-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  margin-right: 10px;
+}
+
+.button-return {
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #2e5bff;
+}
+
 .icon-click {
   pointer-events: initial !important;
   cursor: pointer;
@@ -126,6 +138,12 @@ body {
   font-size: 15px;
   color: #b0bac9;
   margin-top: 5px;
+}
+
+.image-style-404 {
+  margin-top: 10%;
+  object-fit: contain !important;
+  width: 100%;
 }
 
 .margin-input {
