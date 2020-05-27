@@ -13,6 +13,7 @@
         class="margin-input"
         icon="fa-envelope"
         @validation="emailValidation"
+        :doAction="doLogin"
       />
       <validation-input
         v-model="password"
@@ -22,29 +23,32 @@
         class="margin-input"
         icon="fa-lock"
         @validation="passwordValidation"
+        :doAction="doLogin"
       >
-        <router-link class="click-link" to="/reset-password"
+        <router-link class="click-link" to="/reset-password" tabindex="2"
           >Esqueceu sua senha?</router-link
         >
       </validation-input>
-      <div class="centered">
-        <p class="label-style">
-          Não tem uma conta?
-          <router-link class="click-link" to="/register"
-            >Cadastre-se</router-link
-          >
-        </p>
-      </div>
       <button
+        tabindex="1"
         class="button
         is-link
         is-fullwidth
-        button-style"
+        button-style
+        margin-bottom"
         @click="doLogin"
         :disabled="disableButton"
       >
         Entre
       </button>
+      <div class="centered">
+        <p class="label-style" >
+          Não tem uma conta?
+          <router-link class="click-link" to="/register" tabindex="2"
+            >Cadastre-se</router-link
+          >
+        </p>
+      </div>
     </form-image>
   </div>
 </template>
@@ -139,3 +143,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.margin-bottom{
+  margin-bottom:1.4em;
+}
+</style>

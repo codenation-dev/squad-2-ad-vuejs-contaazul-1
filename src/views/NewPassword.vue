@@ -10,6 +10,7 @@
         class="margin-input"
         icon="fa-lock"
         @validation="passwordValidation"
+        :doAction="changePassword"
       />
       <validation-input
         v-model="newPasswordConfirmation"
@@ -20,23 +21,25 @@
         class="margin-input"
         icon="fa-lock"
         @validation="newPasswordValidation"
+        :doAction="changePassword"
       />
+      <button
+        class="button
+        is-link
+        is-fullwidth
+        button-style
+        margin-bottom"
+        @click="changePassword"
+        :disabled="disableButton"
+      >
+        Cadastre nova senha
+      </button>
       <div class="centered">
         <p class="label-style">
           Já possui uma conta?
           <router-link to="/login" class="click-link">Entre.</router-link>
         </p>
       </div>
-      <button
-        class="button
-        is-link
-        is-fullwidth
-        button-style"
-        @click="changePassword"
-        :disabled="disableButton"
-      >
-        Cadastre nova senha
-      </button>
     </form-image>
   </div>
 </template>
@@ -76,12 +79,16 @@ export default {
       this.newPasswordIsValid = valid;
     },
     changePassword() {
-      if (this.password === this.newPassword && this.password !== null) {
+      if (
+        this.newPasswordConfirmation === this.newPassword
+        && this.newPassword !== null
+      ) {
         const payload = {
           password: this.newPassword,
         };
 
-        this.$http.post(`users/${this.id}/reset`, payload)
+        this.$http
+          .post(`users/${this.id}/reset`, payload)
           .then(() => {
             this.$toasted.show('Senha alterada com sucesso!', {
               theme: 'toasted-primary',
@@ -97,7 +104,8 @@ export default {
             });
 
             this.$router.push({ name: 'Login' });
-          }).catch((error) => this.$toasted.show(error, {
+          })
+          .catch((error) => this.$toasted.show(error, {
             theme: 'toasted-primary',
             position: 'bottom-left',
             duration: 5000,
@@ -125,3 +133,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .margin-bottom {
+    margin-bottom: 1.4em;
+  }
+</style>

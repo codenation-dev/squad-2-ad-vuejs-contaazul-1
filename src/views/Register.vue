@@ -12,6 +12,7 @@
         type-validation="name"
         icon="fa-user"
         @validation="nameValidation"
+        :doAction="register"
       />
       <validation-input
         v-model="email"
@@ -21,6 +22,7 @@
         class="margin-input"
         icon="fa-envelope"
         @validation="emailValidation"
+        :doAction="register"
       />
       <validation-input
         v-model="password"
@@ -30,12 +32,14 @@
         class="margin-input"
         icon="fa-lock"
         @validation="passwordValidation"
+        :doAction="register"
       />
       <button
         class="button
         is-link
         is-fullwidth
-        button-style"
+        button-style
+        margin-bottom"
         :disabled="disableButton"
         @click="register()"
       >
@@ -102,35 +106,52 @@ export default {
         return;
       }
 
-      this.$http.post('/users', { name: this.nome, email: this.email, password: this.password })
+      this.$http
+        .post('/users', {
+          name: this.nome,
+          email: this.email,
+          password: this.password,
+        })
         .catch(() => {
-          this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
-            position: 'bottom-left',
-            duration: 5000,
-            type: 'error',
-            action: {
-              text: 'Fechar',
-              onClick: (e, toastObject) => {
-                toastObject.goAway(0);
+          this.$toasted.show(
+            'Erro de comunicação com a API. Tente novamente mais tarde.',
+            {
+              position: 'bottom-left',
+              duration: 5000,
+              type: 'error',
+              action: {
+                text: 'Fechar',
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
               },
             },
-          });
+          );
         })
         .then(() => {
-          this.$toasted.show('Cadastro realizado com sucesso! Faça login para continuar.', {
-            position: 'bottom-left',
-            duration: 5000,
-            type: 'success',
-            action: {
-              text: 'Fechar',
-              onClick: (e, toastObject) => {
-                toastObject.goAway(0);
+          this.$toasted.show(
+            'Cadastro realizado com sucesso! Faça login para continuar.',
+            {
+              position: 'bottom-left',
+              duration: 5000,
+              type: 'success',
+              action: {
+                text: 'Fechar',
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
               },
             },
-          });
+          );
           this.$router.push({ name: 'Login' });
         });
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.margin-bottom {
+  margin-bottom: 1.4em;
+}
+</style>

@@ -23,12 +23,22 @@
             <div class="title-welcome">Olá, {{ user.name }}!</div>
             <div class="token">Seu token é: {{ user.token }}</div>
           </div>
-          <figure class="image is-48x48 user-img">
-            <img
-              class="is-rounded"
-              src="https://unibrablog.files.wordpress.com/2017/02/marcia-regina.jpg?w=600&resize=327%2C320"
-            />
-          </figure>
+          <div class="dropdown is-right" :class="{'is-active': dropdownActive}">
+              <figure class="image is-48x48 user-img" @click="toogleDropdown">
+              <img
+                class="is-rounded"
+                src="https://i7.pngflow.com/pngimage/754/2/png-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-business-clipart-thumb.png"
+              />
+            </figure>
+            <div class="dropdown-menu header-dropdown">
+              <div class="dropdown-content">
+                <button class="button is-danger" @click="signOut">
+                  <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+                  <span>Sair</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,11 +46,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'PageHeader',
   computed: mapGetters({ user: 'getUser' }),
+  data() {
+    return {
+      dropdownActive: false,
+    };
+  },
+  methods: {
+    ...mapActions({ logout: 'logout' }),
+    toogleDropdown() {
+      this.dropdownActive = !this.dropdownActive;
+    },
+    signOut() {
+      this.logout();
+      this.$router.push({ name: 'Login' });
+    },
+  },
 };
 </script>
 
@@ -74,6 +99,7 @@ export default {
   margin: 0.5em;
   height: 40px;
   width: 40px;
+  cursor: pointer;
 }
 
 .navbar-menu .navbar-start .navbar-item {
@@ -90,6 +116,15 @@ export default {
   .icon {
     margin-right: 0.5em;
     margin-top: -1px;
+  }
+}
+.header-dropdown {
+  min-width: 5rem;
+  padding-top: 0;
+  .dropdown-content {
+    padding: 0.8em;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
