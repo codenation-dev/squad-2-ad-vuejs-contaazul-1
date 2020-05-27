@@ -1,30 +1,31 @@
 <template>
-  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <router-link class="navbar-item" to="/">
-        <img
-          src="https://bulma.io/images/bulma-logo.png"
-          alt="Bulma: Free, open source, and modern CSS framework based on Flexbox"
-          width="112"
-          height="28"
-        />
-      </router-link>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item">
-          <span class="icon">
-            <i class="fas fa-table"></i>
-          </span>
-          Dashboard
-        </a>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <router-link class="navbar-item" to="/">
+          Cricket Gate
+        </router-link>
       </div>
-
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <router-link class="navbar-item" to="/" active-class="active">
+            <span class="icon">
+              <i class="fas fa-table"></i>
+            </span>
+            <span>
+              Dashboard
+            </span>
+          </router-link>
+        </div>
       <div class="navbar-end" v-if="!voltar">
         <div class="navbar-end">
           <div class="nav-welcome">
             <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
             <div class="token">Seu token é: {{token}}</div>
+        <div class="navbar-end">
+          <div class="nav-welcome">
+            <div class="title-welcome">Olá, {{ user.name }}!</div>
+            <div class="token">Seu token é: {{ user.token }}</div>
           </div>
           <figure class="image is-48x48 user-img">
             <img
@@ -46,6 +47,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'PageHeader',
   props: {
@@ -57,50 +60,55 @@ export default {
       token: this.$store.state.user.token,
     };
   },
+  computed: mapGetters({ user: 'getUser' }),
 };
 </script>
 
 <style lang="scss" scoped>
-
-.navbar.is-light {
+.navbar {
   background-color: white;
+
+  .navbar-brand {
+    margin-right: 1em;
+  }
 }
-.user-img {
-  align-self: center;
-  margin: 0.5em;
-}
-.is-48x48 {
-  height: 40px !important;
-  width: 40px !important;
-}
+
 .nav-welcome {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   flex-direction: column;
+
   .title-welcome {
     font-size: 1.1em;
   }
+
   .token {
     font-size: 0.8em;
     color: gray;
   }
 }
+
+.user-img {
+  align-self: center;
+  margin: 0.5em;
+  height: 40px;
+  width: 40px;
+}
+
 .navbar-menu .navbar-start .navbar-item {
   text-transform: uppercase;
   border-bottom: 3px solid white;
   padding-top: 12px;
 
-  &:hover {
-    background-color: #2e5bff10 !important;
+  &:hover,
+  &.active {
+    background-color: #2e5bff10;
     border-bottom: 3px solid #2e5bff;
   }
-  .active {
-    background-color: #2e5bff10 !important;
-    border-bottom: 3px solid #2e5bff;
-  }
+
   .icon {
-    margin-right: 0.5em !important;
+    margin-right: 0.5em;
     margin-top: -1px;
   }
 }

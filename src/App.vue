@@ -58,6 +58,7 @@ export default {
 html,
 body {
   font-family: 'Roboto', sans-serif;
+  color: #2e384d;
   min-height: 100vh;
 }
 
@@ -170,6 +171,10 @@ body {
   font-style: italic;
   font-size: 1.125rem;
   margin-bottom: -0.25em;
+}
+
+.toast-error {
+  background: red !important;
 }
 
 .button.is-primary {
