@@ -89,7 +89,6 @@ export default {
     },
   },
   created() {
-    console.log(this.login);
     this.passwordFieldType = this.isPassword ? 'password' : 'text';
   },
   methods: {
