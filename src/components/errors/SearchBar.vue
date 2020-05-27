@@ -4,27 +4,32 @@
       <div class="column">
         <select-items title="Ambiente" :options="optionsEnvironment" v-model="environment"/>
       </div>
-      <div class="column">
+      <div class="column is-3 padding-field">
         <select-items title="Buscar por" :options="optionsField" v-model="field"/>
       </div>
-      <div class="column">
+      <div class="column padding-search">
         <div class="field has-addons">
           <p class="control">
             <input v-model="searchValue" class="input is-small" type="text"/>
           </p>
           <p class="control">
-            <button class="button is-info is-small" @click="search">
+            <button class="button is-primary is-small" @click="search">
               Buscar
             </button>
           </p>
         </div>
+      </div>
+      <div class="column is-2">
+        <button class="button is-info is-small" @click="cleanAll">
+          Limpar filtros
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SelectItems from './SelectItems.vue';
+import SelectItems from '../SelectItems.vue';
 
 export default {
   components: {
@@ -35,6 +40,7 @@ export default {
       optionsEnvironment: [
         { description: 'Desenvolvimento', label: 'develop' },
         { description: 'Produção', label: 'production' },
+        { description: 'Todos', label: null },
       ],
       environment: null,
       optionsField: [
@@ -47,15 +53,21 @@ export default {
   },
   watch: {
     environment(value) {
-      this.$emit('environment', value.label);
+      this.$emit('environment', value);
     },
     field(value) {
-      this.$emit('field', value.label);
+      this.$emit('field', value);
     },
   },
   methods: {
     search() {
       this.$emit('search', this.searchValue);
+    },
+    cleanAll() {
+      this.environment = null;
+      this.field = null;
+      this.searchValue = null;
+      this.search();
     },
   },
 };
@@ -67,5 +79,13 @@ export default {
   box-shadow: none;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.paddin-search {
+  padding-left: 0px;
+}
+
+.paddin-field {
+  padding-right: 0px;
 }
 </style>

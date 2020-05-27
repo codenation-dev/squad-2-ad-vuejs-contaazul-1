@@ -27,7 +27,7 @@
         "detalhe 3"
       ],
       "origin": "app.server.com.br",
-      "enviroment": "production",
+      "environment": "production",
       "level": "warning",
       "qty": 11,
       "colletected_by": "Lara",
@@ -78,7 +78,7 @@
         "detalhe 3"
       ],
       "origin": "http://127.0.0.1/api/login",
-      "enviroment": "production",
+      "environment": "production",
       "level": "debug",
       "qty": 300,
       "colletected_by": "Dedicio",

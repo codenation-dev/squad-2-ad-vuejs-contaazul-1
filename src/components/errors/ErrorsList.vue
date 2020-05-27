@@ -87,6 +87,9 @@ export default {
     environment() {
       this.getErrorsApi();
     },
+    searchValue() {
+      this.getErrorsApi();
+    },
   },
 
   computed: {
@@ -126,11 +129,22 @@ export default {
         },
       });
     },
+    getFilters(orderby) {
+      const payload = {
+        orderby,
+        environment: this.environment,
+        field: this.field,
+        searchValue: this.searchValue,
+      };
+
+      this.setParams(payload);
+
+      return this.getParams;
+    },
     getErrorsApi(orderby) {
       this.isLoading = true;
-      this.setParams(orderby, this.environment);
 
-      const params = this.getParams;
+      const params = this.getFilters(orderby);
 
       this.$http
         .get('/errors', { params })
@@ -138,16 +152,7 @@ export default {
           this.setErrors(data);
         })
         .catch(() => {
-          this.$toasted.show('Não foi possível carregar os logs', {
-            position: 'top-center',
-            duration: 5000,
-            action: {
-              text: 'Fechar',
-              onClick: (e, toastObject) => {
-                toastObject.goAway(0);
-              },
-            },
-          });
+          this.useToast('Não foi possível carregar os logs');
         })
         .finally(() => {
           this.isLoading = false;

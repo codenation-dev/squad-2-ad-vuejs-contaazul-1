@@ -13,6 +13,8 @@ export default new Vuex.Store({
       order: 'desc',
       orderby: 'last_date',
       environment: null,
+      field: null,
+      searchValue: null,
     },
     selectedItems: [],
   },
@@ -75,12 +77,12 @@ export default new Vuex.Store({
     setParams({ commit, state }, payload) {
       let { params } = state;
 
-      if (!payload) {
+      if (!payload.orderBy) {
         params = {
           orderby: 'last_date',
           order: 'desc',
         };
-      } else if (payload !== params.orderby) {
+      } else if (payload.orderBy !== params.orderby) {
         params = {
           orderby: payload,
           order: 'desc',
@@ -89,6 +91,9 @@ export default new Vuex.Store({
         params.order = params.order === 'desc' ? 'asc' : 'desc';
       }
 
+      params.environment = payload.environment;
+      params.field = payload.field;
+      params.searchValue = payload.searchValue;
       commit('setParams', params);
     },
     toggleSelectedItem({ commit, state }, payload) {

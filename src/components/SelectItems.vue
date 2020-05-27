@@ -6,7 +6,11 @@
     <div class="column">
       <div class="select is-small is-4">
         <select :value="value" @change="$emit('input', $event.target.value)">
-          <option v-for="(option, index) in options" :key="index">
+          <option
+            :value="option.label"
+            v-for="(option, index) in options"
+            :key="index"
+          >
             {{ option.description }}
           </option>
         </select>

@@ -24,7 +24,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import ErrorsList from '@/components/errors/ErrorsList.vue';
-import SearchBar from '@/components/SearchBar.vue';
+import SearchBar from '@/components/errors/SearchBar.vue';
 
 export default {
   components: {
