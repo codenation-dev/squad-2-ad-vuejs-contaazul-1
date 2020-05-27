@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/404',
+    redirect: store.state.user?.token ? '/404' : '/login',
   },
 ];
 
