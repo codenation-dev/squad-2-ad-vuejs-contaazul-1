@@ -6,11 +6,11 @@
       </div>
       <div class="column is-min-width-fit-content">
         <div class="buttons has-addons is-pulled-right">
-          <button class="button is-primary">
+          <button class="button is-primary" @click="archiveItem">
             <span class="icon"><i class="fa fa-archive"></i></span>
             <span>Arquivar</span>
           </button>
-          <button class="button is-danger">
+          <button class="button is-danger" @click="deleteItem">
             <span class="icon"><i class="fa fa-trash-alt"></i></span>
             <span>Excluir</span>
           </button>
@@ -23,7 +23,7 @@
           <div class="medium-title-style">
             {{ error.name }} no {{ error.origin }}
           </div>
-          <div class="subtitle">{{ error.last_date | formatDate }}</div>
+          <div class="subtitle date">{{ error.last_date | formatDate }}</div>
           <div class="margin-top">
             <div class="small-title-style">
               Título
@@ -40,8 +40,8 @@
           </div>
         </div>
         <div class="column is-min-width-fit-content column-message">
-          <article class="message" :class="classMessage">
-            <div class="message-body">
+          <article class="message">
+            <div class="message-body" :class="classMessage">
               <div class="tag is-medium" :class="classMessage">
                 {{ error.level }}
               </div>
@@ -73,18 +73,37 @@ export default {
     ...mapGetters,
     classMessage() {
       // eslint-disable-next-line no-nested-ternary
-      return this.error.level === 'error'
-        ? 'is-danger'
-        : this.error.level === 'warning'
-          ? 'is-warning'
-          : 'is-info';
+      return this.error.level;
+    },
+  },
+  methods: {
+    async deleteItem() {
+      try {
+        await this.$http.delete('/errors/', {
+          data: {
+            ids: [this.error.id],
+          },
+        });
+        this.$router.push({ name: 'ErrorHome' });
+      } catch (error) {
+        this.useToast('Não foi possível excluir o item', 'error');
+      }
+    },
+    async archiveItem() {
+      try {
+        await this.$http.put('/errors/archive', {
+          ids: [this.error.id],
+        });
+        this.$router.push({ name: 'ErrorHome' });
+      } catch (error) {
+        this.useToast('Não foi possível arquivar o item', 'error');
+      }
     },
   },
   created() {
     this.$http
       .get(`/errors/${this.id}`)
       .then(({ data }) => {
-        console.log(data);
         this.error = data;
       })
       .catch(() => this.$router.push({ name: '404' }));
@@ -96,19 +115,44 @@ export default {
 .margin-top {
   margin-top: 2em;
 }
+.subtitle.date {
+  color: #838ea7;
+}
 .column-message {
   max-width: 400px;
   .message {
     background-color: #fff;
+
     .message-body {
       padding-top: 0;
       padding-bottom: 0;
       color: #2e384d;
+      &.error {
+        border-left: #e84a50 solid 4px;
+      }
+      &.warning {
+        border-left: #eacb1b solid 4px;
+      }
+      &.debug {
+        border-left: rgba(46, 91, 255, 0.6) solid 4px;
+      }
     }
     .tag {
       font-weight: 300;
       padding-left: 2em;
       padding-right: 2em;
+      &.error {
+        background-color: #e84a50;
+        color: white;
+      }
+      &.warning {
+        background-color: #eacb1b;
+        color: white;
+      }
+      &.debug {
+        background-color: rgba(46, 91, 255, 0.6);
+        color: white;
+      }
     }
   }
   .label-style {

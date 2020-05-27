@@ -16,7 +16,7 @@ export default [
     component: ErrorDetails,
     props: true,
     meta: {
-      auth: false,
+      auth: true,
     },
   },
 ];

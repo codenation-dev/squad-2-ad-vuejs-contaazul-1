@@ -15,6 +15,7 @@ export default {
 
 <style lang="scss">
 @import '~bulma/bulma';
+$yellow: #eacb1b;
 
 @font-face {
   font-family: 'Roboto';
@@ -58,6 +59,7 @@ export default {
 html,
 body {
   font-family: 'Roboto', sans-serif;
+  color: #2e384d;
   min-height: 100vh;
 }
 
