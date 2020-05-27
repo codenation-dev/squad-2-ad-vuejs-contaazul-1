@@ -9,11 +9,15 @@
       </div>
       <div class="level-right">
         <div class="level-item">
-            <search-bar/>
+            <search-bar
+              @environment="filterEnvironment"
+              @field="filterField"
+              @search="search"
+            />
         </div>
       </div>
     </div>
-    <errors-list></errors-list>
+    <errors-list :environment="environment" :field="field" :searchValue="searchValue"/>
   </div>
 </template>
 
@@ -31,6 +35,9 @@ export default {
   data() {
     return {
       title: 'Dashboard de Erros',
+      environment: null,
+      field: null,
+      searchValue: null,
     };
   },
 
@@ -38,6 +45,18 @@ export default {
     ...mapGetters(['countErrors']),
     total() {
       return `(${this.countErrors})`;
+    },
+  },
+
+  methods: {
+    filterEnvironment(environment) {
+      this.environment = environment;
+    },
+    filterField(field) {
+      this.field = field;
+    },
+    search(searchValue) {
+      this.searchValue = searchValue;
     },
   },
 };

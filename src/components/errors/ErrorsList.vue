@@ -80,6 +80,18 @@ export default {
     };
   },
 
+  props: {
+    environment: String,
+    field: String,
+    searchValue: String,
+  },
+
+  watch: {
+    environment() {
+      this.getErrorsApi();
+    },
+  },
+
   computed: {
     ...mapGetters(['getErrors', 'getParams']),
     actionsClasses() {
@@ -103,7 +115,7 @@ export default {
     },
     getErrorsApi(orderby) {
       this.isLoading = true;
-      this.setParams(orderby);
+      this.setParams(orderby, this.environment);
 
       const params = this.getParams;
 

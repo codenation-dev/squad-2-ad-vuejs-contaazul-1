@@ -7,7 +7,7 @@
       <div class="select is-small is-4">
         <select :value="value" @change="$emit('input', $event.target.value)">
           <option v-for="(option, index) in options" :key="index">
-            {{ option }}
+            {{ option.description }}
           </option>
         </select>
       </div>

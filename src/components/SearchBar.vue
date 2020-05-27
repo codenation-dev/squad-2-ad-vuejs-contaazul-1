@@ -10,10 +10,10 @@
       <div class="column">
         <div class="field has-addons">
           <p class="control">
-            <input class="input is-small" type="text"/>
+            <input v-model="searchValue" class="input is-small" type="text"/>
           </p>
           <p class="control">
-            <button class="button is-info is-small">
+            <button class="button is-info is-small" @click="search">
               Buscar
             </button>
           </p>
@@ -32,11 +32,31 @@ export default {
   },
   data() {
     return {
-      optionsEnvironment: ['Desenvolvimento', 'Produção'],
+      optionsEnvironment: [
+        { description: 'Desenvolvimento', label: 'develop' },
+        { description: 'Produção', label: 'production' },
+      ],
       environment: null,
-      optionsField: ['Descrição'],
+      optionsField: [
+        { description: 'Nome', label: 'name' },
+        { description: 'Origem', label: 'origin' },
+      ],
       field: null,
+      searchValue: null,
     };
+  },
+  watch: {
+    environment(value) {
+      this.$emit('environment', value.label);
+    },
+    field(value) {
+      this.$emit('field', value.label);
+    },
+  },
+  methods: {
+    search() {
+      this.$emit('search', this.searchValue);
+    },
   },
 };
 </script>

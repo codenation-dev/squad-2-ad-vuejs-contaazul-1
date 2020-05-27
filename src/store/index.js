@@ -12,6 +12,7 @@ export default new Vuex.Store({
     params: {
       order: 'desc',
       orderby: 'last_date',
+      environment: null,
     },
   },
   getters: {

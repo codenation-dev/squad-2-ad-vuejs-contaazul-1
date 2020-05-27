@@ -10,6 +10,8 @@ router.get('/', (req, res) => {
   const order = req.query.order || 'desc';
   const filter = { archived: false };
 
+  req.query.environment ? filter.environment = req.query.environment : '';
+
   low(adapter).then((db) => {
     const error = db
       .get('errors')
