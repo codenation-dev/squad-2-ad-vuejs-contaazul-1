@@ -58,6 +58,7 @@ export default {
 html,
 body {
   font-family: 'Roboto', sans-serif;
+  color: #2e384d;
   min-height: 100vh;
 }
 

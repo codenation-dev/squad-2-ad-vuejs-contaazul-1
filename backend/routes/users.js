@@ -18,7 +18,10 @@ router.get('/', (req, res) => {
 // Retorna usuário pelo e-mail passado
 router.get('/:email', (req, res) => {
   low(adapter).then((db) => {
-    const user = db.get('users').find({ email: req.params.email }).value();
+    const user = db
+      .get('users')
+      .find({ email: req.params.email })
+      .value();
 
     res.send(JSON.stringify(user));
   });
@@ -27,8 +30,12 @@ router.get('/:email', (req, res) => {
 // Cadastra novo usuário
 router.post('/', (req, res) => {
   low(adapter).then((db) => {
-    const { name, email, password } = req.body || {};
-    const user = db.get('users').find({ email }).value();
+    const { body } = req || {};
+    const { name, email, password } = body || {};
+    const user = db
+      .get('users')
+      .find({ email })
+      .value();
 
     if (user) {
       res.status(403).send('Já existe um usuário cadastrado com esse e-mail');
@@ -36,14 +43,15 @@ router.post('/', (req, res) => {
       res.status(403).send('Os dados de nome, e-mail e senha são obrigatórios');
     } else {
       const id = uuidv4;
-      req.body.token = md5(id);
+
+      body.token = md5(id);
 
       db.get('users')
-        .push(req.body)
+        .push(body)
         .last()
         .assign({ id })
         .write()
-        .then((user) => res.send(user));
+        .then((data) => res.send(data));
     }
   });
 });
@@ -56,7 +64,10 @@ router.post('/login', (req, res) => {
     if (!email || !password) {
       res.status(403).send('Os dados de e-mail e senha são obrigatórios');
     } else {
-      const user = db.get('users').find({ email, password }).value();
+      const user = db
+        .get('users')
+        .find({ email, password })
+        .value();
       const data = user ? JSON.stringify(user) : 'Usuário ou senha incorretos';
 
       res.send(data);

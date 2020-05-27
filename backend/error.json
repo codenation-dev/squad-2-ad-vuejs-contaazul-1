@@ -4,7 +4,11 @@
       "id": "1",
       "name": "Error Throw",
       "title": "acceleration.Service.AddCandidate: <forbidden>",
-      "details": ["detalhe 1", "detalhe 2", "detalhe 3"],
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
       "origin": "http://localhost:3000/api/blabla",
       "environment": "develop",
       "level": "error",
@@ -14,10 +18,31 @@
       "archived": false
     },
     {
-      "id": "2",
+      "id": "3",
+      "name": "db.Post",
+      "title": "acceleration.Servcice.AddCandidate: acceleration.MongoRepository.Add",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "app.server.com.br",
+      "enviroment": "production",
+      "level": "warning",
+      "qty": 11,
+      "colletected_by": "Lara",
+      "last_date": "2020-04-24T17:44:14Z",
+      "archived": false
+    },
+    {
+      "id": "5",
       "name": "user.service.Auth",
       "title": "password.Password.Compare: crypto/bcryp",
-      "details": ["detalhe 1", "detalhe 2", "detalhe 3"],
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
       "origin": "http://127.0.0.1/api/login",
       "environment": "production",
       "level": "debug",
@@ -27,17 +52,38 @@
       "archived": false
     },
     {
-      "id": "3",
+      "id": "7",
       "name": "db.Post",
       "title": "acceleration.Servcice.AddCandidate: acceleration.MongoRepository.Add",
-      "details": ["detalhe 1", "detalhe 2", "detalhe 3"],
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
       "origin": "app.server.com.br",
       "environment": "production",
       "level": "warning",
       "qty": 11,
       "colletected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
-      "archived": false
+      "archived": true
+    },
+    {
+      "id": "10",
+      "name": "user.service.Auth",
+      "title": "password.Password.Compare: crypto/bcryp",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "http://127.0.0.1/api/login",
+      "enviroment": "production",
+      "level": "debug",
+      "qty": 300,
+      "colletected_by": "Dedicio",
+      "last_date": "2020-04-21T17:44:14Z",
+      "archived": true
     }
   ]
 }

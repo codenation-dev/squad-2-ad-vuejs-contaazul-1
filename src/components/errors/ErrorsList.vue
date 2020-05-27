@@ -4,33 +4,30 @@
       <header class="errors-list--header columns">
         <div class="errors-list--header-item errors-list--header-actions">
           <div class="buttons has-addons">
-            <label
-              for="checkAll"
-              class="button is-small"
-              :class="{ 'is-ghost': !selectedAll }"
-            >
+            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !isAllSelected }">
               <input
                 type="checkbox"
                 name="checkAll"
                 id="checkAll"
-                @change="selectedAll = !selectedAll"
+                @change="toggleAllSelected"
+                :checked="isAllSelected"
               />
             </label>
-            <button class="button is-small is-primary" :class="actionsClasses">
+            <button
+              class="button is-small is-primary"
+              :class="actionsClasses"
+              @click="archiveErrors"
+            >
               <span class="icon"><i class="fa fa-archive"></i></span>
               <span>Arquivar</span>
             </button>
-            <button class="button is-small is-danger" :class="actionsClasses">
+            <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
               <span class="icon"><i class="fa fa-trash-alt"></i></span>
               <span>Excluir</span>
             </button>
           </div>
         </div>
-        <div
-          class="errors-list--header-item"
-          v-for="(filter, index) in filters"
-          :key="index"
-        >
+        <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
           <span
             class="errors-list--header-filter"
             :class="currentFilter === index ? activeClasses : ''"
@@ -41,17 +38,15 @@
         <div class="errors-list--header-item"></div>
       </header>
       <transition mode="out-in" name="fade" appear>
-        <loading-page v-if="isLoading" :key="loading"></loading-page>
-        <ul class="panel" v-else :key="results">
-          <li
+        <loading-page v-if="isLoading" key="loading"></loading-page>
+        <section v-else key="results">
+          <errors-list-item
             v-for="error in getErrors"
             :key="error.id"
-            class="panel-block has-background-white"
-          >
-            {{ error.id }} - {{ error.name }} -
-            <a @click="activeActions">Selecionar</a>
-          </li>
-        </ul>
+            :error="error"
+            @updateList="getErrorsApi"
+          />
+        </section>
       </transition>
     </div>
   </div>
@@ -60,10 +55,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import LoadingPage from '@/components/LoadingPage.vue';
+import ErrorsListItem from '@/components/errors/ErrorsListItem.vue';
 
 export default {
   components: {
     LoadingPage,
+    ErrorsListItem,
   },
   data() {
     return {
@@ -93,9 +90,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getErrors', 'getParams']),
+    ...mapGetters(['getErrors', 'getParams', 'getSelectedItems']),
     actionsClasses() {
-      return this.selectedSome ? '' : 'is-disabled';
+      return this.getSelectedItems.length ? '' : 'is-disabled';
     },
     currentFilter() {
       return this.getParams.orderby;
@@ -106,12 +103,28 @@ export default {
     activeClasses() {
       return `is-active is-${this.currentOrder}`;
     },
+    allIds() {
+      return this.getErrors.map((item) => item.id);
+    },
+    isAllSelected() {
+      return this.allIds.length > 0 && this.allIds.length === this.getSelectedItems.length;
+    },
   },
 
   methods: {
-    ...mapActions(['setErrors', 'setParams']),
-    activeActions() {
-      this.selectedSome = !this.selectedSome;
+    ...mapActions(['setErrors', 'setParams', 'setSelectedItems']),
+    useToast(msg, type = 'default') {
+      this.$toasted.show(msg, {
+        position: 'top-center',
+        type,
+        duration: 5000,
+        action: {
+          text: 'Fechar',
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
     },
     getErrorsApi(orderby) {
       this.isLoading = true;
@@ -140,6 +153,41 @@ export default {
           this.isLoading = false;
         });
     },
+    toggleAllSelected() {
+      if (!this.isAllSelected) {
+        this.setSelectedItems(this.allIds);
+      } else {
+        this.setSelectedItems([]);
+      }
+    },
+    async archiveErrors() {
+      try {
+        await this.$http.put('/errors/archive', {
+          ids: this.getSelectedItems,
+        });
+
+        this.useToast('Itens arquivados com sucesso', 'success');
+      } catch (error) {
+        this.useToast('Não foi possível arquivar os itens', 'error');
+      }
+
+      this.getErrorsApi();
+    },
+    async deleteErrors() {
+      try {
+        this.$http.delete('/errors/', {
+          data: {
+            ids: this.getSelectedItems,
+          },
+        });
+
+        this.useToast('Itens excluídos com sucesso', 'success');
+      } catch (error) {
+        this.useToast('Não foi possível excluir os itens', 'error');
+      }
+
+      this.getErrorsApi();
+    },
   },
 
   created() {
@@ -165,6 +213,7 @@ export default {
     flex-grow: 0;
     flex-basis: 50px;
     flex-shrink: 0;
+    margin-right: 0.75em;
   }
 }
 .errors-list--header-filter {
@@ -194,9 +243,8 @@ export default {
 }
 
 .errors-list--header-actions {
-  flex-direction: row;
-  justify-content: start;
-  flex-grow: 5;
+  flex: none;
+  width: 50%;
 
   .button {
     text-transform: uppercase;
