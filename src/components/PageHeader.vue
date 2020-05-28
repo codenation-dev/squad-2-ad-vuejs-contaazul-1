@@ -17,12 +17,7 @@
             </span>
           </router-link>
         </div>
-      <div class="navbar-end" v-if="!voltar">
-        <div class="navbar-end">
-          <div class="nav-welcome">
-            <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
-            <div class="token">Seu token é: {{token}}</div>
-        <div class="navbar-end">
+        <div class="navbar-end" v-if="!voltar">
           <div class="nav-welcome">
             <div class="title-welcome">Olá, {{ user.name }}!</div>
             <div class="token">Seu token é: {{ user.token }}</div>
@@ -34,13 +29,13 @@
             />
           </figure>
         </div>
-      </div>
-      <div v-else class="navbar-end button-wrapper">
-        <router-link to='/'>
-          <button class="button is-link button-return">
-            Voltar
-          </button>
-        </router-link>
+        <div v-else class="navbar-end button-wrapper">
+          <router-link to="/">
+            <button class="button is-link button-return">
+              Voltar
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </nav>
