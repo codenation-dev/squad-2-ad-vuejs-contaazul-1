@@ -25,12 +25,12 @@
         @validation="passwordValidation"
         :doAction="doLogin"
       >
-        <router-link class="click-link" to="/reset-password" tabindex="2"
+        <router-link class="click-link" to="/reset-password" tabindex="3"
           >Esqueceu sua senha?</router-link
         >
       </validation-input>
       <button
-        tabindex="1"
+        tabindex="2"
         class="button
         is-link
         is-fullwidth
@@ -44,7 +44,7 @@
       <div class="centered">
         <p class="label-style" >
           Não tem uma conta?
-          <router-link class="click-link" to="/register" tabindex="2"
+          <router-link class="click-link" to="/register" tabindex="4"
             >Cadastre-se</router-link
           >
         </p>

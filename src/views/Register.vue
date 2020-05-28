@@ -35,6 +35,7 @@
         :doAction="register"
       />
       <button
+        tabindex="2"
         class="button
         is-link
         is-fullwidth
@@ -48,7 +49,9 @@
       <div class="centered">
         <p class="label-style">
           Já possui uma conta?
-          <router-link to="/login" class="click-link">Entre.</router-link>
+          <router-link to="/login" class="click-link" tabindex="3">
+            Entre.
+          </router-link>
         </p>
       </div>
     </form-image>

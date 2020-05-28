@@ -16,6 +16,7 @@
         :doAction="sendLink"
       />
       <button
+        tabindex="2"
         class="button
           is-link
           is-fullwidth
