@@ -17,14 +17,11 @@
             </span>
           </router-link>
         </div>
-<<<<<<< HEAD
-=======
       <div class="navbar-end" v-if="!voltar">
         <div class="navbar-end">
           <div class="nav-welcome">
             <div class="title-welcome">Seja bem-vinda, {{name}}!</div>
             <div class="token">Seu token é: {{token}}</div>
->>>>>>> 8c494d0e18983b118b78b1edbc562dba1603c672
         <div class="navbar-end">
           <div class="nav-welcome">
             <div class="title-welcome">Olá, {{ user.name }}!</div>

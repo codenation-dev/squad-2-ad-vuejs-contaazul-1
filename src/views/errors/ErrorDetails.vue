@@ -72,7 +72,6 @@ export default {
   computed: {
     ...mapGetters,
     classMessage() {
-      // eslint-disable-next-line no-nested-ternary
       return this.error.level;
     },
   },
