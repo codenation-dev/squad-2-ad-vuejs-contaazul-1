@@ -9,15 +9,11 @@
       </div>
       <div class="level-right">
         <div class="level-item">
-            <search-bar
-              @environment="filterEnvironment"
-              @field="filterField"
-              @search="search"
-            />
+            <search-bar @search="search"/>
         </div>
       </div>
     </div>
-    <errors-list :environment="environment" :field="field" :searchValue="searchValue"/>
+    <errors-list ref="errorsList"/>
   </div>
 </template>
 
@@ -35,9 +31,6 @@ export default {
   data() {
     return {
       title: 'Dashboard de Erros',
-      environment: null,
-      field: null,
-      searchValue: null,
     };
   },
 
@@ -49,14 +42,8 @@ export default {
   },
 
   methods: {
-    filterEnvironment(environment) {
-      this.environment = environment;
-    },
-    filterField(field) {
-      this.field = field;
-    },
-    search(searchValue) {
-      this.searchValue = searchValue;
+    search() {
+      this.$refs.errorsList.getErrorsApi();
     },
   },
 };

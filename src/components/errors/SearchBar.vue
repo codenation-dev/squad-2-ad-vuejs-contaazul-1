@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import SelectItems from '../SelectItems.vue';
 
 export default {
@@ -53,15 +54,18 @@ export default {
   },
   watch: {
     environment(value) {
-      this.$emit('environment', value);
+      this.setParamsEnvironment(value);
+      this.$emit('search');
     },
     field(value) {
-      this.$emit('field', value);
+      this.setParamsField(value);
     },
   },
   methods: {
+    ...mapActions(['setParamsEnvironment', 'setParamsField', 'setParamsSearchValue']),
     search() {
-      this.$emit('search', this.searchValue);
+      this.setParamsSearchValue(this.searchValue);
+      this.$emit('search');
     },
     cleanAll() {
       this.environment = null;

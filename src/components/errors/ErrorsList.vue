@@ -77,21 +77,6 @@ export default {
     };
   },
 
-  props: {
-    environment: String,
-    field: String,
-    searchValue: String,
-  },
-
-  watch: {
-    environment() {
-      this.getErrorsApi();
-    },
-    searchValue() {
-      this.getErrorsApi();
-    },
-  },
-
   computed: {
     ...mapGetters(['getErrors', 'getParams', 'getSelectedItems']),
     actionsClasses() {
@@ -115,7 +100,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setErrors', 'setParams', 'setSelectedItems']),
+    ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems']),
     useToast(msg, type = 'default') {
       this.$toasted.show(msg, {
         position: 'top-center',
@@ -129,22 +114,12 @@ export default {
         },
       });
     },
-    getFilters(orderby) {
-      const payload = {
-        orderby,
-        environment: this.environment,
-        field: this.field,
-        searchValue: this.searchValue,
-      };
-
-      this.setParams(payload);
-
-      return this.getParams;
-    },
     getErrorsApi(orderby) {
       this.isLoading = true;
 
-      const params = this.getFilters(orderby);
+      this.setParamsOrder(orderby);
+
+      const params = this.getParams;
 
       this.$http
         .get('/errors', { params })

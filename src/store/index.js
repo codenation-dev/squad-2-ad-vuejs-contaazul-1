@@ -51,8 +51,17 @@ export default new Vuex.Store({
     login(state, user) {
       state.user = user;
     },
-    setParams(state, payload) {
+    setParamsOrder(state, payload) {
       state.params = payload;
+    },
+    setParamsEnvironment(state, payload) {
+      state.params.environment = payload;
+    },
+    setParamsField(state, payload) {
+      state.params.field = payload;
+    },
+    setParamsSearchValue(state, payload) {
+      state.params.searchValue = payload;
     },
     addSelectedItem(state, payload) {
       state.selectedItems.push(payload);
@@ -74,27 +83,29 @@ export default new Vuex.Store({
     login({ commit }, user) {
       commit('login', user);
     },
-    setParams({ commit, state }, payload) {
-      let { params } = state;
+    setParamsOrder({ commit, state }, payload) {
+      const { params } = state;
 
-      if (!payload.orderBy) {
-        params = {
-          orderby: 'last_date',
-          order: 'desc',
-        };
-      } else if (payload.orderBy !== params.orderby) {
-        params = {
-          orderby: payload,
-          order: 'desc',
-        };
+      if (!payload) {
+        params.orderby = 'last_date';
+        params.order = 'desc';
+      } else if (payload !== params.orderby) {
+        params.orderby = payload;
+        params.order = 'desc';
       } else {
         params.order = params.order === 'desc' ? 'asc' : 'desc';
       }
 
-      params.environment = payload.environment;
-      params.field = payload.field;
-      params.searchValue = payload.searchValue;
-      commit('setParams', params);
+      commit('setParamsOrder', params);
+    },
+    setParamsEnvironment({ commit }, payload) {
+      commit('setParamsEnvironment', payload);
+    },
+    setParamsField({ commit }, payload) {
+      commit('setParamsField', payload);
+    },
+    setParamsSearchValue({ commit }, payload) {
+      commit('setParamsSearchValue', payload);
     },
     toggleSelectedItem({ commit, state }, payload) {
       const existId = state.selectedItems.findIndex((item) => item === payload);
