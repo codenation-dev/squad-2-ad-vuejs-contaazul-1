@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" tabindex="-1">
     <label class="is-pulled-left label-style label-title-style">
       {{ title }}
     </label>
@@ -14,12 +14,14 @@
       }"
     >
       <input
+        tabindex="1"
         class="input"
         :placeholder="placeholder"
         :value="value"
         :class="{ 'is-danger': !$v.value[typeValidation] && value }"
         @input="$emit('input', $event.target.value)"
         :type="passwordFieldType"
+        @keypress.enter="doAction"
       />
       <span
         v-if="isPassword"
@@ -55,6 +57,7 @@ export default {
     value: String,
     icon: String,
     password: String,
+    doAction: Function,
   },
   data() {
     return {
