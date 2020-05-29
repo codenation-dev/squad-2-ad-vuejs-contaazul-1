@@ -7,6 +7,9 @@
         <router-view />
       </transition>
     </div>
+    <footer class="footer">
+      Copyright
+    </footer>
   </div>
 </template>
 
