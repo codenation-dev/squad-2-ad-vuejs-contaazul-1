@@ -21,11 +21,11 @@
           is-link
           is-fullwidth
           button-syle"
-          :disabled="!emailIsValid"
-          @click="sendLink()"
-        >
-          Redefinir senha
-        </button>
+        :disabled="!emailIsValid"
+        @click="sendLink()"
+      >
+        Redefinir senha
+      </button>
     </form-image>
   </div>
 </template>
@@ -66,35 +66,47 @@ export default {
         return;
       }
 
-      this.$http.get(`users/${this.email}`).catch(() => {
-        this.$toasted.show('Erro de comunicação com a API. Tente novamente mais tarde.', {
-          position: 'bottom-left',
-          duration: 5000,
-          type: 'error',
-          action: {
-            text: 'Fechar',
-            onClick: (e, toastObject) => {
-              toastObject.goAway(0);
-            },
-          },
-        });
-      }).then((results) => {
-        if (results.data) {
-          this.$router.push({ name: 'NewPassword', params: { id: results.data.id } });
-        } else {
-          this.$toasted.show('O e-mail informado não pertence a nenhum usuário cadastrado.', {
-            position: 'bottom-left',
-            duration: 5000,
-            type: 'error',
-            action: {
-              text: 'Fechar',
-              onClick: (e, toastObject) => {
-                toastObject.goAway(0);
+      this.$http
+        .get(`users/${this.email}`)
+        .catch(() => {
+          this.$toasted.show(
+            'Erro de comunicação com a API. Tente novamente mais tarde.',
+            {
+              position: 'bottom-left',
+              duration: 5000,
+              type: 'error',
+              action: {
+                text: 'Fechar',
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
               },
             },
-          });
-        }
-      });
+          );
+        })
+        .then((results) => {
+          if (results.data) {
+            this.$router.push({
+              name: 'NewPassword',
+              params: { id: results.data.id },
+            });
+          } else {
+            this.$toasted.show(
+              'O e-mail informado não pertence a nenhum usuário cadastrado.',
+              {
+                position: 'bottom-left',
+                duration: 5000,
+                type: 'error',
+                action: {
+                  text: 'Fechar',
+                  onClick: (e, toastObject) => {
+                    toastObject.goAway(0);
+                  },
+                },
+              },
+            );
+          }
+        });
     },
   },
 };

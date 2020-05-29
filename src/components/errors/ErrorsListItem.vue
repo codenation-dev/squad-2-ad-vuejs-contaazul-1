@@ -2,7 +2,7 @@
   <div
     class="errors-list--item"
     :class="[error.level, { selected: isSelected }]"
-    @click="toggleItem()"
+    @click="redirectDetails(error.id)"
   >
     <div class="errors-list--item-wrapper">
       <div class="errors-list--item-column errors-list--item-text">
@@ -64,6 +64,9 @@ export default {
   },
   methods: {
     ...mapActions(['toggleSelectedItem']),
+    redirectDetails(id) {
+      this.$router.push({ name: 'ErrorDetails', params: { id } });
+    },
     useToast(msg, type = 'default') {
       this.$toasted.show(msg, {
         position: 'top-center',
@@ -129,6 +132,7 @@ export default {
   background-color: #fff;
   border: 1px solid #e4ebff;
   border-left-width: 5px;
+  cursor: pointer;
   display: flex;
   transition: all 0.3s;
   flex-direction: column;
@@ -148,7 +152,10 @@ export default {
   }
 
   &.warning {
-    border-left-color: #ffd700;
+    border-left-color: #eacb1b;
+  }
+  &.debug {
+    border-left-color: rgba(46, 91, 255, 0.6);
   }
 
   @include break-large {
