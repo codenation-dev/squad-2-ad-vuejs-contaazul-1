@@ -13,8 +13,10 @@
         class="margin-input"
         icon="fa-envelope"
         @validation="emailValidation"
+        :doAction="sendLink"
       />
       <button
+        tabindex="2"
         class="button
           is-link
           is-fullwidth
