@@ -1,12 +1,15 @@
 <template>
   <div class="main">
-    <page-header/>
+    <page-header />
 
     <div class="container">
       <transition mode="out-in" name="fade" appear>
         <router-view />
       </transition>
     </div>
+    <footer class="footer">
+      Copyright
+    </footer>
   </div>
 </template>
 

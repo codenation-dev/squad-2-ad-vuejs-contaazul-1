@@ -15,6 +15,7 @@ export default {
 
 <style lang="scss">
 @import '~bulma/bulma';
+$yellow: #eacb1b;
 
 @font-face {
   font-family: 'Roboto';
@@ -91,6 +92,24 @@ body {
   color: #2e384d;
 }
 
+.medium-title-style {
+  width: 100%;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 28px;
+  text-align: left;
+  color: #2e384d;
+}
+
+
+.small-title-style {
+  width: 100%;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 22px;
+  text-align: left;
+  color: #2e384d;
+}
 .description-style {
   left: calc(50% - 273px / 2 - 23.5px);
   font-style: normal;
@@ -244,5 +263,8 @@ body {
     background-color: #5a7593;
     border-color: #61768f;
   }
+}
+.is-min-width-fit-content{
+  min-width: fit-content;
 }
 </style>

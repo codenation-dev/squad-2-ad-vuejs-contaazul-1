@@ -13,7 +13,7 @@
       "environment": "develop",
       "level": "error",
       "qty": 1000,
-      "colletected_by": "Marcos",
+      "collected_by": "Marcos",
       "last_date": "2020-04-20T17:44:14Z",
       "archived": false
     },
@@ -32,7 +32,7 @@
       "qty": 11,
       "colletected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
-      "archived": false
+      "archived": true
     },
     {
       "id": "5",
@@ -45,9 +45,9 @@
       ],
       "origin": "http://127.0.0.1/api/login",
       "environment": "production",
-      "level": "debug",
+      "level": "error",
       "qty": 300,
-      "colletected_by": "Dedicio",
+      "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
     },
@@ -64,9 +64,9 @@
       "environment": "production",
       "level": "warning",
       "qty": 11,
-      "colletected_by": "Lara",
+      "collected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
-      "archived": true
+      "archived": false
     },
     {
       "id": "10",
@@ -81,9 +81,9 @@
       "environment": "production",
       "level": "debug",
       "qty": 300,
-      "colletected_by": "Dedicio",
+      "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
-      "archived": true
+      "archived": false
     }
   ]
 }
