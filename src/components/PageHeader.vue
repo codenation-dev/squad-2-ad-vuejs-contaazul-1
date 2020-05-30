@@ -8,7 +8,7 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-start">
-          <router-link class="navbar-item" to="/" active-class="active">
+          <router-link class="navbar-item" to="/" exact-active-class="active">
             <span class="icon">
               <i class="fas fa-table"></i>
             </span>

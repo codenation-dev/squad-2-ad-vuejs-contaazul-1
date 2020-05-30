@@ -113,11 +113,6 @@ export default {
   background-color: #fff;
   border: 1px solid #e4ebff;
   padding: 1.25rem;
-
-  &:hover {
-    border-color: rgba(46, 91, 255, 0.3);
-    box-shadow: 0px 3px 5px rgba(46, 91, 255, 0.1);
-  }
 }
 .margin-top {
   margin-top: 2em;

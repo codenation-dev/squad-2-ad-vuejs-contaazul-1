@@ -71,6 +71,7 @@ body {
 
   @media (min-width: 992px) {
     padding-bottom: 60px;
+    position: relative;
   }
 }
 
