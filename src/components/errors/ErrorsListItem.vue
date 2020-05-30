@@ -6,7 +6,9 @@
   >
     <div class="errors-list--item-wrapper">
       <div class="errors-list--item-column errors-list--item-text">
-        <div class="item-column"><input type="checkbox" :checked="isSelected" /></div>
+        <div class="item-column checkbox-column" @click.stop="toggleItem()">
+          <input type="checkbox" :checked="isSelected" />
+        </div>
         <div class="item-column">
           <p>
             <span class="item-column--title">{{ error.name }}</span> {{ error.origin }}
@@ -203,6 +205,11 @@ export default {
           flex-grow: 1;
           flex-basis: 0;
 
+          &.checkbox-column{
+            height: 100%;
+            display: flex;
+            align-items: center;
+          }
           &:first-child {
             flex-grow: 0;
             flex-basis: 30px;
