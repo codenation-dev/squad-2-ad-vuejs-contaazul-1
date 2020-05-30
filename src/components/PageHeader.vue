@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand is-pulled-left">
         <router-link class="navbar-item" to="/">
-          Cricket Gate
+          <img :src="logo" alt="" />
         </router-link>
       </div>
       <a
@@ -69,6 +69,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import LogoCricketGate from '@/assets/img/logo_cricket_gate.svg';
 
 export default {
   name: 'PageHeader',
@@ -79,6 +80,7 @@ export default {
     return {
       dropdownActive: false,
       menuActive: false,
+      logo: LogoCricketGate,
     };
   },
   computed: mapGetters({ user: 'getUser' }),
@@ -105,13 +107,24 @@ export default {
     @content;
   }
 }
+
 .navbar {
   background-color: white;
 
   .navbar-brand {
     margin-right: 1em;
   }
+  .navbar-item {
+    img {
+      max-height: 3.25rem;
+      @include break-medium-less {
+        max-height: 3.25rem;
+      }
+    }
+  }
   .navbar-burger {
+    height: 4.65rem;
+    width: 4.65rem;
     &:hover {
       background-color: #f4f6fc;
     }
@@ -121,9 +134,9 @@ export default {
     }
   }
   .navbar-menu {
-      @include break-medium-less {
-        padding-top: 0;
-      }
+    @include break-medium-less {
+      padding-top: 0;
+    }
     .navbar-start {
       .navbar-item {
         text-transform: uppercase;
@@ -179,6 +192,7 @@ export default {
 .header-dropdown {
   min-width: 5rem;
   padding-top: 0;
+
   .dropdown-content {
     padding: 0.8em;
     display: flex;
