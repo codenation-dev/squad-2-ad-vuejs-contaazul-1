@@ -17,12 +17,10 @@
         </div>
       </div>
     </div>
-    <div class="box">
+    <div class="error-detail">
       <div class="columns is-mobile is-multiline is-vcentered">
         <div class="column">
-          <div class="medium-title-style">
-            {{ error.name }} no {{ error.origin }}
-          </div>
+          <div class="medium-title-style">{{ error.name }} no {{ error.origin }}</div>
           <div class="subtitle date">{{ error.last_date | formatDate }}</div>
           <div class="margin-top">
             <div class="small-title-style">
@@ -111,6 +109,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.error-detail {
+  background-color: #fff;
+  border: 1px solid #e4ebff;
+  padding: 1.25rem;
+}
 .margin-top {
   margin-top: 2em;
 }
@@ -126,6 +129,8 @@ export default {
       padding-top: 0;
       padding-bottom: 0;
       color: #2e384d;
+      border-radius: 0;
+
       &.error {
         border-left: #e84a50 solid 4px;
       }

@@ -1,28 +1,30 @@
 <template>
-  <div class="box">
-    <div class="columns">
-      <div class="column">
-        <select-items title="Ambiente" :options="optionsEnvironment" v-model="environment"/>
-      </div>
-      <div class="column is-3 padding-field">
-        <select-items title="Buscar por" :options="optionsField" v-model="field"/>
-      </div>
-      <div class="column padding-search">
-        <div class="field has-addons">
-          <p class="control">
-            <input v-model="searchValue" class="input is-small" type="text"/>
-          </p>
-          <p class="control">
-            <button class="button is-primary is-small" @click="search">
-              Buscar
-            </button>
-          </p>
+  <div>
+    <div class="search-bar">
+      <div class="columns">
+        <div class="column">
+          <select-items title="Ambiente" :options="optionsEnvironment" v-model="environment" />
         </div>
-      </div>
-      <div class="column is-2">
-        <button class="button is-info is-small" @click="cleanAll">
-          Limpar filtros
-        </button>
+        <div class="column padding-field">
+          <select-items title="Buscar por" :options="optionsField" v-model="field" />
+        </div>
+        <div class="column padding-search">
+          <div class="field has-addons">
+            <p class="control">
+              <input v-model="searchValue" class="input is-small" type="text" />
+            </p>
+            <p class="control">
+              <button class="button is-primary is-small" @click="search">
+                Buscar
+              </button>
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <a @click="cleanAll" class="click-link" title="Limpar todos os filtros">
+            <i class="far fa-times-circle"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -39,14 +41,14 @@ export default {
   data() {
     return {
       optionsEnvironment: [
-        { description: 'Desenvolvimento', label: 'develop' },
-        { description: 'Produção', label: 'production' },
-        { description: 'Todos', label: null },
+        { description: 'Desenvolvimento', value: 'develop' },
+        { description: 'Produção', value: 'production' },
+        { description: 'Todos', value: null },
       ],
       environment: null,
       optionsField: [
-        { description: 'Nome', label: 'name' },
-        { description: 'Origem', label: 'origin' },
+        { description: 'Nome', value: 'name' },
+        { description: 'Origem', value: 'origin' },
       ],
       field: null,
       searchValue: null,
@@ -77,19 +79,31 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.box {
-  border: 1px solid #dbdbdb !important;
-  box-shadow: none;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
+<style lang="scss" scoped>
+.search-bar {
+  background-color: #fff;
+  border: 1px solid #e4ebff;
+  padding: 0.75rem 1.5rem;
 
-.paddin-search {
-  padding-left: 0px;
-}
+  .paddin-search {
+    padding-left: 0px;
+  }
 
-.paddin-field {
-  padding-right: 0px;
+  .paddin-field {
+    padding-right: 0px;
+  }
+  .column {
+    flex-basis: auto;
+
+    &:last-child {
+      padding-right: 0;
+      padding-left: 0.5rem;
+    }
+  }
+
+  .click-link {
+    font-size: 1.25rem;
+    opacity: 0.5;
+  }
 }
 </style>

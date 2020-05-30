@@ -6,7 +6,7 @@
   >
     <div class="errors-list--item-wrapper">
       <div class="errors-list--item-column errors-list--item-text">
-        <div class="item-column" @click.stop="toggleItem()">
+        <div class="item-column" @click.stop="toggleItem">
           <input type="checkbox" :checked="isSelected" />
         </div>
         <div class="item-column">
@@ -68,19 +68,6 @@ export default {
     ...mapActions(['toggleSelectedItem']),
     redirectDetails(id) {
       this.$router.push({ name: 'ErrorDetails', params: { id } });
-    },
-    useToast(msg, type = 'default') {
-      this.$toasted.show(msg, {
-        position: 'top-center',
-        type,
-        duration: 5000,
-        action: {
-          text: 'Fechar',
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
-          },
-        },
-      });
     },
     async deleteItem() {
       try {

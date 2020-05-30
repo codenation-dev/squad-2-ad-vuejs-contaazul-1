@@ -6,12 +6,18 @@ const adapter = new FileAsync('error.json');
 
 // Lista todos os erros
 router.get('/', (req, res) => {
-  const orderby = req.query.orderby || 'last_date';
-  const order = req.query.order || 'desc';
+  const { query } = req || {};
+  const orderby = query.orderby || 'last_date';
+  const order = query.order || 'desc';
   const filter = { archived: false };
 
-  req.query.environment ? filter.environment = req.query.environment : '';
-  req.query.field ? filter[req.query.field] = req.query.searchValue : '';
+  if (query.environment) {
+    filter.environment = query.environment;
+  }
+
+  if (query.field) {
+    filter[req.query.field] = query.searchValue;
+  }
 
   low(adapter).then((db) => {
     const error = db
