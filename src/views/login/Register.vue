@@ -1,10 +1,7 @@
 <template>
   <div class="Register">
     <form-image>
-      <form-header
-        title="Comece de graça"
-        subtitle="E fique sempre de olho na sua aplicação"
-      />
+      <form-header title="Comece de graça" subtitle="E fique sempre de olho na sua aplicação" />
       <validation-input
         v-model="nome"
         title="Nome Completo"
@@ -36,11 +33,7 @@
       />
       <button
         tabindex="2"
-        class="button
-        is-link
-        is-fullwidth
-        button-style
-        margin-bottom"
+        class="button is-primary is-fullwidth button-style margin-bottom"
         :disabled="disableButton"
         @click="register()"
       >
@@ -59,9 +52,9 @@
 </template>
 
 <script>
-import FormHeader from '../components/FormHeader.vue';
-import FormImage from '../components/FormImage.vue';
-import ValidationInput from '../components/ValidationInput.vue';
+import FormHeader from '@/components/FormHeader.vue';
+import FormImage from '@/components/FormImage.vue';
+import ValidationInput from '@/components/ValidationInput.vue';
 
 export default {
   components: {
@@ -96,16 +89,7 @@ export default {
     },
     register() {
       if (!(this.nome && this.email && this.password)) {
-        this.$toasted.show('Preencha todas as informações para continuar.', {
-          position: 'top-center',
-          duration: 5000,
-          action: {
-            text: 'Fechar',
-            onClick: (e, toastObject) => {
-              toastObject.goAway(0);
-            },
-          },
-        });
+        this.useToast('Preencha todas as informações para continuar.');
         return;
       }
 
@@ -116,36 +100,10 @@ export default {
           password: this.password,
         })
         .catch(() => {
-          this.$toasted.show(
-            'Erro de comunicação com a API. Tente novamente mais tarde.',
-            {
-              position: 'bottom-left',
-              duration: 5000,
-              type: 'error',
-              action: {
-                text: 'Fechar',
-                onClick: (e, toastObject) => {
-                  toastObject.goAway(0);
-                },
-              },
-            },
-          );
+          this.useToast('Erro de comunicação com a API. Tente novamente mais tarde.', 'error');
         })
         .then(() => {
-          this.$toasted.show(
-            'Cadastro realizado com sucesso! Faça login para continuar.',
-            {
-              position: 'bottom-left',
-              duration: 5000,
-              type: 'success',
-              action: {
-                text: 'Fechar',
-                onClick: (e, toastObject) => {
-                  toastObject.goAway(0);
-                },
-              },
-            },
-          );
+          this.useToast('Cadastro realizado com sucesso! Faça login para continuar.', 'success');
           this.$router.push({ name: 'Login' });
         });
     },

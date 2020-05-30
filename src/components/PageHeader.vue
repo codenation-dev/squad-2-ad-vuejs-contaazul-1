@@ -22,8 +22,8 @@
             <div class="title-welcome">Olá, {{ user.name }}!</div>
             <div class="token">Seu token é: {{ user.token }}</div>
           </div>
-          <div class="dropdown is-right" :class="{'is-active': dropdownActive}">
-              <figure class="image is-48x48 user-img" @click="toogleDropdown">
+          <div class="dropdown is-right" :class="{ 'is-active': dropdownActive }">
+            <figure class="image is-48x48 user-img" @click="toogleDropdown">
               <img
                 class="is-rounded"
                 src="https://i7.pngflow.com/pngimage/754/2/png-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-business-clipart-thumb.png"
@@ -63,14 +63,10 @@ export default {
     return {
       name: this.$store.state.user.name,
       token: this.$store.state.user.token,
-    };
-  },
-  computed: mapGetters({ user: 'getUser' }),
-  data() {
-    return {
       dropdownActive: false,
     };
   },
+  computed: mapGetters({ user: 'getUser' }),
   methods: {
     ...mapActions({ logout: 'logout' }),
     toogleDropdown() {

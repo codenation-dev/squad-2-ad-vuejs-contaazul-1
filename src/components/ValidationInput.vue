@@ -1,5 +1,5 @@
 <template>
-  <div class="container" tabindex="-1">
+  <div class="container">
     <label class="is-pulled-left label-style label-title-style">
       {{ title }}
     </label>
@@ -25,13 +25,10 @@
       />
       <span
         v-if="isPassword"
-        class="icon
-        is-right
-        icon-click"
-        @click="switchVisibility()"
+        class="icon is-right icon-click"
+        @click.stop="switchVisibility()"
+        :class="passwordFieldType"
       >
-        <img class="icon-image" src="../img/eye.png" v-if="passwordFieldType === 'password'" />
-        <img class="icon-image" src="../img/eye-slash.png" v-else />
       </span>
       <span v-if="icon" class="icon is-small is-left">
         <i class="fas" :class="icon"></i>
@@ -66,6 +63,10 @@ export default {
           'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.',
         name: 'Digite seu nome completo.',
         email: 'E-mail inválido.',
+      },
+      icons: {
+        eye: '../../assets/img/eye.png',
+        eyeSlash: '../../assets/img/eye-slash.png',
       },
     };
   },
@@ -106,14 +107,38 @@ export default {
   text-transform: uppercase;
 }
 
-.input {
-  background: rgba(224, 231, 255, 0.2);
-}
+.control {
+  .input {
+    background: rgba(224, 231, 255, 0.2);
+    border-color: #e0e7ff;
+  }
+  .icon {
+    color: #728aa6;
+    opacity: 0.5;
 
-.icon-image {
-  width: 20px;
-  height: 20px;
-  opacity: 0.7;
+    &.icon-click {
+      &:hover {
+        opacity: 1;
+      }
+
+      &:before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        display: inline-block;
+        text-rendering: auto;
+        line-height: 1;
+        margin-left: 0.3rem;
+      }
+
+      &.password::before {
+        content: '\f06e';
+      }
+
+      &.text::before {
+        content: '\f070';
+      }
+    }
+  }
 }
 
 .error {

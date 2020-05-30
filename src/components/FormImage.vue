@@ -1,28 +1,29 @@
 <template>
-    <section class="hero is-fullheight">
-      <div class="hero-body is-paddingless">
-        <div class="columns is-vcentered is-centered">
-          <div class="column
-            is-4-desktop is-offset-1-desktop
-            is-10-mobile is-offset-1-mobile">
-            <slot/>
-          </div>
-
-          <div v-if="this.windowWidth > 768" class="column is-offset-1 is-6 is-paddingless">
-            <img class="image is-pulled-right" :src="background">
+  <section class="hero is-fullheight">
+    <div class="hero-body is-paddingless">
+      <div class="columns is-vcentered is-centered">
+        <div class="column is-half">
+          <div class="columns">
+            <div class="column is-half is-offset-one-quarter">
+              <slot />
+            </div>
           </div>
         </div>
+        <div v-if="this.windowWidth > 768" class="column is-half is-paddingless">
+          <img class="image is-pulled-right" :src="background" />
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 </template>
 
 <script>
-import BackgroundImage from '../img/background.jpg';
+import backgroundImage from '@/assets/img/background.jpg';
 
 export default {
   data() {
     return {
-      background: BackgroundImage,
+      background: backgroundImage,
       windowWidth: window.innerWidth,
     };
   },
@@ -32,7 +33,6 @@ export default {
     });
   },
 };
-
 </script>
 
 <style lang="scss">

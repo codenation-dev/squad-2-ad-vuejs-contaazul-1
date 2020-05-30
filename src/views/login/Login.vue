@@ -1,13 +1,10 @@
 <template>
   <div>
     <form-image>
-      <form-header
-        title="Entre"
-        subtitle="Por favor, entre com suas credenciais para continuar."
-      />
+      <form-header title="Entre" subtitle="Por favor, entre com suas credenciais para continuar." />
       <validation-input
         v-model="email"
-        title="Email"
+        title="E-mail"
         placeholder="Insira seu e-mail"
         type-validation="email"
         class="margin-input"
@@ -31,22 +28,16 @@
       </validation-input>
       <button
         tabindex="2"
-        class="button
-        is-link
-        is-fullwidth
-        button-style
-        margin-bottom"
+        class="button is-primary is-fullwidth button-style margin-bottom"
         @click="doLogin"
         :disabled="disableButton"
       >
         Entre
       </button>
       <div class="centered">
-        <p class="label-style" >
+        <p class="label-style">
           Não tem uma conta?
-          <router-link class="click-link" to="/register" tabindex="4"
-            >Cadastre-se</router-link
-          >
+          <router-link class="click-link" to="/register" tabindex="4">Cadastre-se</router-link>
         </p>
       </div>
     </form-image>
@@ -55,9 +46,9 @@
 
 <script>
 import { mapActions } from 'vuex';
-import FormHeader from '../components/FormHeader.vue';
-import FormImage from '../components/FormImage.vue';
-import ValidationInput from '../components/ValidationInput.vue';
+import FormHeader from '@/components/FormHeader.vue';
+import FormImage from '@/components/FormImage.vue';
+import ValidationInput from '@/components/ValidationInput.vue';
 
 export default {
   components: {
@@ -94,57 +85,28 @@ export default {
           password: this.password,
         };
 
-        this.$http.post('/users/login', payload)
+        this.$http
+          .post('/users/login', payload)
           .then(({ data }) => {
             if (data === 'Usuário ou senha incorretos') {
-              this.$toasted.show(data, {
-                theme: 'toasted-primary',
-                position: 'bottom-left',
-                duration: 5000,
-                type: 'error',
-                action: {
-                  text: 'Fechar',
-                  onClick: (e, toastObject) => {
-                    toastObject.goAway(0);
-                  },
-                },
-              });
+              this.useToast(data, 'error');
             } else {
               this.login(data);
               this.$router.push({ name: 'ErrorHome' });
             }
           })
-          .catch((error) => this.$toasted.show(error, {
-            theme: 'toasted-primary',
-            position: 'bottom-left',
-            duration: 5000,
-            type: 'error',
-            action: {
-              text: 'Fechar',
-              onClick: (e, toastObject) => {
-                toastObject.goAway(0);
-              },
-            },
-          }));
+          .catch((error) => {
+            this.useToast(error, 'error');
+          });
       } else {
-        this.$toasted.show('Preencha todos os campos!', {
-          theme: 'toasted-primary',
-          position: 'bottom-left',
-          duration: 5000,
-          action: {
-            text: 'Fechar',
-            onClick: (e, toastObject) => {
-              toastObject.goAway(0);
-            },
-          },
-        });
+        this.useToast('Preencha todos os campos!');
       }
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-.margin-bottom{
-  margin-bottom:1.4em;
+.margin-bottom {
+  margin-bottom: 1.4em;
 }
 </style>

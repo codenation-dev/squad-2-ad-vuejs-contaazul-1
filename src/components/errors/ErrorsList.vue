@@ -139,19 +139,6 @@ export default {
 
   methods: {
     ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems']),
-    useToast(msg, type = 'default') {
-      this.$toasted.show(msg, {
-        position: 'top-center',
-        type,
-        duration: 5000,
-        action: {
-          text: 'Fechar',
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
-          },
-        },
-      });
-    },
     getErrorsApi(orderby) {
       this.isLoading = true;
 

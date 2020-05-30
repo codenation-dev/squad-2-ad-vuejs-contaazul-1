@@ -6,11 +6,7 @@
     <div class="column">
       <div class="select is-small is-4">
         <select :value="value" @change="$emit('input', $event.target.value)">
-          <option
-            :value="option.label"
-            v-for="(option, index) in options"
-            :key="index"
-          >
+          <option :value="option.value" v-for="(option, index) in options" :key="index">
             {{ option.description }}
           </option>
         </select>
@@ -37,5 +33,9 @@ export default {
   font-size: 12px;
   text-align: center;
   color: #b0bac9;
+}
+
+.select select {
+  border-color: #e0e7ff;
 }
 </style>

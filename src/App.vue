@@ -15,6 +15,8 @@ export default {
 
 <style lang="scss">
 @import '~bulma/bulma';
+
+$primary-blue: #2e5bff;
 $yellow: #eacb1b;
 
 @font-face {
@@ -66,6 +68,10 @@ body {
 .main {
   min-height: 100vh;
   background-color: #f4f6fc;
+
+  @media (min-width: 992px) {
+    padding-bottom: 60px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -101,7 +107,6 @@ body {
   color: #2e384d;
 }
 
-
 .small-title-style {
   width: 100%;
   font-style: normal;
@@ -122,7 +127,7 @@ body {
 
 .button-style {
   color: #ffffff;
-  background-color: #2e5bff;
+  background-color: $primary-blue;
   margin-top: 15px;
 }
 
@@ -135,7 +140,7 @@ body {
 .button-return {
   text-transform: uppercase;
   color: #ffffff;
-  background-color: #2e5bff;
+  background-color: $primary-blue;
 }
 
 .icon-click {
@@ -144,12 +149,16 @@ body {
   padding: 1px;
 }
 
+.input {
+  border-color: #e0e7ff;
+}
+
 .click-link {
   color: #8798ad;
 }
 
 .click-link:hover {
-  color: #2e5bff;
+  color: $primary-blue;
   text-decoration: underline;
 }
 
@@ -197,7 +206,7 @@ body {
 }
 
 .button.is-primary {
-  background-color: #2e5bff;
+  background-color: $primary-blue;
   border-color: #1057bf;
   color: #fff;
 
@@ -216,6 +225,11 @@ body {
   .is-active {
     background-color: #0032e9;
     border-color: #0b3a80;
+  }
+
+  &:disabled {
+    background-color: #5076ff;
+    border-color: #1365de;
   }
 }
 
@@ -264,7 +278,20 @@ body {
     border-color: #61768f;
   }
 }
-.is-min-width-fit-content{
+.is-min-width-fit-content {
   min-width: fit-content;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: #fff;
+
+  @media (min-width: 992px) {
+    height: 60px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
 }
 </style>
