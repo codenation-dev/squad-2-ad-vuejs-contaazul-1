@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: store.state.user?.token ? '/404' : '/login',
+    redirect: '/404',
   },
 ];
 
@@ -41,6 +41,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const { isLogged } = store.getters;
   const isAuthNeeded = to?.meta?.auth;
+  const isBeforeLogin = to?.meta?.beforeLogin;
+
+  if (isLogged && isBeforeLogin) {
+    router.push({ name: 'ErrorHome' });
+  }
 
   if (!isLogged && isAuthNeeded) {
     router.push({ name: 'Login' });
