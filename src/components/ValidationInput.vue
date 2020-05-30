@@ -64,10 +64,6 @@ export default {
         name: 'Digite seu nome completo.',
         email: 'E-mail inválido.',
       },
-      icons: {
-        eye: '../../assets/img/eye.png',
-        eyeSlash: '../../assets/img/eye-slash.png',
-      },
     };
   },
   watch: {
