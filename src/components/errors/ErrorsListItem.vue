@@ -6,7 +6,7 @@
   >
     <div class="errors-list--item-wrapper">
       <div class="errors-list--item-column errors-list--item-text">
-        <div class="item-column checkbox-column" @click.stop="toggleItem()">
+        <div class="item-column" @click.stop="toggleItem()">
           <input type="checkbox" :checked="isSelected" />
         </div>
         <div class="item-column">
@@ -205,20 +205,18 @@ export default {
           flex-grow: 1;
           flex-basis: 0;
 
-          &.checkbox-column{
-            height: 100%;
-            display: flex;
-            align-items: center;
-          }
           &:first-child {
             flex-grow: 0;
             flex-basis: 30px;
             flex-shrink: 0;
             align-self: flex-start;
             padding: 0.5em 0;
+            height: 100%;
 
             @include break-large {
               align-self: auto;
+              align-items: center;
+              display: flex;
               padding: 0;
             }
           }
