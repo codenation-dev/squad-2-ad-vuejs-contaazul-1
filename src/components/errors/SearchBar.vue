@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="column">
-          <a @click="cleanAll" class="click-link" title="Limapar todos os filtros">
+          <a @click="cleanAll" class="click-link" title="Limpar todos os filtros">
             <i class="far fa-times-circle"></i>
           </a>
         </div>
