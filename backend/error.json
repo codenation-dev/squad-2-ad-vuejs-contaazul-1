@@ -10,11 +10,28 @@
         "detalhe 3"
       ],
       "origin": "http://localhost:3000/api/blabla",
-      "enviroment": "develop",
+      "environment": "develop",
       "level": "error",
       "qty": 1000,
       "collected_by": "Marcos",
       "last_date": "2020-04-20T17:44:14Z",
+      "archived": false
+    },
+    {
+      "id": "3",
+      "name": "db.Post",
+      "title": "acceleration.Servcice.AddCandidate: acceleration.MongoRepository.Add",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "app.server.com.br",
+      "environment": "production",
+      "level": "warning",
+      "qty": 11,
+      "colletected_by": "Lara",
+      "last_date": "2020-04-24T17:44:14Z",
       "archived": true
     },
     {
@@ -27,7 +44,7 @@
         "detalhe 3"
       ],
       "origin": "http://127.0.0.1/api/login",
-      "enviroment": "production",
+      "environment": "production",
       "level": "error",
       "qty": 300,
       "collected_by": "Dedicio",
@@ -44,7 +61,7 @@
         "detalhe 3"
       ],
       "origin": "app.server.com.br",
-      "enviroment": "production",
+      "environment": "production",
       "level": "warning",
       "qty": 11,
       "collected_by": "Lara",
@@ -61,7 +78,7 @@
         "detalhe 3"
       ],
       "origin": "http://127.0.0.1/api/login",
-      "enviroment": "production",
+      "environment": "production",
       "level": "debug",
       "qty": 300,
       "collected_by": "Dedicio",

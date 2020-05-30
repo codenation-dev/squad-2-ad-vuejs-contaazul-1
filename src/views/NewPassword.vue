@@ -66,9 +66,6 @@ export default {
       newPasswordIsValid: false,
     };
   },
-  props: {
-    id: String,
-  },
   computed: {
     disableButton() {
       return !(this.passwordIsValid && this.newPasswordIsValid);
@@ -82,16 +79,12 @@ export default {
       this.newPasswordIsValid = valid;
     },
     changePassword() {
-      if (
-        this.newPasswordConfirmation === this.newPassword
-        && this.newPassword !== null
-      ) {
+      if (this.newPassword === this.newPasswordConfirmation && this.password !== null) {
         const payload = {
           password: this.newPassword,
         };
 
-        this.$http
-          .post(`users/${this.id}/reset`, payload)
+        this.$http.post(`users/${this.$route.params.id}/reset`, payload)
           .then(() => {
             this.$toasted.show('Senha alterada com sucesso!', {
               theme: 'toasted-primary',

@@ -36,7 +36,6 @@
       <span v-if="icon" class="icon is-small is-left">
         <i class="fas" :class="icon"></i>
       </span>
-
       <div class="error" v-if="!$v.value[typeValidation] && value">
         {{ messages[typeValidation] }}
       </div>

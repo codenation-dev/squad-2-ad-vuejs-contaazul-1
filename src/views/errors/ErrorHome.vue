@@ -9,30 +9,23 @@
       </div>
       <div class="level-right">
         <div class="level-item">
-          <div class="field has-addons">
-            <p class="control">
-              <input class="input" type="text" placeholder="Find a post" />
-            </p>
-            <p class="control">
-              <button class="button is-info">
-                Search
-              </button>
-            </p>
-          </div>
+            <search-bar @search="search"/>
         </div>
       </div>
     </div>
-    <errors-list></errors-list>
+    <errors-list ref="errorsList"/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import ErrorsList from '@/components/errors/ErrorsList.vue';
+import SearchBar from '@/components/errors/SearchBar.vue';
 
 export default {
   components: {
     ErrorsList,
+    SearchBar,
   },
 
   data() {
@@ -45,6 +38,12 @@ export default {
     ...mapGetters(['countErrors']),
     total() {
       return `(${this.countErrors})`;
+    },
+  },
+
+  methods: {
+    search() {
+      this.$refs.errorsList.getErrorsApi();
     },
   },
 };

@@ -138,7 +138,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setErrors', 'setParams', 'setSelectedItems']),
+    ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems']),
     useToast(msg, type = 'default') {
       this.$toasted.show(msg, {
         position: 'top-center',
@@ -154,7 +154,8 @@ export default {
     },
     getErrorsApi(orderby) {
       this.isLoading = true;
-      this.setParams(orderby);
+
+      this.setParamsOrder(orderby);
 
       const params = this.getParams;
 
@@ -164,16 +165,7 @@ export default {
           this.setErrors(data);
         })
         .catch(() => {
-          this.$toasted.show('Não foi possível carregar os logs', {
-            position: 'top-center',
-            duration: 5000,
-            action: {
-              text: 'Fechar',
-              onClick: (e, toastObject) => {
-                toastObject.goAway(0);
-              },
-            },
-          });
+          this.useToast('Não foi possível carregar os logs');
         })
         .finally(() => {
           this.isLoading = false;
