@@ -65,7 +65,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['toggleSelectedItem']),
+    ...mapActions(['toggleSelectedItem', 'setSelectedItems']),
     redirectDetails(id) {
       this.$router.push({ name: 'ErrorDetails', params: { id } });
     },
@@ -77,6 +77,7 @@ export default {
           },
         });
 
+        this.setSelectedItems(this.getSelectedItems.filter((item) => `${item}` !== this.error.id));
         this.useToast('Item excluído com sucesso', 'success');
       } catch (error) {
         this.useToast('Não foi possível excluir o item', 'error');
@@ -89,12 +90,12 @@ export default {
         await this.$http.put('/errors/archive', {
           ids: [this.error.id],
         });
-
+        this.setSelectedItems(this.getSelectedItems.filter((item) => `${item}` !== this.error.id));
         this.useToast('Item arquivado com sucesso', 'success');
       } catch (error) {
         this.useToast('Não foi possível arquivar o item', 'error');
       }
-
+      this.setSelectedItems(this.getSelectedItems.filter((item) => `${item}` !== this.error.id));
       this.$emit('updateList');
     },
     toggleItem() {
