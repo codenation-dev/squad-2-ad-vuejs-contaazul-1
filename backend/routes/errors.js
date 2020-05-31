@@ -9,16 +9,15 @@ router.get('/', (req, res) => {
   const { query } = req || {};
   const orderby = query.orderby || 'last_date';
   const order = query.order || 'desc';
-  const filter = { archived: false };
+  const filter = { archived: Boolean(query.archived === 'true') };
 
   if (query.environment) {
     filter.environment = query.environment;
   }
 
-  if (query.field) {
+  if (query.searchValue) {
     filter[req.query.field] = query.searchValue;
   }
-
   low(adapter).then((db) => {
     const error = db
       .get('errors')
@@ -26,7 +25,6 @@ router.get('/', (req, res) => {
       .orderBy(orderby, order)
       .take(10)
       .value();
-
     res.send(error);
   });
 });
