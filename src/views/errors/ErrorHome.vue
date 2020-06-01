@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <errors-list ref="errorsList"/>
+    <errors-list ref="errorsList" @search="search"/>
   </div>
 </template>
 

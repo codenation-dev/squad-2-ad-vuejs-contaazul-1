@@ -23,6 +23,7 @@ export default new Vuex.Store({
       environment: null,
       field: null,
       searchValue: null,
+      archived: false,
     },
     selectedItems: [],
   },
@@ -71,6 +72,9 @@ export default new Vuex.Store({
     setParamsSearchValue(state, payload) {
       state.params.searchValue = payload;
     },
+    setParamsArchived(state, payload) {
+      state.params.archived = payload;
+    },
     addSelectedItem(state, payload) {
       state.selectedItems.push(payload);
     },
@@ -114,6 +118,9 @@ export default new Vuex.Store({
     },
     setParamsSearchValue({ commit }, payload) {
       commit('setParamsSearchValue', payload);
+    },
+    setParamsArchived({ commit }, payload) {
+      commit('setParamsArchived', payload);
     },
     toggleSelectedItem({ commit, state }, payload) {
       const existId = state.selectedItems.findIndex((item) => item === payload);

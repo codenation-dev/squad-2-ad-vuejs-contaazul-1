@@ -1,12 +1,25 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
-      <div class="navbar-brand">
+      <div class="navbar-brand is-pulled-left">
         <router-link class="navbar-item" to="/">
-          Cricket Gate
+          <img :src="logo" alt="" />
         </router-link>
       </div>
-      <div class="navbar-menu">
+      <a
+        role="button"
+        class="navbar-burger burger"
+        :class="{ 'is-active': menuActive }"
+        aria-label="menu"
+        aria-expanded="true"
+        data-target="navbarBasicExample"
+        @click="toogleMenu"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+      <div class="navbar-menu" :class="{ 'is-active': menuActive }">
         <div class="navbar-start">
           <router-link class="navbar-item" to="/" exact-active-class="active">
             <span class="icon">
@@ -22,7 +35,10 @@
             <div class="title-welcome">Olá, {{ user.name }}!</div>
             <div class="token">Seu token é: {{ user.token }}</div>
           </div>
-          <div class="dropdown is-right" :class="{ 'is-active': dropdownActive }">
+          <div
+            class="dropdown is-right"
+            :class="{ 'is-active': dropdownActive }"
+          >
             <figure class="image is-48x48 user-img" @click="toogleDropdown">
               <img
                 class="is-rounded"
@@ -53,6 +69,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import LogoCricketGate from '@/assets/img/logo_cricket_gate.svg';
 
 export default {
   name: 'PageHeader',
@@ -61,9 +78,9 @@ export default {
   },
   data() {
     return {
-      name: this.$store.state.user.name,
-      token: this.$store.state.user.token,
       dropdownActive: false,
+      menuActive: false,
+      logo: LogoCricketGate,
     };
   },
   computed: mapGetters({ user: 'getUser' }),
@@ -71,6 +88,10 @@ export default {
     ...mapActions({ logout: 'logout' }),
     toogleDropdown() {
       this.dropdownActive = !this.dropdownActive;
+    },
+    toogleMenu() {
+      this.menuActive = !this.menuActive;
+      this.dropdownActive = false;
     },
     signOut() {
       this.logout();
@@ -81,61 +102,104 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin break-medium-less {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
+
 .navbar {
   background-color: white;
 
   .navbar-brand {
     margin-right: 1em;
   }
-}
-
-.nav-welcome {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  flex-direction: column;
-
-  .title-welcome {
-    font-size: 1.1em;
+  .navbar-item {
+    img {
+      max-height: 3.25rem;
+      @include break-medium-less {
+        max-height: 3.25rem;
+      }
+    }
   }
-
-  .token {
-    font-size: 0.8em;
-    color: gray;
+  .navbar-burger {
+    height: 4.65rem;
+    width: 4.65rem;
+    &:hover {
+      background-color: #f4f6fc;
+    }
+    span {
+      background-color: #2e5bff;
+      height: 2px;
+    }
   }
-}
+  .navbar-menu {
+    @include break-medium-less {
+      padding-top: 0;
+    }
+    .navbar-start {
+      .navbar-item {
+        text-transform: uppercase;
+        border-bottom: 3px solid white;
+        padding-top: 12px;
 
-.user-img {
-  align-self: center;
-  margin: 0.5em;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-}
+        @include break-medium-less {
+          text-align: center;
+        }
+        &:hover,
+        &.active {
+          background-color: #2e5bff10;
+          border-bottom: 3px solid #2e5bff;
+        }
+        .icon {
+          margin-right: 0.5em;
+          margin-top: -1px;
+        }
+      }
+    }
+    .navbar-end {
+      display: flex;
+      justify-content: flex-end;
 
-.navbar-menu .navbar-start .navbar-item {
-  text-transform: uppercase;
-  border-bottom: 3px solid white;
-  padding-top: 12px;
-
-  &:hover,
-  &.active {
-    background-color: #2e5bff10;
-    border-bottom: 3px solid #2e5bff;
-  }
-
-  .icon {
-    margin-right: 0.5em;
-    margin-top: -1px;
+      @include break-medium-less {
+        margin-top: 1em;
+        padding: 8px;
+        justify-content: center;
+      }
+      .nav-welcome {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-direction: column;
+        .title-welcome {
+          font-size: 1.1em;
+        }
+        .token {
+          font-size: 0.8em;
+          color: gray;
+        }
+      }
+      .user-img {
+        align-self: center;
+        margin: 0.5em;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+      }
+    }
   }
 }
 .header-dropdown {
   min-width: 5rem;
   padding-top: 0;
+
   .dropdown-content {
     padding: 0.8em;
     display: flex;
     justify-content: center;
+    @include break-medium-less {
+      margin-right: 8px;
+    }
   }
 }
 </style>
