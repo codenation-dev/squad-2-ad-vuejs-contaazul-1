@@ -58,6 +58,12 @@ $yellow: #eacb1b;
   font-display: swap;
 }
 
+@mixin break-large {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
 html,
 body {
   font-family: 'Roboto', sans-serif;
@@ -69,7 +75,7 @@ body {
   min-height: 100vh;
   background-color: #f4f6fc;
 
-  @media (min-width: 992px) {
+  @include break-large {
     padding-bottom: 60px;
     position: relative;
   }
@@ -288,7 +294,7 @@ body {
   text-align: center;
   background-color: #fff;
 
-  @media (min-width: 992px) {
+  @include break-large {
     height: 60px;
     position: absolute;
     width: 100%;
