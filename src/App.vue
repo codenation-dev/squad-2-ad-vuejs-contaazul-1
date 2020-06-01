@@ -113,12 +113,6 @@ body {
   margin-right: 10px;
 }
 
-.button-return {
-  text-transform: uppercase;
-  color: #ffffff;
-  background-color: #2e5bff;
-}
-
 .icon-click {
   pointer-events: initial !important;
   cursor: pointer;
