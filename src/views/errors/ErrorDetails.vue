@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -68,12 +68,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters,
+    ...mapGetters(['getSelectedItems']),
     classMessage() {
       return this.error.level;
     },
   },
   methods: {
+    ...mapActions(['setSelectedItems']),
     async deleteItem() {
       try {
         await this.$http.delete('/errors/', {
@@ -81,6 +82,8 @@ export default {
             ids: [this.error.id],
           },
         });
+
+        this.setSelectedItems(this.getSelectedItems.filter((item) => `${item}` !== this.error.id));
         this.$router.push({ name: 'ErrorHome' });
       } catch (error) {
         this.useToast('Não foi possível excluir o item', 'error');
@@ -91,6 +94,8 @@ export default {
         await this.$http.put('/errors/archive', {
           ids: [this.error.id],
         });
+
+        this.setSelectedItems(this.getSelectedItems.filter((item) => `${item}` !== this.error.id));
         this.$router.push({ name: 'ErrorHome' });
       } catch (error) {
         this.useToast('Não foi possível arquivar o item', 'error');

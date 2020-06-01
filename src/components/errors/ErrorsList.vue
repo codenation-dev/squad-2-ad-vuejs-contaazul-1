@@ -223,6 +223,7 @@ export default {
           ids: this.getSelectedItems,
         });
 
+        this.setSelectedItems([]);
         this.useToast('Itens arquivados com sucesso', 'success');
       } catch (error) {
         this.useToast('Não foi possível arquivar os itens', 'error');
@@ -232,12 +233,13 @@ export default {
     },
     async deleteErrors() {
       try {
-        this.$http.delete('/errors/', {
+        await this.$http.delete('/errors/', {
           data: {
             ids: this.getSelectedItems,
           },
         });
 
+        this.setSelectedItems([]);
         this.useToast('Itens excluídos com sucesso', 'success');
       } catch (error) {
         this.useToast('Não foi possível excluir os itens', 'error');
