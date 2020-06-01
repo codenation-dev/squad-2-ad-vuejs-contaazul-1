@@ -1,10 +1,10 @@
 <template>
-  <div class="columns">
+  <div class="columns is-desktop">
     <div class="column span-title">
       <span>{{ title }}</span>
     </div>
     <div class="column">
-      <div class="select is-small is-4">
+      <div class="select is-4">
         <select :value="value" @change="$emit('input', $event.target.value)">
           <option :value="option.value" v-for="(option, index) in options" :key="index">
             {{ option.description }}
@@ -34,8 +34,17 @@ export default {
   text-align: center;
   color: #b0bac9;
 }
+.select {
+  width: 100%;
 
-.select select {
-  border-color: #e0e7ff;
+  @media (min-width: 1024px) {
+    border-radius: 2px;
+    font-size: 0.75rem;
+  }
+
+  select {
+    border-color: #e0e7ff;
+    width: 100%;
+  }
 }
 </style>

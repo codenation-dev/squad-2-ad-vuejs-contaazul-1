@@ -107,13 +107,13 @@ export default {
 
 <style lang="scss" scoped>
 @mixin break-large {
-  @media (min-width: 992px) {
+  @media (min-width: 1024px) {
     @content;
   }
 }
 
 @mixin break-medium-less {
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     @content;
   }
 }
