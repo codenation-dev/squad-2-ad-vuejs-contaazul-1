@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="errors-list">
-      <header class="errors-list--header columns is-desktop">
+      <header class="errors-list--header columns">
         <div class="errors-list--header-wrapper errors-list--header-actions">
           <div class="buttons has-addons">
-            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !isAllSelected }">
+            <label
+              for="checkAll"
+              class="button is-small"
+              :class="{ 'is-ghost': !isAllSelected }"
+            >
               <input
                 type="checkbox"
                 name="checkAll"
@@ -21,13 +25,17 @@
               <span class="icon"><i class="fa fa-archive"></i></span>
               <span>Arquivar</span>
             </button>
-            <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
+            <button
+              class="button is-small is-danger"
+              :class="actionsClasses"
+              @click="deleteErrors"
+            >
               <span class="icon"><i class="fa fa-trash-alt"></i></span>
               <span>Excluir</span>
             </button>
           </div>
         </div>
-        <div class="errors-list--header-wrapper" v-if="windowWidth <= 1023">
+        <div class="errors-list--header-wrapper" v-if="windowWidth <= 991">
           <div
             class="dropdown errors-list--header-dropdown"
             :class="{ 'is-active': dropdownActive }"
@@ -62,7 +70,11 @@
           </div>
         </div>
         <div v-else class="errors-list--header-wrapper">
-          <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
+          <div
+            class="errors-list--header-item"
+            v-for="(filter, index) in filters"
+            :key="index"
+          >
             <span
               class="errors-list--header-filter"
               :class="currentFilter === index ? activeClasses : ''"
@@ -71,7 +83,10 @@
             >
           </div>
           <div class="errors-list--header-item" @click="toogleDropdownOptions">
-            <div class="dropdown is-right" :class="{ 'is-active': dropdownOptions }">
+            <div
+              class="dropdown is-right"
+              :class="{ 'is-active': dropdownOptions }"
+            >
               <i class="fas fa-ellipsis-h"></i>
               <div class="dropdown-menu header-dropdown">
                 <div class="dropdown-content">
@@ -153,11 +168,19 @@ export default {
       return this.getErrors.map((item) => item.id);
     },
     isAllSelected() {
-      return this.allIds.length > 0 && this.allIds.length === this.getSelectedItems.length;
+      return (
+        this.allIds.length > 0
+        && this.allIds.length === this.getSelectedItems.length
+      );
     },
   },
   methods: {
-    ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems', 'setParamsArchived']),
+    ...mapActions([
+      'setErrors',
+      'setParamsOrder',
+      'setSelectedItems',
+      'setParamsArchived',
+    ]),
     getErrorsApi(orderby) {
       this.isLoading = true;
 
@@ -240,13 +263,13 @@ export default {
 
 <style lang="scss" scoped>
 @mixin break-large {
-  @media (min-width: 1024px) {
+  @media (min-width: 992px) {
     @content;
   }
 }
 
 @mixin break-medium-less {
-  @media (max-width: 1023px) {
+  @media (max-width: 991px) {
     @content;
   }
 }
@@ -345,16 +368,13 @@ export default {
     margin-bottom: 1em;
 
     .button {
-      border-color: #e0e7ff;
-
       &::before {
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
         display: inline-block;
         text-rendering: auto;
         line-height: 1;
-        margin-left: calc(-0.5em - 1px);
-        width: 1.5em;
+        margin-left: 0.3rem;
       }
 
       &.asc {
@@ -400,11 +420,10 @@ export default {
   }
 }
 .dropdown-menu {
-  min-width: 9rem;
-  padding-top: 0;
-
-  .dropdown-content {
-    .button.is-small {
+      min-width: 9rem;
+      padding-top: 0;
+  .dropdown-content{
+    .button.is-small{
       border: none;
     }
   }
