@@ -17,6 +17,9 @@ npm run install-deps
 # rodar servidor de front e back end
 npm run start
 
+# (máquina windows) rodar servidor de front e back end
+npm run start-win
+
 # rodar apenas servidor de front end
 npm run serve
 

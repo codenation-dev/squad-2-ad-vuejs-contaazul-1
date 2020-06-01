@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     filter.environment = query.environment;
   }
 
-  if (query.field) {
+  if (query.searchValue) {
     filter[req.query.field] = query.searchValue;
   }
 
