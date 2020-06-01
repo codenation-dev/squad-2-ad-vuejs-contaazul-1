@@ -10,12 +10,13 @@
         "detalhe 3"
       ],
       "origin": "http://localhost:3000/api/blabla",
-      "enviroment": "develop",
+      "environment": "develop",
       "level": "error",
       "qty": 1000,
-      "colletected_by": "Marcos",
+      "collected_by": "Marcos",
       "last_date": "2020-04-20T17:44:14Z",
       "archived": false
+
     },
     {
       "id": "3",
@@ -27,12 +28,13 @@
         "detalhe 3"
       ],
       "origin": "app.server.com.br",
-      "enviroment": "production",
+      "environment": "production",
       "level": "warning",
       "qty": 11,
       "colletected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
       "archived": false
+
     },
     {
       "id": "5",
@@ -44,12 +46,13 @@
         "detalhe 3"
       ],
       "origin": "http://127.0.0.1/api/login",
-      "enviroment": "production",
-      "level": "debug",
+      "environment": "production",
+      "level": "error",
       "qty": 300,
-      "colletected_by": "Dedicio",
+      "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
+
     },
     {
       "id": "7",
@@ -61,12 +64,13 @@
         "detalhe 3"
       ],
       "origin": "app.server.com.br",
-      "enviroment": "production",
+      "environment": "production",
       "level": "warning",
       "qty": 11,
-      "colletected_by": "Lara",
+      "collected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
-      "archived": true
+      "archived": false
+
     },
     {
       "id": "10",
@@ -78,12 +82,85 @@
         "detalhe 3"
       ],
       "origin": "http://127.0.0.1/api/login",
-      "enviroment": "production",
+      "environment": "production",
       "level": "debug",
       "qty": 300,
-      "colletected_by": "Dedicio",
+      "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
-      "archived": true
+      "archived": false
+
+    },
+    {
+      "id": "11",
+      "name": "user.service.Auth",
+      "title": "password.Password.Compare: crypto/bcryp",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "http://127.0.0.1/api/login",
+      "environment": "production",
+      "level": "debug",
+      "qty": 300,
+      "collected_by": "Dedicio",
+      "last_date": "2020-04-21T17:44:14Z",
+      "archived": false
+
+    },
+    {
+      "id": "12",
+      "name": "user.service.Auth",
+      "title": "password.Password.Compare: crypto/bcryp",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "http://127.0.0.1/api/login",
+      "environment": "production",
+      "level": "debug",
+      "qty": 300,
+      "collected_by": "Dedicio",
+      "last_date": "2020-04-21T17:44:14Z",
+      "archived": false
+
+    },
+    {
+      "id": "13",
+      "name": "user.service.Auth",
+      "title": "password.Password.Compare: crypto/bcryp",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "http://127.0.0.1/api/login",
+      "environment": "production",
+      "level": "debug",
+      "qty": 300,
+      "collected_by": "Dedicio",
+      "last_date": "2020-04-21T17:44:14Z",
+      "archived": false
+
+    },
+    {
+      "id": "14",
+      "name": "user.service.Auth",
+      "title": "password.Password.Compare: crypto/bcryp",
+      "details": [
+        "detalhe 1",
+        "detalhe 2",
+        "detalhe 3"
+      ],
+      "origin": "http://127.0.0.1/api/login",
+      "environment": "production",
+      "level": "debug",
+      "qty": 300,
+      "collected_by": "Dedicio",
+      "last_date": "2020-04-21T17:44:14Z",
+      "archived": false
+
     }
   ]
 }
