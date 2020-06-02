@@ -64,7 +64,7 @@
           </div>
         </div>
         <div v-else class="navbar-end button-wrapper">
-          <router-link to='/'>
+          <router-link to="/">
             <button class="button is-primary">
               Voltar
             </button>

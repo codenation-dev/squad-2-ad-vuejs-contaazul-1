@@ -4,7 +4,6 @@ import VueMeta from 'vue-meta';
 import Toasted from 'vue-toasted';
 import store from '@/store';
 import Home from '@/views/Home.vue';
-import Charts from '@/views/errors/Charts.vue';
 import errorsRoutes from './errorsRoutes';
 import loginRoutes from './loginRoutes';
 import NotFound from '../views/NotFound.vue';
@@ -20,14 +19,6 @@ const routes = [
       default: Home,
     },
     children: [...errorsRoutes],
-  },
-  {
-    path: '/charts',
-    name: 'Charts',
-    component: Charts,
-    meta: {
-      auth: true,
-    },
   },
   ...loginRoutes,
   {

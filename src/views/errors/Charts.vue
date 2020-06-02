@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <PageHeader />
     <div class="container">
       <div class="page-header level">
         <div class="level-left">
@@ -20,7 +19,6 @@
         <h2 class="subtitle-style">
           Erros nas aplicações
         </h2>
-        <!-- Gráfico de linha -->
         <line-chart
           :data="dataChart"
           :dataset="{
@@ -38,14 +36,13 @@
         <h2 class="subtitle-style">
         Tipos de erros
         </h2>
-        <!-- Gráfico de colunas -->
         <column-chart
           v-if="chartColumnData.length > 0"
           :data="chartColumnData"
           :library="libraryOptions"
           :dataset="{
-          borderColor: chartColumnData.map((item, index) => colorList[index % colorList.length]),
-          backgroundColor: chartColumnData.map((item, index) => colorList[index % colorList.length])
+          borderColor: chartColumnColors,
+          backgroundColor: chartColumnColors
           }"
           xtitle="Nome do Erro"
           ytitle="Nº de erros"
@@ -55,11 +52,10 @@
         <h2 class="subtitle-style">
           Quantidade de erros por nível
         </h2>
-        <!-- Gráfico de pizza -->
         <pie-chart
           :data="chartPieData"
           :donut="true"
-          :colors="chartPieData.map((item, index) => colorList[index % colorList.length])"
+          :colors="chartPieColors"
           legend="bottom"
           :library="{
             animation: {
@@ -79,7 +75,6 @@
 </template>
 
 <script>
-import PageHeader from '@/components/PageHeader.vue';
 
 export default {
   data() {
@@ -88,6 +83,8 @@ export default {
       dataChart: [],
       chartPieData: [],
       chartColumnData: [],
+      chartColumnColors: [],
+      chartPieColors: [],
       title: 'Gráficos',
       libraryOptions: {
         animation: {
@@ -115,41 +112,48 @@ export default {
       },
     };
   },
-  components: {
-    PageHeader,
+  methods: {
+    fetchData() {
+      const errorsByDay = new Map();
+      const qntByError = new Map();
+      const qntByLevel = new Map();
+      this.$http.get('errors/').then((response) => {
+        response.data.reverse().forEach((e) => {
+          const day = new Date(e.last_date);
+          const dayString = day.toLocaleDateString('pt-BR').slice(0, 5);
+          if (errorsByDay.has(dayString)) {
+            errorsByDay.set(dayString, errorsByDay.get(dayString) + 1);
+          } else {
+            errorsByDay.set(dayString, 1);
+          }
+
+          if (qntByError.has(e.title)) {
+            qntByError.set(e.title, qntByError.get(e.title) + 1);
+          } else {
+            qntByError.set(e.title, 1);
+          }
+
+          if (qntByLevel.has(e.level)) {
+            qntByLevel.set(e.level, qntByLevel.get(e.level) + 1);
+          } else {
+            qntByLevel.set(e.level, 1);
+          }
+        });
+        this.dataChart = Array.from(errorsByDay.entries());
+        this.chartColumnData = Array.from(qntByError.entries());
+        this.chartPieData = Array.from(qntByLevel.entries());
+
+        this.chartColumnColors = this.chartColumnData.map(
+          (item, index) => this.colorList[index % this.colorList.length],
+        );
+        this.chartPieColors = this.chartPieData.map(
+          (item, index) => this.colorList[index % this.colorList.length],
+        );
+      });
+    },
   },
   mounted() {
-    const errorsByDay = new Map();
-    const qntByError = new Map();
-    const qntByLevel = new Map();
-    this.$http.get('errors/').then((response) => {
-      response.data.reverse().forEach((e) => {
-        const day = new Date(e.last_date);
-        const dayString = day.toLocaleDateString('pt-BR').slice(0, 5);
-        if (errorsByDay.has(dayString)) {
-          errorsByDay.set(dayString, errorsByDay.get(dayString) + 1);
-        } else {
-          errorsByDay.set(dayString, 1);
-        }
-
-
-        if (qntByError.has(e.title)) {
-          qntByError.set(e.title, qntByError.get(e.title) + 1);
-        } else {
-          qntByError.set(e.title, 1);
-        }
-
-
-        if (qntByLevel.has(e.level)) {
-          qntByLevel.set(e.level, qntByLevel.get(e.level) + 1);
-        } else {
-          qntByLevel.set(e.level, 1);
-        }
-      });
-      this.dataChart = Array.from(errorsByDay.entries());
-      this.chartColumnData = Array.from(qntByError.entries());
-      this.chartPieData = Array.from(qntByLevel.entries());
-    });
+    this.fetchData();
   },
 };
 </script>
