@@ -16,7 +16,6 @@
       "collected_by": "Marcos",
       "last_date": "2020-04-20T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "3",
@@ -34,7 +33,6 @@
       "colletected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "5",
@@ -52,7 +50,6 @@
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "7",
@@ -70,7 +67,6 @@
       "collected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "10",
@@ -88,7 +84,6 @@
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "11",
@@ -106,7 +101,6 @@
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "12",
@@ -124,7 +118,6 @@
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
-
     },
     {
       "id": "13",
@@ -141,8 +134,7 @@
       "qty": 300,
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
-      "archived": false
-
+      "archived": true
     },
     {
       "id": "14",
@@ -160,7 +152,6 @@
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
       "archived": false
-
     }
   ]
 }
