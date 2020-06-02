@@ -10,7 +10,12 @@
         <div class="level-right">
           <router-link to="/">
             <p class="level-item">
-              <a class="button is-primary">Voltar</a>
+              <button class="button button-return">
+                <span class="icon is-small">
+                  <i class="fas fa-arrow-left"></i>
+                </span>
+                <span>Voltar</span>
+              </button>
             </p>
           </router-link>
         </div>
