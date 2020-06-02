@@ -217,13 +217,30 @@ export default {
     }
   }
 
-  .paddin-search {
-    padding-left: 0px;
+  .padding-search {
+    @include break-medium-less {
+      .columns {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        align-items: center;
+
+        .column {
+          &:first-child {
+            :first-child {
+              flex-grow: 1;
+            }
+          }
+          &:last-child {
+            padding-left: 0;
+            flex-shrink: 0;
+            flex-grow: 0;
+            flex-basis: 1.5em;
+          }
+        }
+      }
+    }
   }
 
-  .paddin-field {
-    padding-right: 0px;
-  }
   .column {
     flex-basis: auto;
 
