@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="errors-list">
-      <header class="errors-list--header columns">
+      <header class="errors-list--header columns is-desktop">
         <div class="errors-list--header-wrapper errors-list--header-actions">
           <div class="buttons has-addons">
             <label
@@ -35,7 +35,7 @@
             </button>
           </div>
         </div>
-        <div class="errors-list--header-wrapper" v-if="windowWidth <= 991">
+        <div class="errors-list--header-wrapper" v-if="windowWidth <= 1023">
           <div
             class="dropdown errors-list--header-dropdown"
             :class="{ 'is-active': dropdownActive }"
@@ -82,8 +82,7 @@
               >{{ filter }}</span
             >
           </div>
-          <div class="errors-list--header-item">
-          </div>
+          <div class="errors-list--header-item"></div>
         </div>
       </header>
       <transition mode="out-in" name="fade" appear>
@@ -153,11 +152,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'setErrors',
-      'setParamsOrder',
-      'setSelectedItems',
-    ]),
+    ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems']),
     getErrorsApi(orderby) {
       this.isLoading = true;
 
@@ -231,13 +226,19 @@ export default {
 
 <style lang="scss" scoped>
 @mixin break-large {
-  @media (min-width: 992px) {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin break-huge {
+  @media (min-width: 1200px) {
     @content;
   }
 }
 
 @mixin break-medium-less {
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     @content;
   }
 }
@@ -285,6 +286,14 @@ export default {
     .errors-list--header-filter {
       display: inline-block;
       cursor: pointer;
+
+      @include break-large {
+        font-size: 0.75rem;
+      }
+
+      @include break-huge {
+        font-size: inherit;
+      }
 
       &.is-active {
         color: #0073a8;
@@ -336,13 +345,16 @@ export default {
     margin-bottom: 1em;
 
     .button {
+      border-color: #e0e7ff;
+
       &::before {
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
         display: inline-block;
         text-rendering: auto;
         line-height: 1;
-        margin-left: 0.3rem;
+        margin-left: calc(-0.5em - 1px);
+        width: 1.5em;
       }
 
       &.asc {
@@ -387,5 +399,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>
