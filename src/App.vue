@@ -123,11 +123,10 @@ body {
   color: #2e384d;
 }
 .description-style {
-  left: calc(50% - 273px / 2 - 23.5px);
   font-style: normal;
   font-weight: normal;
+  line-height: 1.1rem;
   font-size: 15px;
-  line-height: 15px;
   text-align: left;
   color: #8798ad;
 }

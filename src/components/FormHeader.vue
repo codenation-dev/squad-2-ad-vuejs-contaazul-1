@@ -1,8 +1,8 @@
 <template>
-    <div class="margin-title-description">
-      <p class="big-title-style is-pulled-left">{{ title }}</p>
-      <p class="description-style is-pulled-left">{{ subtitle }}</p>
-    </div>
+  <div class="margin-title-description">
+    <p class="big-title-style">{{ title }}</p>
+    <p class="description-style">{{ subtitle }}</p>
+  </div>
 </template>
 
 <script>
@@ -13,9 +13,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.margin-title-description {
-  margin-bottom: 110px;
-}
-</style>
