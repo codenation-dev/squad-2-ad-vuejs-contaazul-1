@@ -21,12 +21,20 @@
       </a>
       <div class="navbar-menu" :class="{ 'is-active': menuActive }">
         <div class="navbar-start">
-          <router-link class="navbar-item" to="/" exact-active-class="active">
+          <router-link class="navbar-item" to="/" active-class="active" exact>
             <span class="icon">
               <i class="fas fa-table"></i>
             </span>
             <span>
               Dashboard
+            </span>
+          </router-link>
+          <router-link class="navbar-item" to="/charts" active-class="active">
+            <span class="icon">
+              <i class="far fa-chart-bar"></i>
+            </span>
+            <span>
+              Gráficos
             </span>
           </router-link>
         </div>
@@ -57,7 +65,7 @@
         </div>
         <div v-else class="navbar-end button-wrapper">
           <router-link to="/">
-            <button class="button is-link button-return">
+            <button class="button is-primary">
               Voltar
             </button>
           </router-link>

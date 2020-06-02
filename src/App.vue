@@ -144,12 +144,6 @@ body {
   margin-right: 10px;
 }
 
-.button-return {
-  text-transform: uppercase;
-  color: #ffffff;
-  background-color: $primary-blue;
-}
-
 .icon-click {
   pointer-events: initial !important;
   cursor: pointer;
