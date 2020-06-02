@@ -1,12 +1,20 @@
 <template>
   <div>
     <div class="search-bar">
-      <div class="columns">
+      <div class="columns is-vcentered">
         <div class="column">
-          <select-items title="Ambiente" :options="optionsEnvironment" v-model="environment" />
+          <select-items
+            title="Ambiente"
+            :options="optionsEnvironment"
+            v-model="environment"
+          />
         </div>
         <div class="column padding-field">
-          <select-items title="Buscar por" :options="optionsField" v-model="field" />
+          <select-items
+            title="Buscar por"
+            :options="optionsField"
+            v-model="field"
+          />
         </div>
         <div class="column padding-search">
           <div class="field has-addons">
@@ -21,9 +29,37 @@
           </div>
         </div>
         <div class="column">
-          <a @click="cleanAll" class="click-link" title="Limpar todos os filtros">
+          <a
+            @click="cleanAll"
+            class="click-link"
+            title="Limpar todos os filtros"
+          >
             <i class="far fa-times-circle"></i>
           </a>
+        </div>
+        <div class="column options-column">
+          <div
+            class="dropdown is-right"
+            :class="{ 'is-active': dropdownOptions }"
+          >
+            <a class="click-link" @click="toogleDropdownOptions">
+              <i class="fas fa-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu header-dropdown">
+              <div class="dropdown-content">
+                <label for="checkArchived" class="button is-small">
+                  <input
+                    type="checkbox"
+                    name="checkArchived"
+                    id="checkArchived"
+                    @change="getArchivedErrors"
+                    :checked="isArchivedErrors"
+                  />
+                  Arquivados
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -52,6 +88,8 @@ export default {
       ],
       field: null,
       searchValue: null,
+      dropdownOptions: false,
+      isArchivedErrors: false,
     };
   },
   watch: {
@@ -64,7 +102,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setParamsEnvironment', 'setParamsField', 'setParamsSearchValue']),
+    ...mapActions([
+      'setParamsEnvironment',
+      'setParamsField',
+      'setParamsSearchValue',
+      'setParamsArchived',
+    ]),
     search() {
       this.setParamsSearchValue(this.searchValue);
       this.$emit('search');
@@ -74,6 +117,15 @@ export default {
       this.field = null;
       this.searchValue = null;
       this.search();
+    },
+    toogleDropdownOptions() {
+      this.dropdownOptions = !this.dropdownOptions;
+    },
+    getArchivedErrors() {
+      this.dropdownOptions = false;
+      this.isArchivedErrors = !this.isArchivedErrors;
+      this.setParamsArchived(this.isArchivedErrors);
+      this.$emit('search');
     },
   },
 };
@@ -105,5 +157,24 @@ export default {
     font-size: 1.25rem;
     opacity: 0.5;
   }
+}
+.dropdown.is-right {
+  color: #c3ccd6;
+}
+.dropdown-menu {
+  min-width: 9rem;
+  padding-top: 0;
+  .dropdown-content {
+    justify-content: center;
+    display: flex;
+
+    .button.is-small {
+      border: none;
+    }
+  }
+}
+#checkArchived {
+  width: auto;
+  margin-right: 1em;
 }
 </style>

@@ -82,27 +82,7 @@
               >{{ filter }}</span
             >
           </div>
-          <div class="errors-list--header-item" @click="toogleDropdownOptions">
-            <div
-              class="dropdown is-right"
-              :class="{ 'is-active': dropdownOptions }"
-            >
-              <i class="fas fa-ellipsis-h"></i>
-              <div class="dropdown-menu header-dropdown">
-                <div class="dropdown-content">
-                  <label for="checkArchived" class="button is-small">
-                    <input
-                      type="checkbox"
-                      name="checkArchived"
-                      id="checkArchived"
-                      @change="getArchivedErrors"
-                      :checked="isArchivedErrors"
-                    />
-                    Arquivados
-                  </label>
-                </div>
-              </div>
-            </div>
+          <div class="errors-list--header-item">
           </div>
         </div>
       </header>
@@ -145,8 +125,6 @@ export default {
       isLoading: false,
       dropdownActive: false,
       windowWidth: window.innerWidth,
-      dropdownOptions: false,
-      isArchivedErrors: false,
     };
   },
 
@@ -179,7 +157,6 @@ export default {
       'setErrors',
       'setParamsOrder',
       'setSelectedItems',
-      'setParamsArchived',
     ]),
     getErrorsApi(orderby) {
       this.isLoading = true;
@@ -201,21 +178,12 @@ export default {
           this.dropdownActive = false;
         });
     },
-    toogleDropdownOptions() {
-      this.dropdownOptions = !this.dropdownOptions;
-    },
     toggleAllSelected() {
       if (!this.isAllSelected) {
         this.setSelectedItems(this.allIds);
       } else {
         this.setSelectedItems([]);
       }
-    },
-    getArchivedErrors() {
-      this.dropdownOptions = false;
-      this.isArchivedErrors = !this.isArchivedErrors;
-      this.setParamsArchived(this.isArchivedErrors);
-      this.$emit('search');
     },
     async archiveErrors() {
       try {
@@ -419,17 +387,5 @@ export default {
     width: 100%;
   }
 }
-.dropdown-menu {
-      min-width: 9rem;
-      padding-top: 0;
-  .dropdown-content{
-    .button.is-small{
-      border: none;
-    }
-  }
-}
-#checkArchived {
-  width: auto;
-  margin-right: 1em;
-}
+
 </style>
