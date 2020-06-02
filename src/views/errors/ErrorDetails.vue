@@ -1,26 +1,17 @@
 <template>
   <section class="section">
+    <router-link to="/">
+      <button class="button is-primary is-pulled-right">Voltar</button>
+    </router-link>
     <div class="columns is-mobile is-multiline">
       <div class="column is-min-width-fit-content">
         <div class="big-title-style page-header--title">Detalhe do Erro</div>
-      </div>
-      <div class="column is-min-width-fit-content">
-        <div class="buttons has-addons is-pulled-right">
-          <button class="button is-primary" @click="archiveItem">
-            <span class="icon"><i class="fa fa-archive"></i></span>
-            <span>Arquivar</span>
-          </button>
-          <button class="button is-danger" @click="deleteItem">
-            <span class="icon"><i class="fa fa-trash-alt"></i></span>
-            <span>Excluir</span>
-          </button>
-        </div>
       </div>
     </div>
     <div class="error-detail">
       <div class="columns is-mobile is-multiline is-vcentered">
         <div class="column">
-          <div class="medium-title-style">{{ error.name }} no {{ error.origin }}</div>
+          <div class="error-title medium-title-style">{{ error.name }} no {{ error.origin }}</div>
           <div class="subtitle date">{{ error.last_date | formatDate }}</div>
           <div class="margin-top">
             <div class="small-title-style">
@@ -50,6 +41,16 @@
             </div>
           </article>
         </div>
+      </div>
+      <div class="buttons-container buttons has-addons is-pulled-right">
+        <button class="button is-primary" @click="archiveItem">
+          <span class="icon"><i class="fa fa-archive"></i></span>
+          <span>Arquivar</span>
+        </button>
+        <button class="button is-danger" @click="deleteItem">
+          <span class="icon"><i class="fa fa-trash-alt"></i></span>
+          <span>Excluir</span>
+        </button>
       </div>
     </div>
   </section>
@@ -109,10 +110,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.buttons-container {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.error-title {
+  word-break: break-all;
+  margin-top: 48px;
+}
 .error-detail {
   background-color: #fff;
   border: 1px solid #e4ebff;
   padding: 1.25rem;
+  position: relative;
 }
 .margin-top {
   margin-top: 2em;
