@@ -57,7 +57,7 @@ export default {
   }
 }
 .logo {
-  margin: 0 auto 1rem;
+  margin: 0 auto 2rem;
   display: block;
 }
 </style>

@@ -35,10 +35,7 @@
             <div class="title-welcome">Olá, {{ user.name }}!</div>
             <div class="token">Seu token é: {{ user.token }}</div>
           </div>
-          <div
-            class="dropdown is-right"
-            :class="{ 'is-active': dropdownActive }"
-          >
+          <div class="dropdown is-right" :class="{ 'is-active': dropdownActive }">
             <figure class="image is-48x48 user-img" @click="toogleDropdown">
               <img
                 class="is-rounded"
@@ -69,7 +66,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import LogoCricketGate from '@/assets/img/logo_cricket_gate.svg';
+import LogoCricketGate from '@/assets/img/cricketgate-logo-h.svg';
 
 export default {
   name: 'PageHeader',
