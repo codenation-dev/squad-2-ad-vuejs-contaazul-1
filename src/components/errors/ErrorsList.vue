@@ -100,6 +100,9 @@
             :error="error"
             @updateList="getErrorsApi"
           />
+          <div class="text-title-style" v-if="getErrors.length == 0">
+            {{ empty.message }}
+          </div>
         </section>
       </transition>
     </div>
@@ -132,6 +135,9 @@ export default {
       windowWidth: window.innerWidth,
       dropdownOptions: false,
       isArchivedErrors: false,
+      empty: {
+        message: 'Não há erros para serem exibidos. Revise seus filtros e termos de busca.',
+      },
     };
   },
 
@@ -426,5 +432,14 @@ export default {
 #checkArchived {
   width: auto;
   margin-right: 1em;
+}
+
+.text-title-style {
+  width: 100%;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+  color: #8798ad;
 }
 </style>
