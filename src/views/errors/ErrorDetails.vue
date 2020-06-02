@@ -1,7 +1,12 @@
 <template>
   <section class="section">
     <router-link to="/">
-      <button class="button is-primary is-pulled-right">Voltar</button>
+      <button class="button button-return is-pulled-right">
+        <span class="icon is-small">
+          <i class="fas fa-arrow-left"></i>
+        </span>
+        <span>Voltar</span>
+      </button>
     </router-link>
     <div class="columns is-mobile is-multiline">
       <div class="column is-min-width-fit-content">
@@ -11,7 +16,10 @@
     <div class="error-detail">
       <div class="columns is-mobile is-multiline is-vcentered">
         <div class="column">
-          <div class="error-title medium-title-style">{{ error.name }} no {{ error.origin }}</div>
+          <div v-bind:class="{ 'error-title-mobile': windowWidth <= 548 }"
+            class="error-title medium-title-style">
+            {{ error.name }} no {{ error.origin }}
+          </div>
           <div class="subtitle date">{{ error.last_date | formatDate }}</div>
           <div class="margin-top">
             <div class="small-title-style">
@@ -66,6 +74,7 @@ export default {
   data() {
     return {
       error: {},
+      windowWidth: window.innerWidth,
     };
   },
   computed: {
@@ -73,6 +82,11 @@ export default {
     classMessage() {
       return this.error.level;
     },
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth;
+    });
   },
   methods: {
     async deleteItem() {
@@ -112,11 +126,13 @@ export default {
 <style lang="scss" scoped>
 .buttons-container {
   position: absolute;
-  left: 20px;
+  right: 20px;
   top: 20px;
 }
 .error-title {
   word-break: break-all;
+}
+.error-title-mobile {
   margin-top: 48px;
 }
 .error-detail {

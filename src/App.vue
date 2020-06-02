@@ -139,9 +139,15 @@ body {
 }
 
 .button-return {
-  text-transform: uppercase;
-  color: #ffffff;
-  background-color: $primary-blue;
+  color: $primary-blue;
+  background-color: #ffffff;
+  border-color: $primary-blue;
+  &:hover,
+  .is-hover {
+    color: $primary-blue;
+    background-color: #ffffff;
+    border-color: $primary-blue;
+  }
 }
 
 .icon-click {

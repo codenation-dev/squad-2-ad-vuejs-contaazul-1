@@ -41,8 +41,11 @@
         </div>
         <div v-else class="navbar-end button-wrapper">
           <router-link to="/">
-            <button class="button is-link button-return">
-              Voltar
+            <button class="button button-return">
+              <span class="icon is-small">
+                <i class="fas fa-arrow-left"></i>
+              </span>
+              <span>Voltar</span>
             </button>
           </router-link>
         </div>
