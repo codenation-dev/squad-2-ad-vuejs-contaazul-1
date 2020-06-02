@@ -133,6 +133,12 @@ export default {
   }
 }
 
+@mixin break-huge {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
 @mixin break-medium-less {
   @media (max-width: 1023px) {
     @content;
@@ -198,6 +204,16 @@ export default {
     .button {
       border-radius: 2px;
       font-size: 0.75rem;
+    }
+
+    .input {
+      max-width: 120px;
+    }
+  }
+
+  @include break-huge {
+    .input {
+      max-width: 100%;
     }
   }
 

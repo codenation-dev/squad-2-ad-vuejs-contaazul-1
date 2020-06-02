@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style lang="scss">
+.column {
+  flex-basis: auto;
+}
 .span-title {
   padding: 0px;
   margin: auto;

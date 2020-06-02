@@ -245,6 +245,12 @@ export default {
   }
 }
 
+@mixin break-huge {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
 @mixin break-medium-less {
   @media (max-width: 1023px) {
     @content;
@@ -294,6 +300,14 @@ export default {
     .errors-list--header-filter {
       display: inline-block;
       cursor: pointer;
+
+      @include break-large {
+        font-size: 0.75rem;
+      }
+
+      @include break-huge {
+        font-size: inherit;
+      }
 
       &.is-active {
         color: #0073a8;
