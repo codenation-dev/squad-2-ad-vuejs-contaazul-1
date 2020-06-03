@@ -4,6 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:12.16.3
+    working_directory: ~/circleci-workflows
     steps:
       - checkout
       - run:
@@ -17,11 +18,17 @@ jobs:
       - run:
           name: build
           command: npm run build
+      - save_cache:
+          key: repo-dist
+          paths:
+            - ~/circleci-workflows
   deploy:
-    docker:
-      - image: circleci/node:12.16.3
+    machine:
+      enabled: true
     steps:
-      - checkout
+      - restore_cache:
+          keys:
+            - repo-dist
       - run:
           name: install firebase-tools
           command: sudo npm install firebase-tools -g
