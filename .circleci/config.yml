@@ -21,6 +21,8 @@ jobs:
           command: npm run build
 
   deploy:
+    machine:
+      enabled: true
     requires:
       - build
     filters:
@@ -28,6 +30,7 @@ jobs:
         only:
           - master
     steps:
+      - checkout
       - run:
         name: deploy to Firebase Hosting
         command: firebase deploy --token=$FIREBASE_TOKEN
