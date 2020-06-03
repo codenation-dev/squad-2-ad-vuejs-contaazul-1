@@ -33,7 +33,7 @@
       <span v-if="icon" class="icon is-small is-left">
         <i class="fas" :class="icon"></i>
       </span>
-      <div class="error" v-if="!$v.value[typeValidation] && value">
+      <div class="error" v-if="showValidation">
         {{ messages[typeValidation] }}
       </div>
     </div>
@@ -54,13 +54,14 @@ export default {
     icon: String,
     password: String,
     doAction: Function,
+    showMessage: Boolean,
   },
   data() {
     return {
       passwordFieldType: null,
       messages: {
         password:
-          'No mínimo 8 caracteres. Requer letra maíuscula, minúscula e pelo menos um número.',
+          'No mínimo 8 caracteres. Requer letras e pelo menos um número.',
         name: 'Digite seu nome completo.',
         email: 'E-mail inválido.',
       },
@@ -82,6 +83,9 @@ export default {
   computed: {
     isPassword() {
       return this.typeValidation === 'password' || this.typeValidation === 'newPassword';
+    },
+    showValidation() {
+      return (!this.$v.value[this.typeValidation] && this.value) && this.showMessage;
     },
   },
   created() {

@@ -11,6 +11,7 @@
         icon="fa-lock"
         @validation="passwordValidation"
         :doAction="changePassword"
+        :showMessage="showMessage"
       />
       <validation-input
         v-model="newPasswordConfirmation"
@@ -22,12 +23,12 @@
         icon="fa-lock"
         @validation="newPasswordValidation"
         :doAction="changePassword"
+        :showMessage="showMessage"
       />
       <button
         tabindex="2"
         class="button is-primary is-fullwidth button-style margin-bottom"
         @click="changePassword"
-        :disabled="disableButton"
       >
         Cadastrar nova senha
       </button>
@@ -60,11 +61,12 @@ export default {
       newPasswordConfirmation: null,
       passwordIsValid: false,
       newPasswordIsValid: false,
+      showMessage: false,
     };
   },
   computed: {
-    disableButton() {
-      return !(this.passwordIsValid && this.newPasswordIsValid);
+    isValid() {
+      return this.passwordIsValid && this.newPasswordIsValid;
     },
   },
   methods: {
@@ -75,22 +77,26 @@ export default {
       this.newPasswordIsValid = valid;
     },
     changePassword() {
-      if (this.newPassword === this.newPasswordConfirmation && this.password !== null) {
-        const payload = {
-          password: this.newPassword,
-        };
+      if (this.newPassword && this.newPasswordConfirmation) {
+        if (this.isValid) {
+          const payload = {
+            password: this.newPassword,
+          };
 
-        this.$http
-          .post(`users/${this.$route.params.id}/reset`, payload)
-          .then(() => {
-            this.useToast('Senha alterada com sucesso!', 'success');
-            this.$router.push({ name: 'Login' });
-          })
-          .catch((error) => {
-            this.useToast(error, 'error');
-          });
+          this.$http
+            .post(`users/${this.$route.params.id}/reset`, payload)
+            .then(() => {
+              this.useToast('Senha alterada com sucesso!', 'success');
+              this.$router.push({ name: 'Login' });
+            })
+            .catch((error) => {
+              this.useToast(error, 'error');
+            });
+        } else {
+          this.showMessage = true;
+        }
       } else {
-        this.useToast('As senhas devem ser iguais!', 'error');
+        this.useToast('Preencha todos os campos!');
       }
     },
   },
