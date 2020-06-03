@@ -1,11 +1,16 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-test:
     docker:
-      - image: circleci/node:12.16.3
-    working_directory: ~/circleci-workflows
+      - image: circleci/node:12.16.3]
+    working_directory: ~/cricketgate
     steps:
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - checkout
       - run:
           name: npm install
@@ -17,19 +22,26 @@ jobs:
             npm install
       - run:
           name: build
-          command: npm run build
+          command: npm run test:unit
       - save_cache:
-          key: repo-dist
           paths:
-            - ~/circleci-workflows
+            - ~/usr/local/lib/node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - store_artifacts:
+          path: /tmp/artifacts
+          destination: build
+
   deploy:
     docker:
       - image: circleci/node:12.16.3
-    working_directory: ~/circleci-workflows
+    working_directory: ~/cricketgate
     steps:
       - restore_cache:
           keys:
-            - repo-dist
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - checkout
       - run:
           name: install firebase-tools
           command: sudo npm install firebase-tools -g
@@ -38,7 +50,8 @@ jobs:
           command: firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
-  build-and-deploy:
+  version: 2
+  build-test-and-deploy:
     jobs:
       - build
       - deploy:
