@@ -23,8 +23,9 @@ jobs:
           paths:
             - ~/circleci-workflows
   deploy:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/node:12.16.3
+    working_directory: ~/circleci-workflows
     steps:
       - restore_cache:
           keys:
