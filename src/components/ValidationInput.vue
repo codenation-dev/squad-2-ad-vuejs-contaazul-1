@@ -18,7 +18,7 @@
         class="input"
         :placeholder="placeholder"
         :value="value"
-        :class="{ 'is-danger': !$v.value[typeValidation] && value }"
+        :class="{ 'is-danger': showValidation }"
         @input="$emit('input', $event.target.value)"
         :type="passwordFieldType"
         @keypress.enter="doAction"
