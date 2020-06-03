@@ -1,20 +1,32 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  machine-config:
     docker:
       - image: circleci/node:12.16.3]
-    working_directory: ~/cricketgate
+    working_directory: /tmp
+
+jobs:
+  build:
+    executor: machine-config
     steps:
-      - restore_cache:
-          keys:
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
       - checkout
       - run:
           name: npm install
           command: npm install
+      - run:
+          name: build
+          command: npm run test:unit
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  deploy:
+    executor: machine-config
+    steps:
+      - attach_workspace:
+          at: /tmp
       - run:
           name: npm install for functions
           command: |
@@ -22,32 +34,10 @@ jobs:
             npm install
       - run:
           name: build
-          command: npm run test:unit
-      - save_cache:
-          paths:
-            - ~/usr/local/lib/node_modules
-          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - store_artifacts:
-          path: /tmp/artifacts
-          destination: build
-
-  deploy:
-    docker:
-      - image: circleci/node:12.16.3
-    working_directory: ~/cricketgate
-    steps:
-      - restore_cache:
-          keys:
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
-      - checkout
+          command: npm run build
       - run:
-          name: install firebase-tools
-          command: sudo npm install firebase-tools -g
-      - run:
-          name: deploy to Firebase Hosting
-          command: firebase deploy --token=$FIREBASE_TOKEN
+          name: Deploy Master to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
