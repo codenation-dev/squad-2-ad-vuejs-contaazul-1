@@ -26,13 +26,13 @@
         "detalhe 2",
         "detalhe 3"
       ],
-      "origin": "app.server.com.br",
+      "origin": "http://127.0.0.1/api/login",
       "environment": "production",
       "level": "warning",
       "qty": 11,
       "colletected_by": "Lara",
       "last_date": "2020-04-24T17:44:14Z",
-      "archived": false
+      "archived": true
     },
     {
       "id": "5",
@@ -134,7 +134,7 @@
       "qty": 300,
       "collected_by": "Dedicio",
       "last_date": "2020-04-21T17:44:14Z",
-      "archived": true
+      "archived": false
     },
     {
       "id": "14",

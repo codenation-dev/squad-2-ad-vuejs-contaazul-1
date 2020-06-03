@@ -28,16 +28,13 @@ export default {
     SearchBar,
   },
 
-  data() {
-    return {
-      title: 'Dashboard de Erros',
-    };
-  },
-
   computed: {
-    ...mapGetters(['countErrors']),
+    ...mapGetters(['countErrors', 'getParams']),
     total() {
       return `(${this.countErrors})`;
+    },
+    title() {
+      return this.getParams.archived ? 'Erros Arquivados' : 'Dashboard de Erros';
     },
   },
 
