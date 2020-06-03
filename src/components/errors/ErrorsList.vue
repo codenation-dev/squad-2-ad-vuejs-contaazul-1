@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="errors-list">
-      <header class="errors-list--header columns">
+      <header class="errors-list--header columns is-desktop">
         <div class="errors-list--header-wrapper errors-list--header-actions">
           <div class="buttons has-addons">
-            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !isAllSelected }">
+            <label
+              for="checkAll"
+              class="button is-small"
+              :class="{ 'is-ghost': !isAllSelected }"
+            >
               <input
                 type="checkbox"
                 name="checkAll"
@@ -21,13 +25,17 @@
               <span class="icon"><i class="fa fa-archive"></i></span>
               <span>Arquivar</span>
             </button>
-            <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
+            <button
+              class="button is-small is-danger"
+              :class="actionsClasses"
+              @click="deleteErrors"
+            >
               <span class="icon"><i class="fa fa-trash-alt"></i></span>
               <span>Excluir</span>
             </button>
           </div>
         </div>
-        <div class="errors-list--header-wrapper" v-if="windowWidth <= 991">
+        <div class="errors-list--header-wrapper" v-if="windowWidth <= 1023">
           <div
             class="dropdown errors-list--header-dropdown"
             :class="{ 'is-active': dropdownActive }"
@@ -62,7 +70,11 @@
           </div>
         </div>
         <div v-else class="errors-list--header-wrapper">
-          <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
+          <div
+            class="errors-list--header-item"
+            v-for="(filter, index) in filters"
+            :key="index"
+          >
             <span
               class="errors-list--header-filter"
               :class="currentFilter === index ? activeClasses : ''"
@@ -133,10 +145,12 @@ export default {
       return this.getErrors.map((item) => item.id);
     },
     isAllSelected() {
-      return this.allIds.length > 0 && this.allIds.length === this.getSelectedItems.length;
+      return (
+        this.allIds.length > 0
+        && this.allIds.length === this.getSelectedItems.length
+      );
     },
   },
-
   methods: {
     ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems']),
     getErrorsApi(orderby) {
@@ -172,6 +186,7 @@ export default {
           ids: this.getSelectedItems,
         });
 
+        this.setSelectedItems([]);
         this.useToast('Itens arquivados com sucesso', 'success');
       } catch (error) {
         this.useToast('Não foi possível arquivar os itens', 'error');
@@ -181,12 +196,13 @@ export default {
     },
     async deleteErrors() {
       try {
-        this.$http.delete('/errors/', {
+        await this.$http.delete('/errors/', {
           data: {
             ids: this.getSelectedItems,
           },
         });
 
+        this.setSelectedItems([]);
         this.useToast('Itens excluídos com sucesso', 'success');
       } catch (error) {
         this.useToast('Não foi possível excluir os itens', 'error');
@@ -210,13 +226,19 @@ export default {
 
 <style lang="scss" scoped>
 @mixin break-large {
-  @media (min-width: 992px) {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin break-huge {
+  @media (min-width: 1200px) {
     @content;
   }
 }
 
 @mixin break-medium-less {
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     @content;
   }
 }
@@ -256,12 +278,22 @@ export default {
           flex-basis: 50px;
           flex-shrink: 0;
           margin-right: 0.75em;
+          display: flex;
+          align-items: flex-end;
         }
       }
     }
     .errors-list--header-filter {
       display: inline-block;
       cursor: pointer;
+
+      @include break-large {
+        font-size: 0.75rem;
+      }
+
+      @include break-huge {
+        font-size: inherit;
+      }
 
       &.is-active {
         color: #0073a8;
@@ -313,13 +345,16 @@ export default {
     margin-bottom: 1em;
 
     .button {
+      border-color: #e0e7ff;
+
       &::before {
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
         display: inline-block;
         text-rendering: auto;
         line-height: 1;
-        margin-left: 0.3rem;
+        margin-left: calc(-0.5em - 1px);
+        width: 1.5em;
       }
 
       &.asc {

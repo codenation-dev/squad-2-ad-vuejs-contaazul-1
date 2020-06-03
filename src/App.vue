@@ -58,6 +58,12 @@ $yellow: #eacb1b;
   font-display: swap;
 }
 
+@mixin break-large {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
 html,
 body {
   font-family: 'Roboto', sans-serif;
@@ -68,11 +74,8 @@ body {
 .main {
   min-height: 100vh;
   background-color: #f4f6fc;
-
-  @media (min-width: 992px) {
-    padding-bottom: 60px;
-    position: relative;
-  }
+  padding-bottom: 60px;
+  position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -117,11 +120,10 @@ body {
   color: #2e384d;
 }
 .description-style {
-  left: calc(50% - 273px / 2 - 23.5px);
   font-style: normal;
   font-weight: normal;
+  line-height: 1.1rem;
   font-size: 15px;
-  line-height: 15px;
   text-align: left;
   color: #8798ad;
 }
@@ -165,7 +167,7 @@ body {
 }
 
 .click-link:hover {
-  color: $primary-blue;
+  color: #0073a8;
   text-decoration: underline;
 }
 
@@ -293,12 +295,9 @@ body {
   padding: 1rem;
   text-align: center;
   background-color: #fff;
-
-  @media (min-width: 992px) {
-    height: 60px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
+  height: 60px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 </style>

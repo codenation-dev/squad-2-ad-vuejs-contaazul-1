@@ -9,26 +9,45 @@ router.get('/', (req, res) => {
   const { query } = req || {};
   const orderby = query.orderby || 'last_date';
   const order = query.order || 'desc';
-  const filter = { archived: false };
-
+  const filter = { archived: Boolean(query.archived === 'true') };
   if (query.environment) {
     filter.environment = query.environment;
   }
-
-  if (query.field) {
-    filter[req.query.field] = query.searchValue;
+  if (query.searchValue && req.query.field) {
+    low(adapter).then((db) => {
+      const error = db
+        .get('errors')
+        .filter(filter)
+        .orderBy(orderby, order)
+        .take(10)
+        .value();
+      res.send(error
+        .filter((e) => e[req.query.field].toLowerCase()
+          .indexOf(query.searchValue.toLowerCase()) > -1));
+    });
+  } else if (query.searchValue) {
+    low(adapter).then((db) => {
+      const error = db
+        .get('errors')
+        .filter(filter)
+        .orderBy(orderby, order)
+        .take(10)
+        .value();
+      res.send(error
+        .filter((e) => e.origin.toLowerCase().indexOf(query.searchValue.toLowerCase()) > -1
+        || e.name.toLowerCase().indexOf(query.searchValue.toLowerCase()) > -1));
+    });
+  } else {
+    low(adapter).then((db) => {
+      const error = db
+        .get('errors')
+        .filter(filter)
+        .orderBy(orderby, order)
+        .take(10)
+        .value();
+      res.send(error);
+    });
   }
-
-  low(adapter).then((db) => {
-    const error = db
-      .get('errors')
-      .filter(filter)
-      .orderBy(orderby, order)
-      .take(10)
-      .value();
-
-    res.send(error);
-  });
 });
 
 // Retorna erro pelo id passado
