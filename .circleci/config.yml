@@ -26,8 +26,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: deploy to Firebase Hosting
-        command: firebase deploy --token=$FIREBASE_TOKEN
+          name: deploy to Firebase Hosting
+          command: firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   build-and-deploy:
