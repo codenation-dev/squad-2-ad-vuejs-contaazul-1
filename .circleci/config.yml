@@ -23,8 +23,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: install firebase-tools
-        command: sudo npm install firebase-tools -g
+          name: install firebase-tools
+          command: sudo npm install firebase-tools -g
       - run:
           name: deploy to Firebase Hosting
           command: firebase deploy --token=$FIREBASE_TOKEN
