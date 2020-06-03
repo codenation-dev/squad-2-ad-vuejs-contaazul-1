@@ -29,11 +29,15 @@
                 />
               </div>
               <div class="column padding-field">
-                <select-items title="Buscar por" :options="optionsField" v-model="field" />
+                <select-items
+                  title="Buscar por"
+                  :options="optionsField"
+                  v-model="field"
+                />
               </div>
               <div class="column padding-search">
-                <div class="columns is-mobile">
-                  <div class="column">
+                <div class="columns is-mobile is-multiline">
+                  <div class="column" :class="{ 'is-full': isMobile }">
                     <div class="field has-addons">
                       <p class="control">
                         <input
@@ -51,10 +55,80 @@
                       </p>
                     </div>
                   </div>
-                  <div class="column">
-                    <a @click="cleanAll" class="click-link" title="Limpar todos os filtros">
+                  <div v-if="isMobile" class="column is-full options is-mobile">
+                    <a
+                      @click="cleanAll"
+                      class="click-link clear-filter"
+                      title="Limpar todos os filtros"
+                    >
                       <i class="far fa-times-circle"></i>
+                      <span class="label-option text-option"
+                        >Limpar filtro</span
+                      >
                     </a>
+                    <a
+                      @click="getArchivedErrors"
+                      class="click-link link-archived"
+                      :class="{ 'is-active': isArchivedErrors }"
+                      title="Visualizar arquivados"
+                    >
+                      <span v-show="!isArchivedErrors" class="icon is-small">
+                        <i class="far fa-square"></i>
+                      </span>
+                      <span v-show="isArchivedErrors" class="icon is-small">
+                        <i class="fas fa-check-square"></i>
+                      </span>
+                      <span class="label-option text-option">Arquivados</span>
+                    </a>
+                  </div>
+                  <div v-else class="column">
+                    <div
+                      class="dropdown is-right "
+                      :class="{ 'is-active': dropdownOptions }"
+                    >
+                      <a class="click-link" @click="toogleDropdownOptions">
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div
+                        class="dropdown-menu menu-options header-dropdown"
+                        :class="{ 'is-active': dropdownOptions }"
+                      >
+                        <div class="dropdown-content options">
+                          <a
+                            @click="cleanAll"
+                            class="click-link"
+                            title="Limpar todos os filtros"
+                          >
+                            <i class="far fa-times-circle"></i>
+                            <span class="label-option text-option"
+                              >Limpar filtro</span
+                            >
+                          </a>
+                          <a
+                            @click="getArchivedErrors"
+                            class="click-link link-archived"
+                            :class="{ 'is-active': isArchivedErrors }"
+                            title="Visualizar arquivados"
+                          >
+                            <span
+                              v-show="!isArchivedErrors"
+                              class="icon is-small"
+                            >
+                              <i class="far fa-square"></i>
+                            </span>
+                            <span
+                              v-show="isArchivedErrors"
+                              class="icon is-small"
+                            >
+                              <i class="fas fa-check-square"></i>
+                            </span>
+                            <span class="label-option text-option"
+                              >Arquivados</span
+                            >
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -89,6 +163,8 @@ export default {
       ],
       field: null,
       searchValue: null,
+      dropdownOptions: false,
+      isArchivedErrors: false,
       showSearch: false,
       windowWidth: window.innerWidth,
     };
@@ -108,7 +184,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setParamsEnvironment', 'setParamsField', 'setParamsSearchValue']),
+    ...mapActions([
+      'setParamsEnvironment',
+      'setParamsField',
+      'setParamsSearchValue',
+      'setParamsArchived',
+    ]),
     search() {
       this.setParamsSearchValue(this.searchValue);
       this.$emit('search');
@@ -118,6 +199,16 @@ export default {
       this.field = null;
       this.searchValue = null;
       this.search();
+      this.dropdownOptions = false;
+    },
+    toogleDropdownOptions() {
+      this.dropdownOptions = !this.dropdownOptions;
+    },
+    getArchivedErrors() {
+      this.dropdownOptions = false;
+      this.isArchivedErrors = !this.isArchivedErrors;
+      this.setParamsArchived(this.isArchivedErrors);
+      this.$emit('search');
     },
   },
   mounted() {
@@ -165,7 +256,7 @@ export default {
   }
 
   @include break-large {
-    .dropdown-menu {
+    #dropdown-menu {
       min-width: auto;
       position: relative;
       top: 0;
@@ -242,7 +333,6 @@ export default {
       }
     }
   }
-
   .column {
     flex-basis: auto;
 
@@ -251,10 +341,68 @@ export default {
       padding-left: 0.5rem;
     }
   }
-
   .click-link {
     font-size: 1.25rem;
-    opacity: 0.5;
   }
+}
+.dropdown.is-right {
+  color: #c3ccd6;
+}
+.dropdown-menu.menu-options {
+  min-width: 9rem;
+  padding-top: 0;
+  margin-top: 0.2em;
+  margin-right: -1em;
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+
+  .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    padding-left: 1em;
+  }
+}
+.options {
+  .click-link.is-active {
+    color: #0073a8;
+  }
+  .link-archived {
+    margin-left: 0.15em;
+  }
+  .button.is-small {
+    border: none;
+  }
+  .label-option {
+    font-size: 14px;
+    margin-left: 0.75em;
+    &:hover {
+      color: #0073a8;
+    }
+    &.text-option {
+      top: -4px;
+      position: relative;
+    }
+  }
+  &.is-mobile {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    .clear-filter {
+      top: -2px;
+      position: relative;
+      span {
+        top: -2px;
+      }
+    }
+  }
+}
+#checkArchived {
+  width: auto;
+  margin-right: 0.25em;
 }
 </style>
