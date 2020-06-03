@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="chart-style">
-        <h2 class="subtitle-style">
+        <h2 class="chart-title-style">
           Erros nas aplicações
         </h2>
         <line-chart
@@ -33,7 +33,7 @@
           :library="libraryOptions"
         >
         </line-chart>
-        <h2 class="subtitle-style">
+        <h2 class="chart-title-style">
         Tipos de erros
         </h2>
         <column-chart
@@ -49,7 +49,7 @@
           label="Ocorrência"
         >
         </column-chart>
-        <h2 class="subtitle-style">
+        <h2 class="chart-title-style">
           Quantidade de erros por nível
         </h2>
         <pie-chart
@@ -118,8 +118,8 @@ export default {
       const qntByError = new Map();
       const qntByLevel = new Map();
       this.$http.get('errors/').then((response) => {
-        response.data.reverse().forEach((e) => {
-          const day = new Date(e.last_date);
+        response.data.reverse().forEach((error) => {
+          const day = new Date(error.last_date);
           const dayString = day.toLocaleDateString('pt-BR').slice(0, 5);
           if (errorsByDay.has(dayString)) {
             errorsByDay.set(dayString, errorsByDay.get(dayString) + 1);
@@ -127,16 +127,16 @@ export default {
             errorsByDay.set(dayString, 1);
           }
 
-          if (qntByError.has(e.title)) {
-            qntByError.set(e.title, qntByError.get(e.title) + 1);
+          if (qntByError.has(error.name)) {
+            qntByError.set(error.name, qntByError.get(error.name) + 1);
           } else {
-            qntByError.set(e.title, 1);
+            qntByError.set(error.name, 1);
           }
 
-          if (qntByLevel.has(e.level)) {
-            qntByLevel.set(e.level, qntByLevel.get(e.level) + 1);
+          if (qntByLevel.has(error.level)) {
+            qntByLevel.set(error.level, qntByLevel.get(error.level) + 1);
           } else {
-            qntByLevel.set(e.level, 1);
+            qntByLevel.set(error.level, 1);
           }
         });
         this.dataChart = Array.from(errorsByDay.entries());
@@ -165,11 +165,12 @@ export default {
     background-color: #ffffff;
     border: 1px solid #e4ebff;
   }
-  .subtitle-style {
-    font-size: 13px;
+  .chart-title-style {
+    font-size: 1.4rem;
+    font-weight: 300;
     line-height: 15px;
     text-transform: uppercase;
     color: #2e384d;
-    padding: 20px 0 10px 0;
+    padding: 20px 0 15px 0;
   }
 </style>
