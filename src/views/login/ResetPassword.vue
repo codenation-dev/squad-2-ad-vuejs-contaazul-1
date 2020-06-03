@@ -11,11 +11,11 @@
         icon="fa-envelope"
         @validation="emailValidation"
         :doAction="sendLink"
+        :showMessage="showMessage"
       />
       <button
         tabindex="2"
         class="button is-primary is-fullwidth button-syle"
-        :disabled="!emailIsValid"
         @click="sendLink()"
       >
         Redefinir senha
@@ -39,6 +39,7 @@ export default {
     return {
       email: null,
       emailIsValid: false,
+      showMessage: false,
     };
   },
   methods: {
@@ -46,26 +47,29 @@ export default {
       this.emailIsValid = valid;
     },
     sendLink() {
-      if (!this.email) {
-        this.useToast('Preencha seu e-mail para continuar.');
-        return;
-      }
-
-      this.$http
-        .get(`users/${this.email}`)
-        .catch(() => {
-          this.useToast('Erro de comunicação com a API. Tente novamente mais tarde.', 'error');
-        })
-        .then((results) => {
-          if (results.data) {
-            this.$router.push({
-              name: 'NewPassword',
-              params: { id: results.data.id },
+      if (this.email) {
+        if (this.emailIsValid) {
+          this.$http
+            .get(`users/${this.email}`)
+            .catch(() => {
+              this.useToast('Erro de comunicação com a API. Tente novamente mais tarde.', 'error');
+            })
+            .then((results) => {
+              if (results.data) {
+                this.$router.push({
+                  name: 'NewPassword',
+                  params: { id: results.data.id },
+                });
+              } else {
+                this.useToast('O e-mail informado não pertence a nenhum usuário cadastrado.', 'error');
+              }
             });
-          } else {
-            this.useToast('O e-mail informado não pertence a nenhum usuário cadastrado.', 'error');
-          }
-        });
+        } else {
+          this.showMessage = true;
+        }
+      } else {
+        this.useToast('Preencha seu e-mail para continuar.');
+      }
     },
   },
 };
