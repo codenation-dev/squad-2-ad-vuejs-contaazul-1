@@ -3,7 +3,7 @@ version: 2.1
 executors:
   machine-config:
     docker:
-      - image: circleci/node:12.16.3]
+      - image: circleci/node:12.16.3
     working_directory: /tmp
 
 jobs:
