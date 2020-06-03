@@ -74,11 +74,8 @@ body {
 .main {
   min-height: 100vh;
   background-color: #f4f6fc;
-
-  @include break-large {
-    padding-bottom: 60px;
-    position: relative;
-  }
+  padding-bottom: 60px;
+  position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -286,12 +283,9 @@ body {
   padding: 1rem;
   text-align: center;
   background-color: #fff;
-
-  @include break-large {
-    height: 60px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
+  height: 60px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 </style>
