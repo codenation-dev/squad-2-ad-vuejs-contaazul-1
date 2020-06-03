@@ -18,8 +18,8 @@ jobs:
           name: build
           command: npm run build
   deploy:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/node:12.16.3
     steps:
       - checkout
       - run:
