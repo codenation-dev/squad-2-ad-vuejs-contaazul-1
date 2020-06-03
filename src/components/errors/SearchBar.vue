@@ -41,6 +41,7 @@
                           class="input"
                           type="text"
                           placeholder="Palavra-chave"
+                          @keypress.enter="search"
                         />
                       </p>
                       <p class="control">
@@ -84,6 +85,7 @@ export default {
       optionsField: [
         { description: 'Nome', value: 'name' },
         { description: 'Origem', value: 'origin' },
+        { description: 'Todos', value: null },
       ],
       field: null,
       searchValue: null,
