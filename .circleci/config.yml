@@ -1,23 +1,14 @@
 version: 2.1
 
-executors:
-  machine-config:
+jobs:
+  build-and-deploy:
     docker:
       - image: circleci/node:12.16.3
-
-jobs:
-  test:
-    executor: machine-config
     steps:
       - checkout
       - run:
-          name: npm install
-          command: npm install
-
-  deploy:
-    executor: machine-config
-    steps:
-      - checkout
+          name: install firebase-tools
+          command: sudo npm install firebase-tools -g
       - run:
           name: npm install
           command: npm install
@@ -30,14 +21,11 @@ jobs:
           name: build
           command: npm run build
       - run:
-          name: Deploy Master to Firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+          name: deploy to Firebase Hosting
+          command: firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
-  build-test-and-deploy:
+  btd:
     jobs:
-      - test
-      - deploy:
-          requires:
-            - test
+      - build-and-deploy
