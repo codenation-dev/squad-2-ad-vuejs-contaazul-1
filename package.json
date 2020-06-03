@@ -4,9 +4,9 @@
   "description": "Front end de sistema de tracking de erros em aplicações | Desafio final do AceleraDev da Codenation + ContaAzul",
   "private": true,
   "scripts": {
-    "install-deps": "npm install && cd backend && npm install",
-    "start": "(cd backend && npm run start) & vue-cli-service serve",
-    "start-win": "concurrently \"cd backend && npm run start\" \"vue-cli-service serve\"",
+    "install-deps": "npm install && cd functions && npm install",
+    "start": "(cd functions && npm run start) & vue-cli-service serve",
+    "start-win": "concurrently \"cd functions && npm run start\" \"vue-cli-service serve\"",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",

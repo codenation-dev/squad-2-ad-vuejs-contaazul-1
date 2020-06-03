@@ -19,6 +19,15 @@ jobs:
       - run:
           name: build
           command: npm run build
+
+  deploy:
+    requires:
+      - build
+    filters:
+      branches:
+        only:
+          - master
+    steps:
       - run:
-          name: deploy to Firebase Hosting
-          command: firebase deploy --token=$FIREBASE_TOKEN
+        name: deploy to Firebase Hosting
+        command: firebase deploy --token=$FIREBASE_TOKEN
