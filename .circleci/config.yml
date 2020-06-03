@@ -4,10 +4,9 @@ executors:
   machine-config:
     docker:
       - image: circleci/node:12.16.3
-    working_directory: /tmp
 
 jobs:
-  build:
+  test:
     executor: machine-config
     steps:
       - checkout
@@ -15,18 +14,16 @@ jobs:
           name: npm install
           command: npm install
       - run:
-          name: build
+          name: unit test
           command: npm run test:unit
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
 
   deploy:
     executor: machine-config
     steps:
-      - attach_workspace:
-          at: /tmp
+      - checkout
+      - run:
+          name: npm install
+          command: npm install
       - run:
           name: npm install for functions
           command: |
@@ -43,7 +40,7 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - build
+      - test
       - deploy:
           requires:
-            - build
+            - test
