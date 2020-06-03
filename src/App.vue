@@ -159,7 +159,7 @@ body {
 }
 
 .click-link:hover {
-  color: $primary-blue;
+  color: #0073a8;
   text-decoration: underline;
 }
 
