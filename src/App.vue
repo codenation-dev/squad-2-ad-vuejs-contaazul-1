@@ -319,4 +319,17 @@ body {
   width: 100%;
   bottom: 0;
 }
+
+.button-return {
+  background-color: $primary-blue;
+  color: $primary-blue;
+  background-color: #ffffff;
+  border-color: $primary-blue;
+  &:hover,
+  .is-hover {
+    color: $primary-blue;
+    background-color: #ffffff;
+    border-color: $primary-blue;
+  }
+}
 </style>

@@ -4,18 +4,22 @@
       <div class="column">
         <div class="big-title-style page-header--title">Detalhe do Erro</div>
       </div>
+
       <div class="column">
-        <div class="buttons has-addons">
-          <button class="button is-primary is-outlined" @click="archiveItem">
-            <span class="icon"><i class="fa fa-archive"></i></span>
-            <span>Arquivar</span>
-          </button>
-          <button class="button is-danger is-outlined" @click="deleteItem">
-            <span class="icon"><i class="fa fa-trash-alt"></i></span>
-            <span>Excluir</span>
-          </button>
+        <div class="level-right">
+          <div class="level-item">
+            <router-link to="/">
+            <button class="button button-return is-pulled-right">
+              <span class="icon is-small">
+                <i class="fas fa-arrow-left"></i>
+              </span>
+              <span> Voltar</span>
+            </button>
+          </router-link>
+          </div>
         </div>
       </div>
+
     </div>
     <div class="error-detail" :class="classMessage">
       <div class="columns is-desktop is-multiline">
@@ -24,6 +28,7 @@
             <span class="is-size-2">{{ error.name }}</span> <span class="error-detail--at">@</span>
             {{ error.origin }}
           </h1>
+
           <div class="subtitle date error-detail--content-date">
             <span class="icon">
               <i class="far fa-clock"></i>
@@ -55,6 +60,18 @@
         </div>
         <div class="column column-message is-one-fifth-desktop">
           <div class="message">
+            <div class="buttons has-addons">
+              <button class="button is-primary is-outlined"
+              @click="archiveItem">
+                <span class="icon"><i class="fa fa-archive"></i></span>
+                <span>Arquivar</span>
+              </button>
+              <button class="button is-danger is-outlined"
+              @click="deleteItem">
+                <span class="icon"><i class="fa fa-trash-alt"></i></span>
+                <span>Excluir</span>
+              </button>
+            </div>
             <div class="message-body" :class="classMessage">
               <div class="tag is-medium" :class="classMessage">
                 <span class="icon">
