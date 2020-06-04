@@ -1,28 +1,25 @@
 <template>
   <section class="error-single">
-    <div class="columns is-desktop is-multiline error-header">
-      <div class="column">
-        <div class="big-title-style page-header--title">Detalhe do Erro</div>
+    <div class="columns is-mobile is-marginless is-multiline error-header">
+      <div class="column is-6">
+        <div class="big-title-style page-header--title is-pulled-left">Detalhe do Erro</div>
       </div>
 
-      <div class="column">
-        <div class="level-right">
-          <div class="level-item">
-            <router-link to="/">
-            <button class="button button-return is-pulled-right">
-              <span class="icon is-small">
-                <i class="fas fa-arrow-left"></i>
-              </span>
-              <span> Voltar</span>
-            </button>
-          </router-link>
-          </div>
-        </div>
+      <div class="column is-6">
+        <router-link to="/">
+          <button class="button button-return is-pulled-right">
+            <span class="icon is-small">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+            <span> Voltar</span>
+          </button>
+        </router-link>
       </div>
-
     </div>
+
+
     <div class="error-detail" :class="classMessage">
-      <div class="columns is-desktop is-multiline">
+      <div class="columns is-mobile is-multiline">
         <div class="column error-detail--content">
           <h1 class="medium-title-style">
             <span class="is-size-2">{{ error.name }}</span> <span class="error-detail--at">@</span>
@@ -323,4 +320,5 @@ export default {
     height: auto;
   }
 }
+
 </style>

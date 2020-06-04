@@ -1,18 +1,21 @@
 <template>
   <div class="main">
     <div class="container">
-      <div class="page-header level">
-        <div class="level-left">
-          <div class="level-item">
+      <div class="page-header">
+        <div class="columns is-marginless is-mobile">
+          <div class="column is-6">
             <h1 class="page-header--title">{{ title }}</h1>
           </div>
-        </div>
-        <div class="level-right">
-          <router-link to="/">
-            <p class="level-item">
-              <a class="button is-primary">Voltar</a>
-            </p>
-          </router-link>
+          <div class="column is-6">
+            <router-link class="is-pulled-right" to="/">
+              <button class="button button-return is-pulled-right">
+                <span class="icon is-small">
+                  <i class="fas fa-arrow-left"></i>
+                </span>
+                <span> Voltar</span>
+            </button>
+            </router-link>
+          </div>
         </div>
       </div>
       <div class="chart-style">
