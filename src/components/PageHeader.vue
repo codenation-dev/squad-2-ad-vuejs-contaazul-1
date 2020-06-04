@@ -21,12 +21,20 @@
       </a>
       <div class="navbar-menu" :class="{ 'is-active': menuActive }">
         <div class="navbar-start">
-          <router-link class="navbar-item" to="/" exact-active-class="active">
+          <router-link class="navbar-item" to="/" active-class="active" exact>
             <span class="icon">
               <i class="fas fa-table"></i>
             </span>
             <span>
               Dashboard
+            </span>
+          </router-link>
+          <router-link class="navbar-item" to="/charts" active-class="active">
+            <span class="icon">
+              <i class="far fa-chart-bar"></i>
+            </span>
+            <span>
+              Gráficos
             </span>
           </router-link>
         </div>
@@ -35,10 +43,7 @@
             <div class="title-welcome">Olá, {{ user.name }}!</div>
             <div class="token">Seu token é: {{ user.token }}</div>
           </div>
-          <div
-            class="dropdown is-right"
-            :class="{ 'is-active': dropdownActive }"
-          >
+          <div class="dropdown is-right" :class="{ 'is-active': dropdownActive }">
             <figure class="image is-48x48 user-img" @click="toogleDropdown">
               <img
                 class="is-rounded"
@@ -57,7 +62,7 @@
         </div>
         <div v-else class="navbar-end button-wrapper">
           <router-link to="/">
-            <button class="button is-link button-return">
+            <button class="button is-primary">
               Voltar
             </button>
           </router-link>
@@ -69,7 +74,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import LogoCricketGate from '@/assets/img/logo_cricket_gate.svg';
+import LogoCricketGate from '@/assets/img/cricketgate-logo-h.svg';
 
 export default {
   name: 'PageHeader',

@@ -11,6 +11,7 @@
         icon="fa-envelope"
         @validation="emailValidation"
         :doAction="doLogin"
+        :showMessage="showMessage"
       />
       <validation-input
         v-model="password"
@@ -21,6 +22,7 @@
         icon="fa-lock"
         @validation="passwordValidation"
         :doAction="doLogin"
+        :showMessage="showMessage"
       >
         <router-link class="click-link" to="/reset-password" tabindex="3"
           >Esqueceu sua senha?</router-link
@@ -30,7 +32,6 @@
         tabindex="2"
         class="button is-primary is-fullwidth button-style margin-bottom"
         @click="doLogin"
-        :disabled="disableButton"
       >
         Entre
       </button>
@@ -62,11 +63,12 @@ export default {
       password: null,
       emailIsValid: false,
       passwordIsValid: false,
+      showMessage: false,
     };
   },
   computed: {
-    disableButton() {
-      return !(this.emailIsValid && this.passwordIsValid);
+    isValid() {
+      return this.emailIsValid && this.passwordIsValid;
     },
   },
   methods: {
@@ -80,24 +82,28 @@ export default {
     },
     doLogin() {
       if (this.email && this.password) {
-        const payload = {
-          email: this.email,
-          password: this.password,
-        };
+        if (this.isValid) {
+          const payload = {
+            email: this.email,
+            password: this.password,
+          };
 
-        this.$http
-          .post('/users/login', payload)
-          .then(({ data }) => {
-            if (data === 'Usuário ou senha incorretos') {
-              this.useToast(data, 'error');
-            } else {
-              this.login(data);
-              this.$router.push({ name: 'ErrorHome' });
-            }
-          })
-          .catch((error) => {
-            this.useToast(error, 'error');
-          });
+          this.$http
+            .post('/users/login', payload)
+            .then(({ data }) => {
+              if (data === 'Usuário ou senha incorretos') {
+                this.useToast(data, 'error');
+              } else {
+                this.login(data);
+                this.$router.push({ name: 'ErrorHome' });
+              }
+            })
+            .catch((error) => {
+              this.useToast(error, 'error');
+            });
+        } else {
+          this.showMessage = true;
+        }
       } else {
         this.useToast('Preencha todos os campos!');
       }

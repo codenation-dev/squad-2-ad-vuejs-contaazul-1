@@ -7,9 +7,11 @@
         title="Nome Completo"
         placeholder="Insira seu nome completo"
         type-validation="name"
+        class="margin-input"
         icon="fa-user"
         @validation="nameValidation"
         :doAction="register"
+        :showMessage="showMessage"
       />
       <validation-input
         v-model="email"
@@ -20,6 +22,7 @@
         icon="fa-envelope"
         @validation="emailValidation"
         :doAction="register"
+        :showMessage="showMessage"
       />
       <validation-input
         v-model="password"
@@ -30,11 +33,11 @@
         icon="fa-lock"
         @validation="passwordValidation"
         :doAction="register"
+        :showMessage="showMessage"
       />
       <button
         tabindex="2"
         class="button is-primary is-fullwidth button-style margin-bottom"
-        :disabled="disableButton"
         @click="register()"
       >
         Crie sua conta
@@ -70,11 +73,12 @@ export default {
       nameIsValid: false,
       emailIsValid: false,
       passwordIsValid: false,
+      showMessage: false,
     };
   },
   computed: {
-    disableButton() {
-      return !(this.nameIsValid && this.emailIsValid && this.passwordIsValid);
+    isValid() {
+      return this.nameIsValid && this.emailIsValid && this.passwordIsValid;
     },
   },
   methods: {
@@ -88,24 +92,27 @@ export default {
       this.passwordIsValid = valid;
     },
     register() {
-      if (!(this.nome && this.email && this.password)) {
+      if (this.nome && this.email && this.password) {
+        if (this.isValid) {
+          this.$http
+            .post('/users', {
+              name: this.nome,
+              email: this.email,
+              password: this.password,
+            })
+            .catch(() => {
+              this.useToast('Erro de comunicação com a API. Tente novamente mais tarde.', 'error');
+            })
+            .then(() => {
+              this.useToast('Cadastro realizado com sucesso! Faça login para continuar.', 'success');
+              this.$router.push({ name: 'Login' });
+            });
+        } else {
+          this.showMessage = true;
+        }
+      } else {
         this.useToast('Preencha todas as informações para continuar.');
-        return;
       }
-
-      this.$http
-        .post('/users', {
-          name: this.nome,
-          email: this.email,
-          password: this.password,
-        })
-        .catch(() => {
-          this.useToast('Erro de comunicação com a API. Tente novamente mais tarde.', 'error');
-        })
-        .then(() => {
-          this.useToast('Cadastro realizado com sucesso! Faça login para continuar.', 'success');
-          this.$router.push({ name: 'Login' });
-        });
     },
   },
 };

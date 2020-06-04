@@ -4,7 +4,11 @@
       <header class="errors-list--header columns is-desktop">
         <div class="errors-list--header-wrapper errors-list--header-actions">
           <div class="buttons has-addons">
-            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !isAllSelected }">
+            <label
+              for="checkAll"
+              class="button is-small"
+              :class="{ 'is-ghost': !isAllSelected }"
+            >
               <input
                 type="checkbox"
                 name="checkAll"
@@ -21,7 +25,11 @@
               <span class="icon"><i class="fa fa-archive"></i></span>
               <span>Arquivar</span>
             </button>
-            <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
+            <button
+              class="button is-small is-danger"
+              :class="actionsClasses"
+              @click="deleteErrors"
+            >
               <span class="icon"><i class="fa fa-trash-alt"></i></span>
               <span>Excluir</span>
             </button>
@@ -62,7 +70,11 @@
           </div>
         </div>
         <div v-else class="errors-list--header-wrapper">
-          <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
+          <div
+            class="errors-list--header-item"
+            v-for="(filter, index) in filters"
+            :key="index"
+          >
             <span
               class="errors-list--header-filter"
               :class="currentFilter === index ? activeClasses : ''"
@@ -70,25 +82,7 @@
               >{{ filter }}</span
             >
           </div>
-          <div class="errors-list--header-item" @click="toogleDropdownOptions">
-            <div class="dropdown is-right" :class="{ 'is-active': dropdownOptions }">
-              <i class="fas fa-ellipsis-h"></i>
-              <div class="dropdown-menu header-dropdown">
-                <div class="dropdown-content">
-                  <label for="checkArchived" class="button is-small">
-                    <input
-                      type="checkbox"
-                      name="checkArchived"
-                      id="checkArchived"
-                      @change="getArchivedErrors"
-                      :checked="isArchivedErrors"
-                    />
-                    Arquivados
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="errors-list--header-item"></div>
         </div>
       </header>
       <transition mode="out-in" name="fade" appear>
@@ -159,11 +153,14 @@ export default {
       return this.getErrors.map((item) => item.id);
     },
     isAllSelected() {
-      return this.allIds.length > 0 && this.allIds.length === this.getSelectedItems.length;
+      return (
+        this.allIds.length > 0
+        && this.allIds.length === this.getSelectedItems.length
+      );
     },
   },
   methods: {
-    ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems', 'setParamsArchived']),
+    ...mapActions(['setErrors', 'setParamsOrder', 'setSelectedItems']),
     getErrorsApi(orderby) {
       this.isLoading = true;
 
@@ -184,21 +181,12 @@ export default {
           this.dropdownActive = false;
         });
     },
-    toogleDropdownOptions() {
-      this.dropdownOptions = !this.dropdownOptions;
-    },
     toggleAllSelected() {
       if (!this.isAllSelected) {
         this.setSelectedItems(this.allIds);
       } else {
         this.setSelectedItems([]);
       }
-    },
-    getArchivedErrors() {
-      this.dropdownOptions = false;
-      this.isArchivedErrors = !this.isArchivedErrors;
-      this.setParamsArchived(this.isArchivedErrors);
-      this.$emit('search');
     },
     async archiveErrors() {
       try {
@@ -399,6 +387,7 @@ export default {
   color: #8097b1;
   box-shadow: none;
 }
+
 .button.is-disabled {
   pointer-events: none;
 }
@@ -418,20 +407,6 @@ export default {
   * {
     width: 100%;
   }
-}
-.dropdown-menu {
-  min-width: 9rem;
-  padding-top: 0;
-
-  .dropdown-content {
-    .button.is-small {
-      border: none;
-    }
-  }
-}
-#checkArchived {
-  width: auto;
-  margin-right: 1em;
 }
 
 .text-title-style {

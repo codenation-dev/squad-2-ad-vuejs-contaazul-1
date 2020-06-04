@@ -17,6 +17,7 @@ export default {
 @import '~bulma/bulma';
 
 $primary-blue: #2e5bff;
+$danger-red: #e84a50;
 $yellow: #eacb1b;
 
 @font-face {
@@ -74,11 +75,8 @@ body {
 .main {
   min-height: 100vh;
   background-color: #f4f6fc;
-
-  @include break-large {
-    padding-bottom: 60px;
-    position: relative;
-  }
+  padding-bottom: 60px;
+  position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -123,11 +121,10 @@ body {
   color: #2e384d;
 }
 .description-style {
-  left: calc(50% - 273px / 2 - 23.5px);
   font-style: normal;
   font-weight: normal;
+  line-height: 1.1rem;
   font-size: 15px;
-  line-height: 15px;
   text-align: left;
   color: #8798ad;
 }
@@ -142,12 +139,6 @@ body {
   display: flex !important;
   align-items: center !important;
   margin-right: 10px;
-}
-
-.button-return {
-  text-transform: uppercase;
-  color: #ffffff;
-  background-color: $primary-blue;
 }
 
 .icon-click {
@@ -165,7 +156,7 @@ body {
 }
 
 .click-link:hover {
-  color: $primary-blue;
+  color: #0073a8;
   text-decoration: underline;
 }
 
@@ -238,10 +229,25 @@ body {
     background-color: #5076ff;
     border-color: #1365de;
   }
+
+  &.is-outlined {
+    background-color: transparent;
+    border-color: $primary-blue;
+    color: $primary-blue;
+
+    &:hover,
+    &.is-hovered,
+    &:focus,
+    &.is-focused {
+      background-color: $primary-blue;
+      border-color: $primary-blue;
+      color: #fff;
+    }
+  }
 }
 
 .button.is-danger {
-  background-color: #e84a50;
+  background-color: $danger-red;
   border-color: #bb242a;
   color: #fff;
 
@@ -260,6 +266,21 @@ body {
   .is-active {
     background-color: #d31b22;
     border-color: #82191d;
+  }
+
+  &.is-outlined {
+    background-color: transparent;
+    border-color: $danger-red;
+    color: $danger-red;
+
+    &:hover,
+    &.is-hovered,
+    &:focus,
+    &.is-focused {
+      background-color: $danger-red;
+      border-color: $danger-red;
+      color: #fff;
+    }
   }
 }
 
@@ -293,12 +314,9 @@ body {
   padding: 1rem;
   text-align: center;
   background-color: #fff;
-
-  @include break-large {
-    height: 60px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
+  height: 60px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 </style>
