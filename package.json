@@ -4,9 +4,9 @@
   "description": "Front end de sistema de tracking de erros em aplicações | Desafio final do AceleraDev da Codenation + ContaAzul",
   "private": true,
   "scripts": {
-    "install-deps": "npm install && cd backend && npm install",
-    "start": "(cd backend && npm run start) & vue-cli-service serve",
-    "start-win": "concurrently \"cd backend && npm run start\" \"vue-cli-service serve\"",
+    "install-deps": "npm install && cd functions && npm install",
+    "start": "(cd functions && npm run start) & vue-cli-service serve",
+    "start-win": "concurrently \"cd functions && npm run start\" \"vue-cli-service serve\"",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
@@ -38,6 +38,9 @@
       "url": "https://github.com/MarcoshsDreveck"
     }
   ],
+  "engines": {
+    "node": "12.16.3"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "axios": "^0.19.2",
@@ -68,6 +71,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
+    "firebase-tools": "^8.4.1",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"

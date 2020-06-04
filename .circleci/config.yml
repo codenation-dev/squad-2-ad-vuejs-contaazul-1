@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  build-and-deploy:
+    docker:
+      - image: circleci/node:12.16.3
+    steps:
+      - checkout
+      - run:
+          name: install firebase-tools
+          command: sudo npm install firebase-tools -g
+      - run:
+          name: npm install
+          command: npm install
+      - run:
+          name: npm install for functions
+          command: |
+            cd functions
+            npm install
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: deploy to Firebase Hosting
+          command: firebase deploy --token=$FIREBASE_TOKEN
+
+workflows:
+  version: 2
+  btd:
+    jobs:
+      - build-and-deploy:
+          filters:
+            branches:
+              only: master
