@@ -19,7 +19,7 @@ jobs:
             npm install
       - run:
           name: build
-          command: npm run build
+          command: VUE_APP_APIURL=$VUE_APP_APIURL npm run build
       - run:
           name: deploy to Firebase Hosting
           command: firebase deploy --token=$FIREBASE_TOKEN
@@ -29,6 +29,4 @@ workflows:
   btd:
     jobs:
       - build-and-deploy:
-          filters:
-            branches:
-              only: master
+
