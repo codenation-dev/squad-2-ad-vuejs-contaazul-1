@@ -28,4 +28,7 @@ workflows:
   version: 2
   btd:
     jobs:
-      - build-and-deploy
+      - build-and-deploy:
+          filters:
+            branches:
+              only: master
