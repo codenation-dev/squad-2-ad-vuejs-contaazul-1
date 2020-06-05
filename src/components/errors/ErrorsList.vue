@@ -18,11 +18,15 @@
               :class="actionsClasses"
               @click="archiveErrors"
             >
-              <span class="icon"><i class="fa fa-archive"></i></span>
+              <span class="icon">
+                <i class="fa fa-archive"></i>
+              </span>
               <span>Arquivar</span>
             </button>
             <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
-              <span class="icon"><i class="fa fa-trash-alt"></i></span>
+              <span class="icon">
+                <i class="fa fa-trash-alt"></i>
+              </span>
               <span>Excluir</span>
             </button>
           </div>
@@ -54,9 +58,8 @@
                   v-for="(filter, index) in filters"
                   :key="index"
                   @click="getErrorsApi(index)"
+                  >{{ filter }}</a
                 >
-                  {{ filter }}
-                </a>
               </div>
             </div>
           </div>
@@ -82,9 +85,7 @@
             :error="error"
             @updateList="getErrorsApi"
           />
-          <div class="text-title-style" v-if="getErrors.length == 0">
-            {{ empty.message }}
-          </div>
+          <div class="text-title-style" v-if="getErrors.length == 0">{{ empty.message }}</div>
         </section>
       </transition>
     </div>
@@ -108,7 +109,7 @@ export default {
       selectedSome: false,
       filters: {
         last_date: 'Data/Hora',
-        colletected_by: 'Usuário',
+        collected_by: 'Usuário',
         qty: 'Eventos',
         level: 'Level',
       },
