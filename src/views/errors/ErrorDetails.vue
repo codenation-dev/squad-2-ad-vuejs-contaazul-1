@@ -176,6 +176,10 @@ $color-debug: rgba(46, 91, 255, 0.6);
     padding: 0 0.5em;
     margin-bottom: 1rem;
   }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
 }
 .error-header {
   padding: 1.5rem 0 0.5rem;
