@@ -72,6 +72,11 @@ export default {
       chartColumnData: [],
       chartColumnColors: [],
       chartPieColors: [],
+      colorErrorList: {
+        debug: 'rgba(46, 91, 255, 0.6)',
+        error: '#e84a50',
+        warning: '#eacb1b',
+      },
       title: 'Gráficos',
       libraryOptions: {
         animation: {
@@ -105,10 +110,10 @@ export default {
       const errorsByDay = new Map();
       const qntByError = new Map();
       const qntByLevel = new Map();
-      const chartColors = (item, index) => this.colorList[index % this.colorList.length];
+      const mapColorList = (item, index) => this.colorList[index % this.colorList.length];
 
-      this.$http.get('errors/').then(({ data }) => {
-        data.reverse().forEach((error) => {
+      this.$http.get('errors/').then((response) => {
+        response.data.reverse().forEach((error) => {
           const day = new Date(error.last_date);
           const dayString = day.toLocaleDateString('pt-BR').slice(0, 5);
           if (errorsByDay.has(dayString)) {
@@ -134,8 +139,8 @@ export default {
         this.dataChart = Array.from(errorsByDay.entries());
         this.chartColumnData = Array.from(qntByError.entries());
         this.chartPieData = Array.from(qntByLevel.entries());
-        this.chartColumnColors = this.chartColumnData.map(chartColors);
-        this.chartPieColors = this.chartPieData.map(chartColors);
+        this.chartColumnColors = this.chartColumnData.map(mapColorList);
+        this.chartPieColors = this.chartPieData.map((item) => this.colorErrorList[item[0]]);
       });
     },
   },
