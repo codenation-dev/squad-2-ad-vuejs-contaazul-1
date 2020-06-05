@@ -4,11 +4,7 @@
       <header class="errors-list--header columns is-desktop">
         <div class="errors-list--header-wrapper errors-list--header-actions">
           <div class="buttons has-addons">
-            <label
-              for="checkAll"
-              class="button is-small"
-              :class="{ 'is-ghost': !isAllSelected }"
-            >
+            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !isAllSelected }">
               <input
                 type="checkbox"
                 name="checkAll"
@@ -22,15 +18,15 @@
               :class="actionsClasses"
               @click="archiveErrors"
             >
-              <span class="icon"><i class="fa fa-archive"></i></span>
+              <span class="icon">
+                <i class="fa fa-archive"></i>
+              </span>
               <span>Arquivar</span>
             </button>
-            <button
-              class="button is-small is-danger"
-              :class="actionsClasses"
-              @click="deleteErrors"
-            >
-              <span class="icon"><i class="fa fa-trash-alt"></i></span>
+            <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
+              <span class="icon">
+                <i class="fa fa-trash-alt"></i>
+              </span>
               <span>Excluir</span>
             </button>
           </div>
@@ -62,19 +58,14 @@
                   v-for="(filter, index) in filters"
                   :key="index"
                   @click="getErrorsApi(index)"
+                  >{{ filter }}</a
                 >
-                  {{ filter }}
-                </a>
               </div>
             </div>
           </div>
         </div>
         <div v-else class="errors-list--header-wrapper">
-          <div
-            class="errors-list--header-item"
-            v-for="(filter, index) in filters"
-            :key="index"
-          >
+          <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
             <span
               class="errors-list--header-filter"
               :class="currentFilter === index ? activeClasses : ''"
@@ -94,9 +85,7 @@
             :error="error"
             @updateList="getErrorsApi"
           />
-          <div class="text-title-style" v-if="getErrors.length == 0">
-            {{ empty.message }}
-          </div>
+          <div class="text-title-style" v-if="getErrors.length == 0">{{ empty.message }}</div>
         </section>
       </transition>
     </div>
@@ -120,7 +109,7 @@ export default {
       selectedSome: false,
       filters: {
         last_date: 'Data/Hora',
-        colletected_by: 'Usuário',
+        collected_by: 'Usuário',
         qty: 'Eventos',
         level: 'Level',
       },
@@ -153,10 +142,7 @@ export default {
       return this.getErrors.map((item) => item.id);
     },
     isAllSelected() {
-      return (
-        this.allIds.length > 0
-        && this.allIds.length === this.getSelectedItems.length
-      );
+      return this.allIds.length > 0 && this.allIds.length === this.getSelectedItems.length;
     },
   },
   methods: {
@@ -166,13 +152,7 @@ export default {
 
       this.setParamsOrder(orderby);
 
-      const params = this.getParams;
-
-      this.$http
-        .get('/errors', { params })
-        .then(({ data }) => {
-          this.setErrors(data);
-        })
+      this.setErrors()
         .catch(() => {
           this.useToast('Não foi possível carregar os logs');
         })

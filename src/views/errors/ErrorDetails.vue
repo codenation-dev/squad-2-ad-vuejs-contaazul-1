@@ -10,7 +10,7 @@
             <span class="icon is-small">
               <i class="fas fa-arrow-left"></i>
             </span>
-            <span> Voltar</span>
+            <span> Voltar</span
           </button>
         </router-link>
       </div>
@@ -19,32 +19,31 @@
       <div class="columns is-mobile is-multiline">
         <div class="column error-detail--content">
           <h1 class="medium-title-style">
-            <span class="is-size-2">{{ error.name }}</span> <span class="error-detail--at">@</span>
+            <span class="is-size-2">{{ error.name }}</span>
+            <span class="error-detail--at">@</span>
             {{ error.origin }}
           </h1>
           <div class="subtitle date error-detail--content-date">
             <span class="icon">
               <i class="far fa-clock"></i>
             </span>
-            <span> {{ error.last_date | formatDate }}</span>
+            <span>{{ error.last_date | formatDate }}</span>
           </div>
           <div class="error-detail--content-line">
             <div class="small-title-style">
               <span class="icon">
                 <i class="far fa-star"></i>
               </span>
-              <span> Título</span>
+              <span>Título</span>
             </div>
-            <div class="text">
-              {{ error.title }}
-            </div>
+            <div class="text">{{ error.title }}</div>
           </div>
           <div class="error-detail--content-line">
             <div class="small-title-style">
               <span class="icon">
                 <i class="fas fa-code"></i>
               </span>
-              <span> Detalhes</span>
+              <span>Detalhes</span>
             </div>
             <div class="text" v-for="(detail, index) in error.details" :key="index">
               {{ detail }}
@@ -76,14 +75,14 @@
                 <span class="icon">
                   <i class="fas fa-clipboard-list"></i>
                 </span>
-                <span> Eventos</span>
+                <span>Eventos</span>
               </div>
               <div class="small-title-style">{{ error.qty }}</div>
               <div class="label-style">
                 <span class="icon">
                   <i class="fas fa-user"></i>
                 </span>
-                <span> Usuário</span>
+                <span>Usuário</span>
               </div>
               <div class="small-title-style">{{ error.collected_by }}</div>
             </div>
@@ -96,14 +95,19 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import LoadingPage from '@/components/LoadingPage.vue';
 
 export default {
+  components: {
+    LoadingPage,
+  },
   props: {
     id: String,
   },
   data() {
     return {
       error: {},
+      isLoading: false,
     };
   },
   computed: {
@@ -142,9 +146,12 @@ export default {
     },
   },
   created() {
+    this.isLoading = true;
+
     this.$http
       .get(`/errors/${this.id}`)
       .then(({ data }) => {
+        this.isLoading = false;
         this.error = data;
       })
       .catch(() => this.$router.push({ name: '404' }));
@@ -165,10 +172,18 @@ export default {
   }
 }
 
+$color-error: #e84a50;
+$color-warning: #eacb1b;
+$color-debug: rgba(46, 91, 255, 0.6);
+
 .error-single {
   @include break-medium-less {
     padding: 0 0.5em;
     margin-bottom: 1rem;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
   }
 }
 .error-header {
@@ -226,13 +241,13 @@ export default {
     border-top-width: 4px;
 
     &.error {
-      border-top-color: #e84a50;
+      border-top-color: $color-error;
     }
     &.warning {
-      border-top-color: #eacb1b;
+      border-top-color: $color-warning;
     }
     &.debug {
-      border-top-color: rgba(46, 91, 255, 0.6);
+      border-top-color: $color-debug;
     }
   }
 
@@ -267,13 +282,13 @@ export default {
       padding: 0;
 
       &.error {
-        border-left-color: #e84a50;
+        border-left-color: $color-error;
       }
       &.warning {
-        border-left-color: #eacb1b;
+        border-left-color: $color-warning;
       }
       &.debug {
-        border-left-color: rgba(46, 91, 255, 0.6);
+        border-left-color: $color-debug;
       }
 
       @include break-large {
@@ -287,17 +302,17 @@ export default {
         padding-right: 2em;
 
         &.error {
-          background-color: #e84a50;
+          background-color: $color-error;
           color: white;
         }
 
         &.warning {
-          background-color: #eacb1b;
+          background-color: $color-warning;
           color: white;
         }
 
         &.debug {
-          background-color: rgba(46, 91, 255, 0.6);
+          background-color: $color-debug;
           color: white;
         }
       }

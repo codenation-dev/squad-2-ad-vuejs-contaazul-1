@@ -9,9 +9,7 @@ const local = new Persistence({
 });
 
 export default new Vuex.Store({
-  plugins: [
-    local.plugin,
-  ],
+  plugins: [local.plugin],
   state: {
     user: {
       token: null,
@@ -86,8 +84,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setErrors({ commit }, payload) {
-      commit('setErrors', payload);
+    setErrors({ commit, state }) {
+      const { params } = state;
+
+      commit('setErrors', []);
+
+      Vue.prototype.$http.get('/errors', { params }).then(({ data }) => {
+        commit('setErrors', data);
+      });
     },
     logout({ commit }) {
       commit('logout');
