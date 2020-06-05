@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand is-pulled-left">
         <router-link class="navbar-item" to="/">
-          <img :src="logo" alt="CricketGate - Trakcing de erros" @click="closeMenu" />
+          <img :src="logo" alt="CricketGate - Tracking de erros" @click="closeMenu" />
         </router-link>
       </div>
       <a
