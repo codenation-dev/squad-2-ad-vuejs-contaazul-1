@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand is-pulled-left">
         <router-link class="navbar-item" to="/">
-          <img :src="logo" alt="" />
+          <img :src="logo" alt="CricketGate - Tracking de erros" @click="closeMenu" />
         </router-link>
       </div>
       <a
@@ -22,37 +22,43 @@
       <div class="navbar-menu" :class="{ 'is-active': menuActive }">
         <div class="navbar-start">
           <router-link class="navbar-item" to="/" active-class="active" exact>
-            <span class="icon">
-              <i class="fas fa-table"></i>
-            </span>
-            <span>
-              Dashboard
+            <span @click="toogleMenu">
+              <span class="icon">
+                <i class="fas fa-table"></i>
+              </span>
+              <span>
+                Dashboard
+              </span>
             </span>
           </router-link>
           <router-link class="navbar-item" to="/charts" active-class="active">
-            <span class="icon">
-              <i class="far fa-chart-bar"></i>
-            </span>
-            <span>
-              Gráficos
+            <span @click="toogleMenu">
+              <span class="icon">
+                <i class="far fa-chart-bar"></i>
+              </span>
+              <span>
+                Gráficos
+              </span>
             </span>
           </router-link>
         </div>
         <div class="navbar-end" v-if="!voltar">
-          <div class="nav-welcome">
-            <div class="title-welcome">Olá, {{ user.name }}!</div>
-            <div class="token">Seu token é: {{ user.token }}</div>
-          </div>
-          <div class="dropdown is-right" :class="{ 'is-active': dropdownActive }">
+          <div class="navbar-info--vcard">
+            <div class="nav-welcome">
+              <div class="title-welcome">Olá, {{ user.name }}!</div>
+              <div class="token">Seu token é: {{ user.token }}</div>
+            </div>
             <figure class="image is-48x48 user-img" @click="toogleDropdown">
-              <img
-                class="is-rounded"
-                src="https://i7.pngflow.com/pngimage/754/2/png-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-business-clipart-thumb.png"
-              />
+              <img class="is-rounded" src="../assets/img/avatar.png" />
             </figure>
-            <div class="dropdown-menu header-dropdown">
+          </div>
+          <div
+            class="dropdown is-right navbar-info--dropdown"
+            :class="{ 'is-active': dropdownActive }"
+          >
+            <div class="dropdown-menu">
               <div class="dropdown-content">
-                <button class="button is-danger" @click="signOut">
+                <button class="button is-danger is-outlined is-small" @click="signOut">
                   <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
                   <span>Sair</span>
                 </button>
@@ -62,8 +68,11 @@
         </div>
         <div v-else class="navbar-end button-wrapper">
           <router-link to="/">
-            <button class="button is-primary">
-              Voltar
+            <button class="button is-primary is-outlined">
+              <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+              </span>
+              <span>Voltar</span>
             </button>
           </router-link>
         </div>
@@ -98,6 +107,10 @@ export default {
       this.menuActive = !this.menuActive;
       this.dropdownActive = false;
     },
+    closeMenu() {
+      this.menuActive = false;
+      this.dropdownActive = false;
+    },
     signOut() {
       this.logout();
       this.$router.push({ name: 'Login' });
@@ -113,6 +126,12 @@ export default {
   }
 }
 
+@mixin break-large {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
 .navbar {
   background-color: white;
 
@@ -122,6 +141,7 @@ export default {
   .navbar-item {
     img {
       max-height: 3.25rem;
+
       @include break-medium-less {
         max-height: 3.25rem;
       }
@@ -130,9 +150,11 @@ export default {
   .navbar-burger {
     height: 4.65rem;
     width: 4.65rem;
+
     &:hover {
       background-color: #f4f6fc;
     }
+
     span {
       background-color: #2e5bff;
       height: 2px;
@@ -142,6 +164,7 @@ export default {
     @include break-medium-less {
       padding-top: 0;
     }
+
     .navbar-start {
       .navbar-item {
         text-transform: uppercase;
@@ -151,11 +174,13 @@ export default {
         @include break-medium-less {
           text-align: center;
         }
+
         &:hover,
         &.active {
           background-color: #2e5bff10;
           border-bottom: 3px solid #2e5bff;
         }
+
         .icon {
           margin-right: 0.5em;
           margin-top: -1px;
@@ -165,20 +190,35 @@ export default {
     .navbar-end {
       display: flex;
       justify-content: flex-end;
+      flex-direction: column;
+
+      @include break-large {
+        flex-direction: row;
+      }
+
+      .navbar-info--vcard {
+        display: flex;
+      }
 
       @include break-medium-less {
         margin-top: 1em;
         padding: 8px;
         justify-content: center;
       }
+
       .nav-welcome {
         display: flex;
-        align-items: flex-end;
         justify-content: center;
         flex-direction: column;
+
+        @include break-large {
+          align-items: flex-end;
+        }
+
         .title-welcome {
           font-size: 1.1em;
         }
+
         .token {
           font-size: 0.8em;
           color: gray;
@@ -191,19 +231,35 @@ export default {
         width: 40px;
         cursor: pointer;
       }
-    }
-  }
-}
-.header-dropdown {
-  min-width: 5rem;
-  padding-top: 0;
 
-  .dropdown-content {
-    padding: 0.8em;
-    display: flex;
-    justify-content: center;
-    @include break-medium-less {
-      margin-right: 8px;
+      .navbar-info--dropdown {
+        .dropdown-menu {
+          min-width: 5rem;
+          padding-top: 0;
+
+          @include break-medium-less {
+            display: block;
+            position: relative;
+            width: 100%;
+          }
+
+          .dropdown-content {
+            padding: 0.8em;
+            display: flex;
+            justify-content: center;
+
+            @include break-medium-less {
+              margin-top: 1rem;
+              box-shadow: none;
+              padding: 0;
+
+              .button {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
