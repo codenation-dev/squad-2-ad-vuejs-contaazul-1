@@ -4,10 +4,9 @@
       <div class="column is-6">
         <div class="big-title-style page-header--title is-pulled-left">Detalhe do Erro</div>
       </div>
-
       <div class="column is-6">
         <router-link to="/">
-          <button class="button button-return is-pulled-right">
+          <button class="button is-info is-outlined is-pulled-right">
             <span class="icon is-small">
               <i class="fas fa-arrow-left"></i>
             </span>
@@ -16,8 +15,6 @@
         </router-link>
       </div>
     </div>
-
-
     <div class="error-detail" :class="classMessage">
       <div class="columns is-mobile is-multiline">
         <div class="column error-detail--content">
@@ -25,7 +22,6 @@
             <span class="is-size-2">{{ error.name }}</span> <span class="error-detail--at">@</span>
             {{ error.origin }}
           </h1>
-
           <div class="subtitle date error-detail--content-date">
             <span class="icon">
               <i class="far fa-clock"></i>

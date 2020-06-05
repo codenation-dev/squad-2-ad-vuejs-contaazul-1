@@ -305,6 +305,21 @@ body {
     background-color: #5a7593;
     border-color: #61768f;
   }
+
+  &.is-outlined {
+    background-color: transparent;
+    border-color: #61768f;
+    color: #61768f;
+
+  &:hover,
+  &.is-hovered,
+  &:focus,
+  &.is-focused {
+    background-color: #5a7593;
+    border-color: #61768f;
+    color: #fff;
+  }
+  }
 }
 .is-min-width-fit-content {
   min-width: fit-content;
@@ -320,16 +335,4 @@ body {
   bottom: 0;
 }
 
-.button-return {
-  background-color: $primary-blue;
-  color: $primary-blue;
-  background-color: #ffffff;
-  border-color: $primary-blue;
-  &:hover,
-  .is-hover {
-    color: $primary-blue;
-    background-color: #ffffff;
-    border-color: $primary-blue;
-  }
-}
 </style>

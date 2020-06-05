@@ -8,7 +8,7 @@
           </div>
           <div class="column is-6">
             <router-link class="is-pulled-right" to="/">
-              <button class="button button-return is-pulled-right">
+              <button class="button is-info is-outlined is-pulled-right">
                 <span class="icon is-small">
                   <i class="fas fa-arrow-left"></i>
                 </span>

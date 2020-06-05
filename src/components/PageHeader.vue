@@ -61,9 +61,12 @@
           </div>
         </div>
         <div v-else class="navbar-end button-wrapper">
-          <router-link to="/">
-            <button class="button is-primary">
-              Voltar
+          <router-link class="is-pulled-right" to="/">
+            <button class="button is-info is-outlined is-pulled-right">
+              <span class="icon is-small">
+                <i class="fas fa-arrow-left"></i>
+              </span>
+              <span> Voltar</span>
             </button>
           </router-link>
         </div>
