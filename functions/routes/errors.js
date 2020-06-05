@@ -10,10 +10,20 @@ router.get('/', (req, res) => {
   const orderby = query.orderby || 'last_date';
   const order = query.order || 'desc';
   const filter = { archived: Boolean(query.archived === 'true') };
+  const searchValueLowercase = query.searchValue.toLowerCase();
+  const searchFilter = (item) => item[query.field].toLowerCase().indexOf(searchValueLowercase) > -1;
+  const searchParamFilter = (item) => {
+    const hasOrigin = item.origin.toLowerCase().indexOf(searchValueLowercase) > -1;
+    const hasName = item.name.toLowerCase().indexOf(searchValueLowercase) > -1;
+
+    return hasOrigin || hasName;
+  };
+
   if (query.environment) {
     filter.environment = query.environment;
   }
-  if (query.searchValue && req.query.field) {
+
+  if (query.searchValue && query.field) {
     low(adapter).then((db) => {
       const error = db
         .get('errors')
@@ -21,9 +31,7 @@ router.get('/', (req, res) => {
         .orderBy(orderby, order)
         .take(10)
         .value();
-      res.send(error
-        .filter((e) => e[req.query.field].toLowerCase()
-          .indexOf(query.searchValue.toLowerCase()) > -1));
+      res.send(error.filter(searchFilter));
     });
   } else if (query.searchValue) {
     low(adapter).then((db) => {
@@ -33,9 +41,7 @@ router.get('/', (req, res) => {
         .orderBy(orderby, order)
         .take(10)
         .value();
-      res.send(error
-        .filter((e) => e.origin.toLowerCase().indexOf(query.searchValue.toLowerCase()) > -1
-        || e.name.toLowerCase().indexOf(query.searchValue.toLowerCase()) > -1));
+      res.send(error.filter(searchParamFilter));
     });
   } else {
     low(adapter).then((db) => {

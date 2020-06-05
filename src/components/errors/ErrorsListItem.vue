@@ -19,7 +19,7 @@
     </div>
     <div class="errors-list--item-wrapper">
       <div class="errors-list--item-column">{{ error.last_date | formatDate }}</div>
-      <div class="errors-list--item-column">{{ error.colletected_by }}</div>
+      <div class="errors-list--item-column">{{ error.collected_by }}</div>
       <div class="errors-list--item-column">{{ error.qty }}</div>
       <div class="errors-list--item-column">
         <span class="is-uppercase">{{ error.level }}</span>

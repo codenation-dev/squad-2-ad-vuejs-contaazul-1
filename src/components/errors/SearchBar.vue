@@ -29,11 +29,7 @@
                 />
               </div>
               <div class="column padding-field">
-                <select-items
-                  title="Buscar por"
-                  :options="optionsField"
-                  v-model="field"
-                />
+                <select-items title="Buscar por" :options="optionsField" v-model="field" />
               </div>
               <div class="column padding-search">
                 <div class="columns is-mobile is-multiline">
@@ -62,9 +58,7 @@
                       title="Limpar todos os filtros"
                     >
                       <i class="far fa-times-circle"></i>
-                      <span class="label-option text-option"
-                        >Limpar filtro</span
-                      >
+                      <span class="label-option text-option">Limpar filtro</span>
                     </a>
                     <a
                       @click="getArchivedErrors"
@@ -82,10 +76,7 @@
                     </a>
                   </div>
                   <div v-else class="column">
-                    <div
-                      class="dropdown is-right "
-                      :class="{ 'is-active': dropdownOptions }"
-                    >
+                    <div class="dropdown is-right " :class="{ 'is-active': dropdownOptions }">
                       <a class="click-link" @click="toogleDropdownOptions">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
@@ -94,15 +85,9 @@
                         :class="{ 'is-active': dropdownOptions }"
                       >
                         <div class="dropdown-content options">
-                          <a
-                            @click="cleanAll"
-                            class="click-link"
-                            title="Limpar todos os filtros"
-                          >
+                          <a @click="cleanAll" class="click-link" title="Limpar todos os filtros">
                             <i class="far fa-times-circle"></i>
-                            <span class="label-option text-option"
-                              >Limpar filtro</span
-                            >
+                            <span class="label-option text-option">Limpar filtro</span>
                           </a>
                           <a
                             @click="getArchivedErrors"
@@ -110,21 +95,13 @@
                             :class="{ 'is-active': isArchivedErrors }"
                             title="Visualizar arquivados"
                           >
-                            <span
-                              v-show="!isArchivedErrors"
-                              class="icon is-small"
-                            >
+                            <span v-show="!isArchivedErrors" class="icon is-small">
                               <i class="far fa-square"></i>
                             </span>
-                            <span
-                              v-show="isArchivedErrors"
-                              class="icon is-small"
-                            >
+                            <span v-show="isArchivedErrors" class="icon is-small">
                               <i class="fas fa-check-square"></i>
                             </span>
-                            <span class="label-option text-option"
-                              >Arquivados</span
-                            >
+                            <span class="label-option text-option">Arquivados</span>
                           </a>
                         </div>
                       </div>
@@ -177,7 +154,8 @@ export default {
   watch: {
     environment(value) {
       this.setParamsEnvironment(value);
-      this.$emit('search');
+      this.setErrors();
+      this.closeDropdown();
     },
     field(value) {
       this.setParamsField(value);
@@ -185,20 +163,23 @@ export default {
   },
   methods: {
     ...mapActions([
+      'setErrors',
       'setParamsEnvironment',
       'setParamsField',
       'setParamsSearchValue',
       'setParamsArchived',
     ]),
     search() {
+      this.closeDropdown();
       this.setParamsSearchValue(this.searchValue);
-      this.$emit('search');
+      this.setErrors();
     },
     cleanAll() {
       this.environment = null;
       this.field = null;
       this.searchValue = null;
       this.search();
+      this.closeDropdown();
       this.dropdownOptions = false;
     },
     toogleDropdownOptions() {
@@ -206,9 +187,13 @@ export default {
     },
     getArchivedErrors() {
       this.dropdownOptions = false;
+      this.closeDropdown();
       this.isArchivedErrors = !this.isArchivedErrors;
       this.setParamsArchived(this.isArchivedErrors);
-      this.$emit('search');
+      this.setErrors();
+    },
+    closeDropdown() {
+      this.showSearch = false;
     },
   },
   mounted() {

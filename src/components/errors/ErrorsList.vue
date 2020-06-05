@@ -4,11 +4,7 @@
       <header class="errors-list--header columns is-desktop">
         <div class="errors-list--header-wrapper errors-list--header-actions">
           <div class="buttons has-addons">
-            <label
-              for="checkAll"
-              class="button is-small"
-              :class="{ 'is-ghost': !isAllSelected }"
-            >
+            <label for="checkAll" class="button is-small" :class="{ 'is-ghost': !isAllSelected }">
               <input
                 type="checkbox"
                 name="checkAll"
@@ -25,11 +21,7 @@
               <span class="icon"><i class="fa fa-archive"></i></span>
               <span>Arquivar</span>
             </button>
-            <button
-              class="button is-small is-danger"
-              :class="actionsClasses"
-              @click="deleteErrors"
-            >
+            <button class="button is-small is-danger" :class="actionsClasses" @click="deleteErrors">
               <span class="icon"><i class="fa fa-trash-alt"></i></span>
               <span>Excluir</span>
             </button>
@@ -70,11 +62,7 @@
           </div>
         </div>
         <div v-else class="errors-list--header-wrapper">
-          <div
-            class="errors-list--header-item"
-            v-for="(filter, index) in filters"
-            :key="index"
-          >
+          <div class="errors-list--header-item" v-for="(filter, index) in filters" :key="index">
             <span
               class="errors-list--header-filter"
               :class="currentFilter === index ? activeClasses : ''"
@@ -153,10 +141,7 @@ export default {
       return this.getErrors.map((item) => item.id);
     },
     isAllSelected() {
-      return (
-        this.allIds.length > 0
-        && this.allIds.length === this.getSelectedItems.length
-      );
+      return this.allIds.length > 0 && this.allIds.length === this.getSelectedItems.length;
     },
   },
   methods: {
@@ -166,13 +151,7 @@ export default {
 
       this.setParamsOrder(orderby);
 
-      const params = this.getParams;
-
-      this.$http
-        .get('/errors', { params })
-        .then(({ data }) => {
-          this.setErrors(data);
-        })
+      this.setErrors()
         .catch(() => {
           this.useToast('Não foi possível carregar os logs');
         })
