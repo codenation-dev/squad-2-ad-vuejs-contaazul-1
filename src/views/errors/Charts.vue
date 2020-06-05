@@ -1,70 +1,57 @@
 <template>
-  <div class="main">
-    <div class="container">
-      <div class="page-header level">
-        <div class="level-left">
-          <div class="level-item">
-            <h1 class="page-header--title">{{ title }}</h1>
-          </div>
-        </div>
-        <div class="level-right">
-          <router-link to="/">
-            <p class="level-item">
-              <a class="button is-primary">Voltar</a>
-            </p>
-          </router-link>
-        </div>
-      </div>
-      <loading-page v-if="isLoading" key="loading"></loading-page>
-      <div v-else class="chart-style">
-        <h2 class="chart-title-style">Erros nas aplicações</h2>
-        <line-chart
-          :data="dataChart"
-          :dataset="{
-            fill: true,
-            backgroundColor: '',
-          }"
-          :discrete="true"
-          :color="['#rgb(46, 91, 255)']"
-          label="Erros"
-          xtitle="Data"
-          ytitle="Nº de erros"
-          :library="libraryOptions"
-        >
-        </line-chart>
-        <h2 class="chart-title-style">Tipos de erros</h2>
-        <column-chart
-          v-if="chartColumnData.length > 0"
-          :data="chartColumnData"
-          :library="libraryOptions"
-          :dataset="{
-            borderColor: chartColumnColors,
-            backgroundColor: chartColumnColors,
-          }"
-          xtitle="Nome do Erro"
-          ytitle="Nº de erros"
-          label="Ocorrência"
-        >
-        </column-chart>
-        <h2 class="chart-title-style">Quantidade de erros por nível</h2>
-        <pie-chart
-          :data="chartPieData"
-          :donut="true"
-          :colors="chartPieColors"
-          legend="bottom"
-          :library="{
-            animation: {
-              duration: 1000,
+  <div class="charts">
+    <div class="page-header">
+      <h1 class="page-header--title">{{ title }}</h1>
+    </div>
+    <loading-page v-if="isLoading" key="loading"></loading-page>
+    <div v-else class="chart-style">
+      <h2 class="chart-title-style">Erros nas aplicações</h2>
+      <line-chart
+        :data="dataChart"
+        :dataset="{
+          fill: true,
+          backgroundColor: '',
+        }"
+        :discrete="true"
+        :color="['#rgb(46, 91, 255)']"
+        label="Erros"
+        xtitle="Data"
+        ytitle="Nº de erros"
+        :library="libraryOptions"
+      >
+      </line-chart>
+      <h2 class="chart-title-style">Tipos de erros</h2>
+      <column-chart
+        v-if="chartColumnData.length > 0"
+        :data="chartColumnData"
+        :library="libraryOptions"
+        :dataset="{
+          borderColor: chartColumnColors,
+          backgroundColor: chartColumnColors,
+        }"
+        xtitle="Nome do Erro"
+        ytitle="Nº de erros"
+        label="Ocorrência"
+      >
+      </column-chart>
+      <h2 class="chart-title-style">Quantidade de erros por nível</h2>
+      <pie-chart
+        :data="chartPieData"
+        :donut="true"
+        :colors="chartPieColors"
+        legend="bottom"
+        :library="{
+          animation: {
+            duration: 1000,
+          },
+          legend: {
+            labels: {
+              fontColor: '#6a7079',
             },
-            legend: {
-              labels: {
-                fontColor: '#6a7079',
-              },
-            },
-          }"
-        >
-        </pie-chart>
-      </div>
+          },
+        }"
+      >
+      </pie-chart>
     </div>
   </div>
 </template>
@@ -158,7 +145,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.charts {
+  margin-bottom: 1rem;
+
+  @media (max-width: 1023px) {
+    padding: 0 0.5rem;
+  }
+
+  .page-header {
+    margin-top: 1.5rem;
+  }
+}
 .chart-style {
   margin-top: 30px;
   padding: 12px;
@@ -168,7 +166,7 @@ export default {
 .chart-title-style {
   font-size: 1.4rem;
   font-weight: 300;
-  line-height: 15px;
+  line-height: 1em;
   text-transform: uppercase;
   color: #2e384d;
   padding: 20px 0 15px 0;
