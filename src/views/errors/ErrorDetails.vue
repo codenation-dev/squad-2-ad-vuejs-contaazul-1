@@ -1,29 +1,22 @@
 <template>
   <section class="error-single">
-    <div class="columns is-desktop is-multiline error-header">
-      <div class="column">
-        <div class="big-title-style page-header--title">Detalhe do Erro</div>
+    <div class="columns is-mobile is-marginless is-multiline error-header">
+      <div class="column is-6">
+        <div class="big-title-style page-header--title is-pulled-left">Detalhe do Erro</div>
       </div>
-      <div class="column">
-        <div class="buttons has-addons">
-          <button class="button is-primary is-outlined" @click="archiveItem">
-            <span class="icon">
-              <i class="fa fa-archive"></i>
+      <div class="column is-6">
+        <router-link to="/">
+          <button class="button is-info is-outlined is-pulled-right">
+            <span class="icon is-small">
+              <i class="fas fa-arrow-left"></i>
             </span>
-            <span>Arquivar</span>
+            <span> Voltar</span
           </button>
-          <button class="button is-danger is-outlined" @click="deleteItem">
-            <span class="icon">
-              <i class="fa fa-trash-alt"></i>
-            </span>
-            <span>Excluir</span>
-          </button>
-        </div>
+        </router-link>
       </div>
     </div>
-    <loading-page v-if="isLoading" key="loading"></loading-page>
-    <div v-else class="error-detail" :class="classMessage">
-      <div class="columns is-desktop is-multiline">
+    <div class="error-detail" :class="classMessage">
+      <div class="columns is-mobile is-multiline">
         <div class="column error-detail--content">
           <h1 class="medium-title-style">
             <span class="is-size-2">{{ error.name }}</span>
@@ -59,6 +52,18 @@
         </div>
         <div class="column column-message is-one-fifth-desktop">
           <div class="message">
+            <div class="buttons has-addons">
+              <button class="button is-primary is-outlined"
+              @click="archiveItem">
+                <span class="icon"><i class="fa fa-archive"></i></span>
+                <span>Arquivar</span>
+              </button>
+              <button class="button is-danger is-outlined"
+              @click="deleteItem">
+                <span class="icon"><i class="fa fa-trash-alt"></i></span>
+                <span>Excluir</span>
+              </button>
+            </div>
             <div class="message-body" :class="classMessage">
               <div class="tag is-medium" :class="classMessage">
                 <span class="icon">
@@ -326,4 +331,5 @@ $color-debug: rgba(46, 91, 255, 0.6);
     height: auto;
   }
 }
+
 </style>
