@@ -15,14 +15,13 @@
           </router-link>
         </div>
       </div>
-      <div class="chart-style">
-        <h2 class="chart-title-style">
-          Erros nas aplicações
-        </h2>
+      <loading-page v-if="isLoading" key="loading"></loading-page>
+      <div v-else class="chart-style">
+        <h2 class="chart-title-style">Erros nas aplicações</h2>
         <line-chart
           :data="dataChart"
           :dataset="{
-            fill:true,
+            fill: true,
             backgroundColor: '',
           }"
           :discrete="true"
@@ -33,25 +32,21 @@
           :library="libraryOptions"
         >
         </line-chart>
-        <h2 class="chart-title-style">
-        Tipos de erros
-        </h2>
+        <h2 class="chart-title-style">Tipos de erros</h2>
         <column-chart
           v-if="chartColumnData.length > 0"
           :data="chartColumnData"
           :library="libraryOptions"
           :dataset="{
-          borderColor: chartColumnColors,
-          backgroundColor: chartColumnColors
+            borderColor: chartColumnColors,
+            backgroundColor: chartColumnColors,
           }"
           xtitle="Nome do Erro"
           ytitle="Nº de erros"
           label="Ocorrência"
         >
         </column-chart>
-        <h2 class="chart-title-style">
-          Quantidade de erros por nível
-        </h2>
+        <h2 class="chart-title-style">Quantidade de erros por nível</h2>
         <pie-chart
           :data="chartPieData"
           :donut="true"
@@ -63,9 +58,9 @@
             },
             legend: {
               labels: {
-                fontColor: '#6a7079'
-              }
-            }
+                fontColor: '#6a7079',
+              },
+            },
           }"
         >
         </pie-chart>
@@ -75,10 +70,15 @@
 </template>
 
 <script>
+import LoadingPage from '@/components/LoadingPage.vue';
 
 export default {
+  components: {
+    LoadingPage,
+  },
   data() {
     return {
+      isLoading: false,
       colorList: ['#2E5BFF', '#8C54FF', '#00C1D4', '#FAD050'],
       dataChart: [],
       chartPieData: [],
@@ -114,11 +114,14 @@ export default {
   },
   methods: {
     fetchData() {
+      this.isLoading = true;
       const errorsByDay = new Map();
       const qntByError = new Map();
       const qntByLevel = new Map();
-      this.$http.get('errors/').then((response) => {
-        response.data.reverse().forEach((error) => {
+      const chartColors = (item, index) => this.colorList[index % this.colorList.length];
+
+      this.$http.get('errors/').then(({ data }) => {
+        data.reverse().forEach((error) => {
           const day = new Date(error.last_date);
           const dayString = day.toLocaleDateString('pt-BR').slice(0, 5);
           if (errorsByDay.has(dayString)) {
@@ -139,16 +142,13 @@ export default {
             qntByLevel.set(error.level, 1);
           }
         });
+
+        this.isLoading = false;
         this.dataChart = Array.from(errorsByDay.entries());
         this.chartColumnData = Array.from(qntByError.entries());
         this.chartPieData = Array.from(qntByLevel.entries());
-
-        this.chartColumnColors = this.chartColumnData.map(
-          (item, index) => this.colorList[index % this.colorList.length],
-        );
-        this.chartPieColors = this.chartPieData.map(
-          (item, index) => this.colorList[index % this.colorList.length],
-        );
+        this.chartColumnColors = this.chartColumnData.map(chartColors);
+        this.chartPieColors = this.chartPieData.map(chartColors);
       });
     },
   },
@@ -159,18 +159,18 @@ export default {
 </script>
 
 <style scoped>
-  .chart-style {
-    margin-top: 30px;
-    padding: 12px;
-    background-color: #ffffff;
-    border: 1px solid #e4ebff;
-  }
-  .chart-title-style {
-    font-size: 1.4rem;
-    font-weight: 300;
-    line-height: 15px;
-    text-transform: uppercase;
-    color: #2e384d;
-    padding: 20px 0 15px 0;
-  }
+.chart-style {
+  margin-top: 30px;
+  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e4ebff;
+}
+.chart-title-style {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 15px;
+  text-transform: uppercase;
+  color: #2e384d;
+  padding: 20px 0 15px 0;
+}
 </style>
