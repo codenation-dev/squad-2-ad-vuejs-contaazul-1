@@ -22,7 +22,7 @@
         <line-chart
           :data="dataChart"
           :dataset="{
-            fill:true,
+            fill: true,
             backgroundColor: '',
           }"
           :discrete="true"
@@ -34,15 +34,15 @@
         >
         </line-chart>
         <h2 class="chart-title-style">
-        Tipos de erros
+          Tipos de erros
         </h2>
         <column-chart
           v-if="chartColumnData.length > 0"
           :data="chartColumnData"
           :library="libraryOptions"
           :dataset="{
-          borderColor: chartColumnColors,
-          backgroundColor: chartColumnColors
+            borderColor: chartColumnColors,
+            backgroundColor: chartColumnColors,
           }"
           xtitle="Nome do Erro"
           ytitle="Nº de erros"
@@ -63,9 +63,9 @@
             },
             legend: {
               labels: {
-                fontColor: '#6a7079'
-              }
-            }
+                fontColor: '#6a7079',
+              },
+            },
           }"
         >
         </pie-chart>
@@ -75,7 +75,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -85,6 +84,11 @@ export default {
       chartColumnData: [],
       chartColumnColors: [],
       chartPieColors: [],
+      colorErrorList: {
+        debug: 'rgba(46, 91, 255, 0.6)',
+        error: '#e84a50',
+        warning: '#eacb1b',
+      },
       title: 'Gráficos',
       libraryOptions: {
         animation: {
@@ -117,6 +121,8 @@ export default {
       const errorsByDay = new Map();
       const qntByError = new Map();
       const qntByLevel = new Map();
+      const mapColorList = (item, index) => this.colorList[index % this.colorList.length];
+
       this.$http.get('errors/').then((response) => {
         response.data.reverse().forEach((error) => {
           const day = new Date(error.last_date);
@@ -143,12 +149,8 @@ export default {
         this.chartColumnData = Array.from(qntByError.entries());
         this.chartPieData = Array.from(qntByLevel.entries());
 
-        this.chartColumnColors = this.chartColumnData.map(
-          (item, index) => this.colorList[index % this.colorList.length],
-        );
-        this.chartPieColors = this.chartPieData.map(
-          (item, index) => this.colorList[index % this.colorList.length],
-        );
+        this.chartColumnColors = this.chartColumnData.map(mapColorList);
+        this.chartPieColors = this.chartPieData.map((item) => this.colorErrorList[item[0]]);
       });
     },
   },
@@ -159,18 +161,18 @@ export default {
 </script>
 
 <style scoped>
-  .chart-style {
-    margin-top: 30px;
-    padding: 12px;
-    background-color: #ffffff;
-    border: 1px solid #e4ebff;
-  }
-  .chart-title-style {
-    font-size: 1.4rem;
-    font-weight: 300;
-    line-height: 15px;
-    text-transform: uppercase;
-    color: #2e384d;
-    padding: 20px 0 15px 0;
-  }
+.chart-style {
+  margin-top: 30px;
+  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e4ebff;
+}
+.chart-title-style {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 15px;
+  text-transform: uppercase;
+  color: #2e384d;
+  padding: 20px 0 15px 0;
+}
 </style>
