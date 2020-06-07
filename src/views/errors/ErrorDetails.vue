@@ -10,12 +10,13 @@
             <span class="icon is-small">
               <i class="fas fa-arrow-left"></i>
             </span>
-            <span> Voltar</span
+            <span> Voltar</span>
           </button>
         </router-link>
       </div>
     </div>
-    <div class="error-detail" :class="classMessage">
+    <loading-page v-if="isLoading" key="loading"></loading-page>
+    <div v-else class="error-detail" :class="classMessage">
       <div class="columns is-mobile is-multiline">
         <div class="column error-detail--content">
           <h1 class="medium-title-style">
