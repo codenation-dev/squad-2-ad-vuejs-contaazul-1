@@ -26,6 +26,7 @@
       </div>
       <div class="errors-list--item-column">
         <a
+          v-if="!isArchived"
           class="errors-list--item-action errors-list--item-action-archive"
           @click.stop="archiveItem(error.id)"
         >
@@ -59,9 +60,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getSelectedItems']),
+    ...mapGetters(['getSelectedItems', 'getParams']),
     isSelected() {
       return !!this.getSelectedItems.find((item) => item === this.error.id);
+    },
+    isArchived() {
+      return this.getParams.archived;
     },
   },
   methods: {
