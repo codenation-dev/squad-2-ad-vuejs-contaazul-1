@@ -168,6 +168,7 @@ export default {
       'setParamsField',
       'setParamsSearchValue',
       'setParamsArchived',
+      'setSelectedItems',
     ]),
     search() {
       this.closeDropdown();
