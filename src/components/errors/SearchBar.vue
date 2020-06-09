@@ -187,6 +187,7 @@ export default {
     },
     getArchivedErrors() {
       this.dropdownOptions = false;
+      this.setSelectedItems([]);
       this.closeDropdown();
       this.isArchivedErrors = !this.isArchivedErrors;
       this.setParamsArchived(this.isArchivedErrors);
