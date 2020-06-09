@@ -15,9 +15,9 @@
         </router-link>
       </div>
     </div>
-    <div class="error-detail" :class="classMessage">
-      <loading-page v-if="isLoading" key="loading"></loading-page>
-      <div v-else class="columns is-mobile is-multiline">
+    <loading-page v-if="isLoading" key="loading"></loading-page>
+    <div v-else class="error-detail" :class="classMessage">
+      <div class="columns is-mobile is-multiline">
         <div class="column error-detail--content">
           <h1 class="medium-title-style">
             <span class="is-size-2">{{ error.name }}</span>
@@ -54,10 +54,12 @@
         <div class="column column-message is-one-fifth-desktop">
           <div class="message">
             <div class="buttons has-addons">
-              <button class="button is-primary is-outlined" @click="archiveItem">
-                <span class="icon">
-                  <i class="fa fa-archive"></i>
-                </span>
+              <button
+                v-if="!error.archived"
+                class="button is-primary is-outlined"
+                @click="archiveItem"
+              >
+                <span class="icon"><i class="fa fa-archive"></i></span>
                 <span>Arquivar</span>
               </button>
               <button class="button is-danger is-outlined" @click="deleteItem">
