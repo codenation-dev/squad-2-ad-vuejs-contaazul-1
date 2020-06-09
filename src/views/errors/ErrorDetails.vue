@@ -54,8 +54,11 @@
         <div class="column column-message is-one-fifth-desktop">
           <div class="message">
             <div class="buttons has-addons">
-              <button class="button is-primary is-outlined"
-              @click="archiveItem">
+              <button
+                v-if="!error.archived"
+                class="button is-primary is-outlined"
+                @click="archiveItem"
+              >
                 <span class="icon"><i class="fa fa-archive"></i></span>
                 <span>Arquivar</span>
               </button>

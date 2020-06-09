@@ -17,6 +17,7 @@
               class="button is-small is-primary"
               :class="actionsClasses"
               @click="archiveErrors"
+              :disabled="isArchived"
             >
               <span class="icon">
                 <i class="fa fa-archive"></i>
@@ -117,7 +118,6 @@ export default {
       dropdownActive: false,
       windowWidth: window.innerWidth,
       dropdownOptions: false,
-      isArchivedErrors: false,
       empty: {
         message: 'Não há erros para serem exibidos. Revise seus filtros e termos de busca.',
       },
@@ -134,6 +134,9 @@ export default {
     },
     currentOrder() {
       return this.getParams.order;
+    },
+    isArchived() {
+      return this.getParams.archived;
     },
     activeClasses() {
       return `is-active is-${this.currentOrder}`;
