@@ -10,7 +10,7 @@
             <span class="icon is-small">
               <i class="fas fa-arrow-left"></i>
             </span>
-            <span> Voltar</span>
+            <span>Voltar</span>
           </button>
         </router-link>
       </div>
@@ -62,9 +62,10 @@
                 <span class="icon"><i class="fa fa-archive"></i></span>
                 <span>Arquivar</span>
               </button>
-              <button class="button is-danger is-outlined"
-              @click="deleteItem">
-                <span class="icon"><i class="fa fa-trash-alt"></i></span>
+              <button class="button is-danger is-outlined" @click="deleteItem">
+                <span class="icon">
+                  <i class="fa fa-trash-alt"></i>
+                </span>
                 <span>Excluir</span>
               </button>
             </div>
@@ -335,5 +336,4 @@ $color-debug: rgba(46, 91, 255, 0.6);
     height: auto;
   }
 }
-
 </style>
